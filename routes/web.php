@@ -26,7 +26,7 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     Route::post('/admin/login', [AdminController::class, 'auth'])->name('auth');
 
     //Route::get('/register', [UserController::class, 'register'])->name('register');
-    Route::post('/register', [UserController::class, 'create'])->name('create');
+    Route::post('/register', [AdminController::class, 'create'])->name('create');
 
     /*Route::post('/esqueci-senha', [UserController::class, 'forgot_password'])->name('esqueci-senha');
     Route::get('/recuperar-senha/{token}', [UserController::class, 'recover_password'])->name('recuperar-senha');
