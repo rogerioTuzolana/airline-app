@@ -12,13 +12,23 @@ class AdminController extends Controller
 {
     //
     public function index(){
-
-
         return view('admin.dashboard'/*,['clients'=>$clients*/);
     }
 
     public function login(Request $request){
         return view('admin.admin_login');
+    }
+
+    public function fleets(){
+        return view('admin.fleets');
+    }
+    
+    public function tariffs(){
+        return view('admin.tariffs');
+    }
+    
+    public function perks(){
+        return view('admin.perks');
     }
 
     public function auth(Request $request){

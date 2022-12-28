@@ -41,5 +41,8 @@ Route::group(['middleware'=>['auth','PreventBackHistory']], function () {
 
 Route::group(['prefix' => 'admin','middleware'=>['auth','admin','PreventBackHistory']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/frotas', [AdminController::class, 'fleets'])->name('fleets');
+    Route::get('/tarifas', [AdminController::class, 'tariffs'])->name('tariffs');
+    Route::get('/Regalias', [AdminController::class, 'perks'])->name('perks');
 
 });

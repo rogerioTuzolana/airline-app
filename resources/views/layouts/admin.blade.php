@@ -142,12 +142,17 @@
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="{{route('fleets')}}">
               <i class="bi bi-circle"></i><span>Frotas</span>
             </a>
           </li>
           <li>
-            <a href="forms-editors.html">
+            <a href="{{route('tariffs')}}">
+              <i class="bi bi-circle"></i><span>Tarifas</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('perks')}}">
               <i class="bi bi-circle"></i><span>Regalias</span>
             </a>
           </li>
@@ -166,7 +171,7 @@
         </a>
       </li><!-- End Charts Nav -->
 
-      <li class="nav-heading">Pages</li>
+      {{--<li class="nav-heading">Pages</li>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
@@ -195,7 +200,7 @@
           <span>Error 404</span>
         </a>
       </li><!-- End Error 404 Page Nav -->
-
+      --}}
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -207,7 +212,7 @@
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">@yield('route')</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -219,20 +224,22 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>PDC Airline</span></strong>. Todos direitos reservados
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="#"></a>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  <script src="/assets/js/jquery.min.js"></script>
+
   <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/vendor/chart.js/chart.min.js"></script>
@@ -244,7 +251,98 @@
 
   <!-- Template Main JS File -->
   <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/admin.js"></script>
+  <script src="/assets/js/jquery.mask.min.js"></script>
 
+  <script>
+    
+    function modalDropFleet(id) {
+      $("#drop_fleet_id").val(id);
+      var modal = document.getElementById('exampleModalDropFleet')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+    function modalDropTariff(id) {
+      $("#drop_tariff_id").val(id);
+      var modal = document.getElementById('exampleModalDropTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+    function modalDropPerk(id) {
+      $("#drop_tariff_id").val(id);
+      var modal = document.getElementById('exampleModalDropTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+    /*function modalDropUser(id) {
+      $("#drop_user_id").val(id);
+      var modal = document.getElementById('exampleModalDropUser')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }*/
+    function modalFleet(params) {
+      $("#btn-addFleet").html('Adicionar');
+      $("#brand").val("");
+      $("#model").val("");
+      $("#capacity").val("");
+      var modal = document.getElementById('exampleModalFleet')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalPerk(params) {
+      $("#btn-addPerk").html('Adicionar');
+      $("#brand").val("");
+      $("#model").val("");
+      $("#capacity").val("");
+      var modal = document.getElementById('exampleModalPerk')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+
+    function modalTariff(params) {
+      $("#btn-addTariff").html('Adicionar');
+      $("#brand").val("");
+      $("#model").val("");
+      $("#capacity").val("");
+      var modal = document.getElementById('exampleModalTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalTariff(params) {
+      $("#btn-addTariff").html('Adicionar');
+      $("#brand").val("");
+      $("#model").val("");
+      $("#capacity").val("");
+      var modal = document.getElementById('exampleModalTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalEditFleet(id,brand,model,capacity){
+      $("#btn-addFleet").html('Editar');
+      $("#fleet_id").val(id);
+      $("#brand").val(brand);
+      $("#model").val(model);
+      $("#capacity").val(capacity);
+      var modal = document.getElementById('exampleModalFleet')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalEditPerk(id,brand,model,capacity){
+      $("#btn-addPerk").html('Editar');
+      $("#fleet_id").val(id);
+      $("#brand").val(brand);
+      $("#model").val(model);
+      $("#capacity").val(capacity);
+      var modal = document.getElementById('exampleModalPerk')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+  </script>
 </body>
 
 </html>
