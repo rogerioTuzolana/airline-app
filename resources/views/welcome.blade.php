@@ -7,25 +7,29 @@
       <img src="images/banner3.jpg" alt="#" />
       <div class="container">
          <div class="text-bg">
-            <h1><br><strong class="">PDC Airline<br>O Mundo Na palama de sua Mão</strong></h1>
-            <div class="button_section"> <a class="main_bt" href="/bilhete">Comprar Bilhete</a> </div>
+            <div id="bg-pub">
+               <h1>PDC Airline<br>O Mundo Na palama de sua Mão</h1>
+            </div>
+            <div class="button_section" id="btnbilhte">
+               <a class="main_bt"  href="/bilhete">Comprar Bilhete</a>
+            </div>
             <div class="container">
                <form class="main-form">
-                  <h3>Encontre Seu Passeio</h3>
+                  <h3>Encontre Seu VOO</h3>
                   <div class="row">
                      <div class="col-md-9">
                         <div class="row">
                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                              <label>Palavra-Chave</label>
-                              <input class="form-control" placeholder="" type="text" name="">
+                              <label>Local Origem</label>
+                              <input class="form-control" placeholder="local" type="text" name="">
                            </div>
                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                              <label>Categoria</label>
+                              <label>Categoria Tarifas</label>
                               <select class="form-control" name="Any">
                                  <option>Alguma</option>
-                                 <option>Option 1</option>
-                                 <option>Option 2</option>
-                                 <option>Option 3</option>
+                                 <option>Tarifas Domestica</option>
+                                 <option>Europa/Africa</option>
+                                 <option>America do Norte</option>
                               </select>
                            </div>
                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
@@ -33,8 +37,8 @@
                               <input class="form-control" placeholder="00.0" type="text" name="00.0">
                            </div>
                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                              <label>Duração</label>
-                              <input class="form-control" placeholder="Alguma" type="text" name="Alguma">
+                              <label>Local Distino</label>
+                              <input class="form-control" placeholder="local" type="text" name="Alguma">
                            </div>
                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                               <label>Data</label>
@@ -63,7 +67,7 @@
       <div class="row">
          <div class="col-md-12 ">
             <div class="titlepage">
-               <br><br><br>
+            
                <h2>Acerca da Nossa Agencia de Viagem</h2>
                <span>
                   fato de que um leitor se distrairá com o conteúdo legível de uma página ao olhar para seu layout. O objetivo de usar Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal</span>

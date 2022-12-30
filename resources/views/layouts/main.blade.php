@@ -65,7 +65,7 @@
                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                   <div class="full">
                      <div class="center-desk">
-                        <div class="logo"> <a href="#welcome"><img src="images/logo2.png" alt="PDC AIRLINE"><strong class="white">PDC AIRLINE</strong></a> </div>
+                        <div class="logo"> <a href="/"><img src="images/logo2.png" alt="PDC AIRLINE"><strong class="white">PDC AIRLINE</strong></a></div>
                      </div>
                   </div>
                </div>
@@ -74,9 +74,10 @@
                      <div class="limit-box">
                         <nav class="main-menu">
                            <ul class="menu-area-main">
-                              <li class="active"> <a href="#">Home</a> </li>
-                              <li> <a href="#about">Acerca</a> </li>
-                              <li><a href="#travel">Viagens</a></li>
+                              <li class="nav-link active" > <a href="/">Home</a> </li>
+                              <li> <a href="/#about">Sobre Nos</a> </li>
+                              <li><a href="/#travel">Viagens</a></li>
+                              <li><a href="/tarifa">Tarifas</a></li>
                               <li><a href="#contact">Fala Conosco</a></li>
                            </ul>
                         </nav>
@@ -115,7 +116,7 @@
                   <div class="Follow">
                      <h3>LINKS ADICIONAIS</h3>
                      <ul class="link">
-                        <li> <a href="#">Sobre Nos</a></li>
+                        <li> <a href="#about">Sobre Nos</a></li>
                         <li> <a href="#">Termos e Condições</a></li>
                         <li> <a href="#"> Política de Privacidade</a></li>
                         <li> <a href="#">Novidades</a></li>
