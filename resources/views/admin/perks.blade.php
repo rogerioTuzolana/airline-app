@@ -19,37 +19,35 @@
         </form>
     </div>
     <div class="card-group">
-      {{--@foreach ($plans as $plan)
+      @foreach ($perks as $perk)
       <div class="card rounded" style="margin-left: 20px">
-        <div class="card-header card-personal text-center">{{$plan->name}}</div>
+        <div class="card-header card-personal text-center">{{$perk->name}}</div>
         <div class="card-body">
-          <p class="card-title text-center">{{$plan->description}}</p> 
+          @foreach ($tariffs as $tariff)
+          <h6 class="card-title text-center">{{$tariff->name}}</h6> 
+          @endforeach
+          
         </div>
         <div class="card-footer">
-          @if ($plan->quantity_total!=null)     
-          <h5 class="text-center" style="color:#012970">Quantidade máxima de telemóveis</h5>
-          <p class="text-center">{{$plan->quantity_total}}</p>      
-          @endif
-          <h5 class="text-center" style="color:#012970">Preço</h5>
-          <p class="text-center">{{$plan->price}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditPerk({{$plan->id}},'{{$plan->name}}','{{$plan->description}}','{{$plan->price}}')">Editar</button>
-          <button class="btn text-white bg-danger" onclick="modalDropPerk({{$plan->id}})">Eliminar</button>
+          <p class="text-center">{{$perk->description}}</p>
+          <button class="btn text-white" style="background: #d8703b" onclick="modalEditPerk({{$perk->id}},'{{$perk->name}}','{{$perk->description}}','{{$perk->price}}')">Editar</button>
+          <button class="btn text-white bg-danger" onclick="modalDropPerk({{$perk->id}})">Eliminar</button>
         </div>
       </div>
-      @endforeach--}}
+      @endforeach
 
-      {{--@if (count($plans) == 0 && $search)
+      @if (count($perks) == 0 && $search)
         <div class="row">
           <div class="text-center">
-            <p style="font-size: 18px">Nenhum plano encotrado<a href="{{route('planos')}}"><b>Ver todos</b></a></p>
+            <p style="font-size: 18px">Nenhuma regalia encotrada<a href="{{route('regalias')}}"><b>Ver todos</b></a></p>
           </div>
         </div>
-      @endif--}}
+      @endif
     </div>
 </div>
 <div class="d-flex">
     <div class="align-self-center mx-auto">
-        {{--$plans->appends(['search'=>isset($search)?$search:''])->links()--}}
+        {{--$perks->appends(['search'=>isset($search)?$search:''])->links()--}}
     </div>
 </div>
 
@@ -67,30 +65,30 @@
             <a id="result"></a>
           </div>
           <div class="d-flex flex-column">
-            <form id="formAddTariff" method="POST" name="formAddPerk">
+            <form id="formAddPerk" method="POST" name="formAddPerk">
               @csrf
               <div class="form-group mb-3">
                 <input type="text" class="form-control rounded" id="name" placeholder="Nome" required>
                 <div class="invalid-feedback">Nome inválido</div>
               </div>
-              <div class="form-group mb-3">
+              {{--<div class="form-group mb-3">
                 <label for="">Tipo</label>
                 <input type="text" class="form-control rounded" id="type" placeholder="Para tipo de tarifas" required>
                 <div class="invalid-feedback">Tipo inválido</div>
-              </div>
+              </div>--}}
               <div class="form-group mb-3">
-                <label for="">Descrição para classe económica</label>
+                <label for="">Descrição</label>
                 <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
                 </textarea>
                 <div class="invalid-feedback">Descrição inválido</div>
               </div>
-              <div class="form-group mb-3">
+              {{--<div class="form-group mb-3">
                 <label for="">Descrição para classe executiva</label>
                 <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
                 </textarea>
                 <div class="invalid-feedback">Descrição inválido</div>
-              </div>
-              <input type="text" class="form-control rounded" id="tariff_id" hidden>
+              </div>--}}
+              <input type="text" class="form-control rounded" id="perk_id" hidden>
               
               <div class="row text-center">
                 <button type="submit" class="btn btn-block btn-round text-white" style="background: #3bb9d8;" id="btn-addPerk"></button>

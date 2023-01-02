@@ -269,8 +269,8 @@
       modalBox.show();
     }
     function modalDropPerk(id) {
-      $("#drop_tariff_id").val(id);
-      var modal = document.getElementById('exampleModalDropTariff')
+      $("#drop_perk_id").val(id);
+      var modal = document.getElementById('exampleModalDropPerk')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
@@ -292,9 +292,8 @@
 
     function modalPerk(params) {
       $("#btn-addPerk").html('Adicionar');
-      $("#brand").val("");
-      $("#model").val("");
-      $("#capacity").val("");
+      $("#name").val("");
+      $("#description").val("");
       var modal = document.getElementById('exampleModalPerk')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
@@ -332,12 +331,11 @@
       modalBox.show();
     }
 
-    function modalEditPerk(id,brand,model,capacity){
+    function modalEditPerk(id,name,description){
       $("#btn-addPerk").html('Editar');
-      $("#fleet_id").val(id);
-      $("#brand").val(brand);
-      $("#model").val(model);
-      $("#capacity").val(capacity);
+      $("#perk_id").val(id);
+      $("#name").val(brand);
+      $("#description").val(description);
       var modal = document.getElementById('exampleModalPerk')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();

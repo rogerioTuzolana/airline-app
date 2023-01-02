@@ -19,32 +19,28 @@
         </form>
     </div>
     <div class="card-group">
-      {{--@foreach ($plans as $plan)
+      @foreach ($tariffs as $tariff)
       <div class="card rounded" style="margin-left: 20px">
-        <div class="card-header card-personal text-center">{{$plan->name}}</div>
+        <div class="card-header card-personal text-center">{{$tariff->name}}</div>
         <div class="card-body">
-          <p class="card-title text-center">{{$plan->description}}</p> 
+          <p class="card-title text-center">{{$tariff->category}}</p> 
         </div>
         <div class="card-footer">
-          @if ($plan->quantity_total!=null)     
-          <h5 class="text-center" style="color:#012970">Quantidade máxima de telemóveis</h5>
-          <p class="text-center">{{$plan->quantity_total}}</p>      
-          @endif
           <h5 class="text-center" style="color:#012970">Preço</h5>
-          <p class="text-center">{{$plan->price}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditTariff({{$plan->id}},'{{$plan->name}}','{{$plan->description}}','{{$plan->price}}')">Editar</button>
-          <button class="btn text-white bg-danger" onclick="modalDropTariff({{$plan->id}})">Eliminar</button>
+          <p class="text-center">{{$tariff->amount}}</p>
+          <button class="btn text-white" style="background: #d8703b" onclick="modalEditTariff({{$tariff->id}},'{{$tariff->name}}','{{$tariff->category}}','{{$tariff->amount}}')">Editar</button>
+          <button class="btn text-white bg-danger" onclick="modalDropTariff({{$tariff->id}})">Eliminar</button>
         </div>
       </div>
-      @endforeach--}}
+      @endforeach
 
-      {{--@if (count($plans) == 0 && $search)
+      @if (count($tariffs) == 0 && $search)
         <div class="row">
           <div class="text-center">
-            <p style="font-size: 18px">Nenhum plano encotrado<a href="{{route('planos')}}"><b>Ver todos</b></a></p>
+            <p style="font-size: 18px">Nenhuma tarifa encotrada<a href="{{route('tarifas')}}"><b>Ver todos</b></a></p>
           </div>
         </div>
-      @endif--}}
+      @endif
     </div>
 </div>
 <div class="d-flex">
@@ -81,14 +77,14 @@
                 </select>
                 <div class="invalid-feedback">Categoria inválido</div>
               </div>
-              <div class="form-group mb-3">
+              {{--<div class="form-group mb-3">
                 <label for="">Regalias</label>
                 <select type="text" class="form-control rounded" id="category" required>
                   <option value="">Y</option>
                   <option value="">X</option>
                 </select>
                 <div class="invalid-feedback">Categoria inválido</div>
-              </div>
+              </div>--}}
               <div class="form-group mb-3">
                 <input type="text" class="form-control rounded money" id="amount" placeholder="Preço" required>
                 <div class="invalid-feedback">Preço inválido</div>
