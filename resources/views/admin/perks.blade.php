@@ -79,8 +79,14 @@
                 <div class="invalid-feedback">Tipo inválido</div>
               </div>
               <div class="form-group mb-3">
-                <label for="">Descrição</label>
-                <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="5">
+                <label for="">Descrição para classe económica</label>
+                <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
+                </textarea>
+                <div class="invalid-feedback">Descrição inválido</div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="">Descrição para classe executiva</label>
+                <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
                 </textarea>
                 <div class="invalid-feedback">Descrição inválido</div>
               </div>

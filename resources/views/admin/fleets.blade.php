@@ -19,32 +19,32 @@
         </form>
     </div>
     <div class="card-group">
-      {{--@foreach ($plans as $plan)
+      @foreach ($fleets as $fleet)
       <div class="card rounded" style="margin-left: 20px">
-        <div class="card-header card-personal text-center">{{$plan->name}}</div>
+        <div class="card-header card-personal text-center">{{$fleet->brand}}</div>
         <div class="card-body">
-          <p class="card-title text-center">{{$plan->description}}</p> 
+          <p class="card-title text-center">{{$fleet->model}}</p> 
         </div>
         <div class="card-footer">
-          @if ($plan->quantity_total!=null)     
-          <h5 class="text-center" style="color:#012970">Quantidade máxima de telemóveis</h5>
-          <p class="text-center">{{$plan->quantity_total}}</p>      
+          @if ($fleet->capacity!=null)
+          <h5 class="text-center" style="color:#012970">Capacidade</h5>
+          <p class="text-center">{{$fleet->capacity}}</p>      
           @endif
-          <h5 class="text-center" style="color:#012970">Preço</h5>
-          <p class="text-center">{{$plan->price}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditFleet({{$plan->id}},'{{$plan->name}}','{{$plan->description}}','{{$plan->price}}')">Editar</button>
-          <button class="btn text-white bg-danger" onclick="modalDropFleet({{$plan->id}})">Eliminar</button>
+          <h5 class="text-center" style="color:#012970">Capacidade</h5>
+          <p class="text-center">{{$fleet->capacity}}</p>
+          <button class="btn text-white" style="background: #d8703b" onclick="modalEditFleet({{$fleet->id}},'{{$fleet->name}}','{{$fleet->description}}','{{$fleet->price}}')">Editar</button>
+          <button class="btn text-white bg-danger" onclick="modalDropFleet({{$fleet->id}})">Eliminar</button>
         </div>
       </div>
-      @endforeach--}}
+      @endforeach
 
-      {{--@if (count($plans) == 0 && $search)
+      @if (count($fleets) == 0 && $search)
         <div class="row">
           <div class="text-center">
-            <p style="font-size: 18px">Nenhum plano encotrado<a href="{{route('planos')}}"><b>Ver todos</b></a></p>
+            <p style="font-size: 18px">Nenhuma frota encotrado<a href="{{route('frotas')}}"><b>Ver todos</b></a></p>
           </div>
         </div>
-      @endif--}}
+      @endif
     </div>
 </div>
 <div class="d-flex">

@@ -1,8 +1,8 @@
 $("#btn-addFleet").on('click',function() {
     $('form[name="formAddFleet"]').submit(function (event) {
         event.preventDefault();
-        alert('Sim')
-        return
+        //alert('Sim')
+        //return
         let brand = $(this).find("input#brand").val();
         let model = $(this).find("input#model").val();
         let capacity = $(this).find("input#capacity").val();
@@ -35,7 +35,7 @@ $("#btn-addFleet").on('click',function() {
             let message = msg.message;
             $("#result").html(message);
             setTimeout(window.location.reload(), 10000);
-            $('form[name="formAddFleet"]').reset();
+            //$('form[name="formAddFleet"]').reset();
         })
         .fail(function(msg){
             $('#resultBox').removeClass('bg-success');

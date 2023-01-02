@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fleet;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,9 +21,67 @@ class AdminController extends Controller
     }
 
     public function fleets(){
-        return view('admin.fleets');
+        
+        $fleets = '';
+        $search = request('search');
+        if ($search) {
+            $fleets = Fleet::where([
+                ['brand', 'like', '%'.$search.'%']
+            ])->orWhere([
+                ['model', 'like', '%'.$search.'%']
+            ])
+            ->orWhere([
+                ['capacity', 'like', '%'.$search.'%']
+            ])
+            ->paginate(3);
+            
+        }else{
+            $fleets = Fleet::paginate(3);
+        }
+        
+        return view('admin.fleets',["fleets"=>$fleets, "search"=>$search]);
     }
     
+    public function store_fleet(Request $request){
+        $status = false;
+        if ($request->fleet_id!='') {
+            $fleet = Fleet::find($request->fleet_id);
+            $fleet->brand = $request->brand;
+            $fleet->model = $request->model;
+            $fleet->capacity = $request->capacity;
+            $status = $fleet->update();
+        }else {
+            $fleet = new Fleet;
+            $fleet->brand = $request->brand;
+            $fleet->model = $request->model;
+            $fleet->capacity = $request->capacity;
+            $status = $fleet->save();
+        }
+        if ($request->fleet_id!='') {
+            if ($status) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Frota adicionado com sucesso.',
+                ],200);
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Frota não editado.',
+                ],422);
+            }
+        }
+        if ($status) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Frota adicionado com sucesso.',
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Frota não adicionado.',
+        ],422);
+    }
+
     public function tariffs(){
         return view('admin.tariffs');
     }
