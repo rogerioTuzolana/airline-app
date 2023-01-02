@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MaiinController;
+use App\Http\Controllers\MainController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +19,20 @@ use App\Http\Controllers\UserController;
 */
 
 
+
+
+
+
 Route::middleware(['guest','PreventBackHistory'])->group(function(){
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('/');
+    
+    // route of Maincontroller 
+
+    Route::get('/', [MainController::class, 'index'])->name('/');
+    Route::get('/bilhete', [MainController::class, 'Comprar_bilhete'])->name('bilhete');
+    Route::get('/tarifa', [MainController::class, 'tarifa'])->name('tarifa');
+
+
+    // and  route of Maincontroller 
 
     Route::get('/admin/entrar', [AdminController::class, 'login'])->name('admin_login');
 
