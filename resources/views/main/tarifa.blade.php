@@ -8,11 +8,12 @@
     <h1>NOSSAS TARIFAS</h1>
 </div>
 
-<div id="tipo-tarifa">
-    <h1>TARIFAS DOMESTRICAS</h1>
-    <p>As Tarifas domésticas aplicam-se nas viagens local Angola DE/PARA</p>
-</div>
-<table class="table table-bordered">
+<div class="tarifasc">
+    <div id="tipo-tarifa">
+        <h1>TARIFAS DOMESTRICAS</h1>
+        <p>As Tarifas domésticas aplicam-se nas viagens local Angola DE/PARA</p>
+    </div>
+    <table class="table table-bordered">
         <thead class="success">
             <tr class="table-info">
                 <th class="white-bg th-top" colspan="1" scope="col"></th>
@@ -338,6 +339,10 @@
     </table>
     <p><strong>N/A</strong>- Não aplicável</p>
 
+</div>
 
 
-    @endsection
+
+
+
+@endsection

@@ -8,7 +8,7 @@
       <div class="container">
          <div class="text-bg">
             <div id="bg-pub">
-               <h1>PDC Airline<br>O Mundo Na palama de sua Mão</h1>
+               <h1>PDC Airline<br>O Mundo Na palma de sua Mão</h1>
             </div>
             <div class="button_section" id="btnbilhte">
                <a class="main_bt"  href="/bilhete">Comprar Bilhete</a>
@@ -118,8 +118,8 @@
          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
             <div class="traveling-box">
                <i><img src="icon/travel-icon2.png" alt="icon" /></i>
-               <h3>Passeios nas montanhas</h3>
-               <p> vai usar uma passagem de Lorem Ipsum</p>
+               <h3>Passeios montanhas</h3>
+               <p> vai usar uma passagem de Lorem Ipsum, você precisa ser</p>
                <div class="read-more">
                   <a href="#">Mais informação</a>
                </div>

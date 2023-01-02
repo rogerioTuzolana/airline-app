@@ -37,7 +37,7 @@
 }
 
 #bg-pub {
-    background-color: #0008084f;
+    background-color: #095474c2;
     margin: 20px;
     margin-top: 50px;
     border-radius: 15px;
@@ -45,11 +45,21 @@
 
 #bg-pub h1 {
 text-align: center;
-color: aliceblue;
+color: #ffffff;
+text-decoration: solid;
+font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
 #btnbilhte a:hover {
     background-color: #15cfe5;
     border-color:#15cfe5;
+}
+
+.tarifasc{
+
+    margin-left: 90px;
+    margin-right: 90px;
+    position: relative;
 }

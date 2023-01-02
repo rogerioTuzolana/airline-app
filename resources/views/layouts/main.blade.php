@@ -107,8 +107,8 @@
                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                   <div class="Follow">
                      <h3>Fale Conosco</h3>
-                     <span> Rua 145 Camama 1 <br>Luanda,<br>
-                        Angonla<br>
+                     <span> Rua 145 Camama 1 <br>Luanda,Belas<br>
+                        Angola<br>
                         +244 999999999</span>
                   </div>
                </div>
