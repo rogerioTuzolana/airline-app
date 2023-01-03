@@ -1075,3 +1075,20 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+/** Modal width**/
+@media (min-width: 576px) {
+  .modal-lg {
+    max-width: 400px;
+  }
+  .card-pub{
+    max-width: 600px;
+  }
+  .modal-lg-reg {
+    max-width: 800px;
+  }
+  /*.modal-dialog .modal-content {
+    padding: 1rem;
+  }*/
+}
