@@ -285,6 +285,7 @@
       $("#brand").val("");
       $("#model").val("");
       $("#capacity").val("");
+      $("#fleet_id").val("");
       var modal = document.getElementById('exampleModalFleet')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
@@ -294,6 +295,7 @@
       $("#btn-addPerk").html('Adicionar');
       $("#name").val("");
       $("#description").val("");
+      $("#perk_id").val("");
       var modal = document.getElementById('exampleModalPerk')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
@@ -302,15 +304,27 @@
 
     function modalTariff(params) {
       $("#btn-addTariff").html('Adicionar');
-      $("#brand").val("");
-      $("#model").val("");
-      $("#capacity").val("");
+      $("#name").val("");
+      $("#category").val("economic");
+      $("#amount").val("");
+      $("#tariff_id").val("");
       var modal = document.getElementById('exampleModalTariff')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
-
-    function modalTariff(params) {
+    function modalPerkTariff(tariff,perk) {
+      $("#btn-addPerkTariff").html('Adicionar');
+      $("#description").val("");
+      $("#tariff_id").val("");
+      $("#perk_id").val("");
+      $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
+      
+      var modal = document.getElementById('exampleModalPerkTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+    
+    /*function modalTariff(params) {
       $("#btn-addTariff").html('Adicionar');
       $("#brand").val("");
       $("#model").val("");
@@ -318,7 +332,7 @@
       var modal = document.getElementById('exampleModalTariff')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
-    }
+    }*/
 
     function modalEditFleet(id,brand,model,capacity){
       $("#btn-addFleet").html('Editar');
@@ -327,6 +341,17 @@
       $("#model").val(model);
       $("#capacity").val(capacity);
       var modal = document.getElementById('exampleModalFleet')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalEditTariff(id,name,category,amount){
+      $("#btn-addTariff").html('Editar');
+      $("#tariff_id").val(id);
+      $("#name").val(name);
+      $("#category").val(category);
+      $("#amount").val(amount);
+      var modal = document.getElementById('exampleModalTariff')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }

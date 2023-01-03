@@ -23,10 +23,13 @@
       <div class="card rounded" style="margin-left: 20px">
         <div class="card-header card-personal text-center">{{$perk->name}}</div>
         <div class="card-body">
+          <div class="row mt-2">
           @foreach ($tariffs as $tariff)
-          <h6 class="card-title text-center">{{$tariff->name}}</h6> 
+          <div class="col-6"><a class="card-title text-center">{{$tariff->name}}</a></div>
+          <div class="col-6 mb-2"><button onclick="modalPerkTariff('{{$tariff->name}}','{{$perk->name}}')" class="btn btn-primary" style="border-radius: 20px">Definir</button></div>
+          <hr>         
           @endforeach
-          
+          </div>
         </div>
         <div class="card-footer">
           <p class="text-center">{{$perk->description}}</p>
@@ -49,6 +52,57 @@
     <div class="align-self-center mx-auto">
         {{--$perks->appends(['search'=>isset($search)?$search:''])->links()--}}
     </div>
+</div>
+
+<div class="modal fade" id="exampleModalPerkTariff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h5 id="title-tariff-perk"></h5>
+        </div>
+        <div class="text-center alert alert-danger" id="resultBox" style="display: none">
+          <a id="result"></a>
+        </div>
+        <div class="d-flex flex-column">
+          <form id="formAddPerkTariff" method="POST" name="formAddPerkTariff">
+            @csrf
+            {{--<div class="form-group mb-3">
+              <label for="">Tipo</label>
+              <input type="text" class="form-control rounded" id="type" placeholder="Para tipo de tarifas" required>
+              <div class="invalid-feedback">Tipo inválido</div>
+            </div>--}}
+            <div class="form-group mb-3">
+              <label for=""></label>
+              <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
+              </textarea>
+              <div class="invalid-feedback">Descrição inválido</div>
+            </div>
+            {{--<div class="form-group mb-3">
+              <label for="">Descrição para classe executiva</label>
+              <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
+              </textarea>
+              <div class="invalid-feedback">Descrição inválido</div>
+            </div>--}}
+            <input type="text" class="form-control rounded" id="perk_id" hidden>
+            <input type="text" class="form-control rounded" id="tariff_id" hidden>
+            
+            <div class="row text-center">
+              <button type="submit" class="btn btn-block btn-round text-white" style="background: #3bb9d8;" id="btn-addPerkTariff"></button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+          
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="exampleModalPerk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

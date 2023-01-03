@@ -175,7 +175,6 @@ class AdminController extends Controller
         }else {
             $perk = new Perk;
             $perk->name = $request->name;
-            $perk->model = $request->model;
             $perk->description = $request->description;
             $status = $perk->save();
         }
