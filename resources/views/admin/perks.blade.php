@@ -25,8 +25,29 @@
         <div class="card-body">
           <div class="row mt-2">
           @foreach ($tariffs as $tariff)
+          @php
+              $perk_tariff = App\Models\PerkTariff::where('perk_id',$perk->id)->where('tariff_id',$tariff->id)->first();
+              //dd($perk_tariff);
+              
+          @endphp
           <div class="col-6"><a class="card-title text-center">{{$tariff->name}}</a></div>
-          <div class="col-6 mb-2"><button onclick="modalPerkTariff('{{$tariff->name}}','{{$perk->name}}')" class="btn btn-primary" style="border-radius: 20px">Definir</button></div>
+          <div class="col-6 mb-2">
+            @if (isset($perk_tariff))
+            
+            <button 
+            onclick="modalEditPerkTariff(
+              {{$perk_tariff->id}},
+              {{$perk_tariff->tariff_id}},
+              {{$perk_tariff->perk_id}},
+              '{{$perk_tariff->description}}',
+              '{{$tariff->name}}',
+              '{{$perk->name}}',
+              {{$perk_tariff->amount}})"
+              class="btn btn-primary" style="border-radius: 20px">Editar</button>
+            @else 
+            <button onclick="modalPerkTariff({{$perk->id}},{{$tariff->id}},'{{$tariff->name}}','{{$perk->name}}')" class="btn btn-primary" style="border-radius: 20px">Definir</button>
+            @endif
+          </div>
           <hr>         
           @endforeach
           </div>

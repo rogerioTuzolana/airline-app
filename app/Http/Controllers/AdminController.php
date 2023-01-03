@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fleet;
 use App\Models\Perk;
 use App\Models\Tariff;
+use App\Models\PerkTariff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -201,6 +202,47 @@ class AdminController extends Controller
         return response()->json([
             'success' => false,
             'message' => 'Regalia não adicionada.',
+        ],422);
+    }
+
+    public function store_perk_tariff(Request $request){
+        $status = false;
+        if ($request->perk_tariff_id!='') {
+            $perk_tariff = PerkTariff::find($request->perk_tariff_id);
+            $perk_tariff->description = $request->description;
+            $perk_tariff->amount = $request->amount;
+            $status = $perk_tariff->update();
+        }else {
+            $perk_tariff = new PerkTariff;
+            $perk_tariff->description = $request->description;
+            $perk_tariff->amount = $request->amount;
+            $perk_tariff->perk_id = $request->perk_id;
+            $perk_tariff->tariff_id = $request->tariff_id;
+            $status = $perk_tariff->save();
+        }
+
+        if ($request->perk_tariff_id!='') {
+            if ($status) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Condições da regalia adicionada com sucesso.',
+                ],200);
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Condições da regalia não editada.',
+                ],422);
+            }
+        }
+        if ($status) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Condições da regalia adicionada com sucesso.',
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Condições da regalia não adicionada.',
         ],422);
     }
 

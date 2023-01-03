@@ -61,5 +61,6 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','admin','PreventBackHist
     Route::post('/tarifa', [AdminController::class, 'store_tariff'])->name('tariff');
     Route::get('/regalias', [AdminController::class, 'perks'])->name('perks');
     Route::post('/regalia', [AdminController::class, 'store_perk'])->name('perk');
+    Route::post('/regalia-tarifa', [AdminController::class, 'store_perk_tariff'])->name('perk_tariff');
 
 });

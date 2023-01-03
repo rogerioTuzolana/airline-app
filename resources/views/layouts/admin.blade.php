@@ -312,11 +312,13 @@
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
-    function modalPerkTariff(tariff,perk) {
+    function modalPerkTariff(perk_id,tariff_id,tariff,perk) {
       $("#btn-addPerkTariff").html('Adicionar');
       $("#description").val("");
-      $("#tariff_id").val("");
-      $("#perk_id").val("");
+      $("#tariff_id").val(tariff_id);
+      $("#perk_id").val(perk_id);
+      $("#amount").val("");
+      $("#perk_tariff_id").val("");
       $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
       
       var modal = document.getElementById('exampleModalPerkTariff')
@@ -352,6 +354,19 @@
       $("#category").val(category);
       $("#amount").val(amount);
       var modal = document.getElementById('exampleModalTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalEditPerkTariff(id,tariff_id,perk_id,description,tariff,perk,amount){
+      $("#perk_tariff_id").val(id);
+      $("#btn-addPerkTariff").html('Editar');
+      $("#tariff_id").val(tariff_id);
+      $("#perk_id").val(perk_id);
+      $("#amount").val(amount);
+      $("#description").val(description);
+      $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
+      var modal = document.getElementById('exampleModalPerkTariff')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }

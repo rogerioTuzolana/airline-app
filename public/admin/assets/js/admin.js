@@ -26,9 +26,9 @@ $("#btn-addFleet").on('click',function() {
             async: false,
         })
         .done(function(msg){
-            $("#brand").val("");
+            /*$("#brand").val("");
             $("#model").val("");
-            $("#capacity").val("");
+            $("#capacity").val("");*/
 
             $('#resultBox').removeClass('alert-danger');
             $('#resultBox').addClass('alert-success');
@@ -58,7 +58,7 @@ $("#btn-addPerk").on('click',function() {
         //alert('Sim')
         //return
         let name = $(this).find("input#name").val();
-        let description = $(this).find("input#description").val();
+        let description = $(this).find("textarea#description").val();
         let perk_id = $(this).find("input#perk_id").val();
 
 
@@ -78,8 +78,66 @@ $("#btn-addPerk").on('click',function() {
             async: false,
         })
         .done(function(msg){
-            $("#name").val("");
+            /*$("#name").val("");
+            $("#description").val("");*/
+
+            $('#resultBox').removeClass('alert-danger');
+            $('#resultBox').addClass('alert-success');
+            result.style.display = "block";
+            
+            //
+            let message = msg.message;
+            $("#result").html(message);
+            setTimeout(window.location.reload(), 10000);
+            //$('form[name="formAddFleet"]').reset();
+        })
+        .fail(function(msg){
+            $('#resultBox').removeClass('bg-success');
+            $('#resultBox').addClass('bg-danger');
+            result.style.display = "block";
+            //
+            let data = JSON.parse(msg.responseText);
+            $("#result").html(data.message);
+        });
+
+    }) 
+});
+
+$("#btn-addPerkTariff").on('click',function() {
+    $('form[name="formAddPerkTariff"]').submit(function (event) {
+        event.preventDefault();
+        //alert('Sim')
+        //return
+        let amount = $(this).find("input#amount").val();
+        let description = $(this).find("textarea#description").val();
+        let perk_id = $(this).find("input#perk_id").val();
+        let tariff_id = $(this).find("input#tariff_id").val();
+        let perk_tariff_id = $(this).find("input#perk_tariff_id").val();
+
+
+        let result = document.getElementById("resultBox");   
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : "/admin/regalia-tarifa",
+            type : 'POST',
+            data : {
+                amount: amount,
+                description: description,
+                perk_id: perk_id,
+                tariff_id: tariff_id,
+                perk_tariff_id: perk_tariff_id,
+            },
+            dataType: 'json',
+            async: false,
+        })
+        .done(function(msg){
+            /*$("#amount").val("");
             $("#description").val("");
+            $("#tariff_id").val("");
+            $("#perk_id").val("");
+            $("#perk_tariff_id").val("");*/
 
             $('#resultBox').removeClass('alert-danger');
             $('#resultBox').addClass('alert-success');
