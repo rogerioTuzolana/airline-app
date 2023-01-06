@@ -11,7 +11,7 @@
                <h1>PDC Airline<br>O Mundo Na palma de sua Mão</h1>
             </div>
             <div class="button_section" id="btnbilhte">
-               <a class="main_bt"  href="/bilhete">Comprar Bilhete</a>
+               <a class="main_bt" data-toggle="modal" data-target=".bd-example-modal-lg" {{-- href="/bilhete"--}}>Comprar Bilhete</a>
             </div>
             <div class="container">
                <form class="main-form">
@@ -190,5 +190,13 @@
          </div>
       </section>
    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
 </div>
 @endsection
