@@ -2,9 +2,23 @@
 @section('title', 'PDC AIRLINE')
 
 @section('content')
+<<<<<<< HEAD
     <section>
         <div class="banner-main">
             <img src="images/banner1.jpg" alt="#" />
+=======
+<section>
+   <div class="banner-main">
+      <img src="images/banner3.jpg" alt="#" />
+      <div class="container">
+         <div class="text-bg">
+            <div id="bg-pub">
+               <h1>PDC Airline<br>O Mundo Na palma de sua Mão</h1>
+            </div>
+            <div class="button_section" id="btnbilhte">
+               <a class="main_bt" data-toggle="modal" data-target=".bd-example-modal-lg" {{-- href="/bilhete"--}}>Comprar Bilhete</a>
+            </div>
+>>>>>>> origin/airline_edson
             <div class="container">
                 <div class="text-bg">
                     <div id="bg-pub">
@@ -216,6 +230,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 
 
     <div id="tarifario" class="tarifasc">
@@ -565,3 +580,55 @@
     </div>
 
 @endsection
+=======
+<!--Tours -->
+<div class="Tours">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2>OS MELHORES PASSEIOS</h2>
+               <span>É um fato há muito estabelecido que um leitor se distrairá com o conteúdo legível de uma página ao olhar para seu layout. O objetivo de usar Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal</span>
+            </div>
+         </div>
+      </div>
+      <section id="demos">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="owl-carousel owl-theme">
+                  <div class="item">
+                     <img class="img-responsive" src="images/1.jpg" alt="#" />
+                     <h3>Holiday Tour</h3>
+                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                  </div>
+                  <div class="item">
+                     <img class="img-responsive" src="images/2.jpg" alt="#" />
+                     <h3>New York</h3>
+                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                  </div>
+                  <div class="item">
+                     <img class="img-responsive" src="images/3.jpg" alt="#" />
+                     <h3>London</h3>
+                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                  </div>
+                  <div class="item">
+                     <img class="img-responsive" src="images/2.jpg" alt="#" />
+                     <h3>Holiday Tour</h3>
+                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+@endsection
+>>>>>>> origin/airline_edson
