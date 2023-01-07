@@ -65,7 +65,7 @@
                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                   <div class="full">
                      <div class="center-desk">
-                        <div class="logo"> <a href="/"><img src="images/logo2.png" alt="PDC AIRLINE"><strong class="white">PDC AIRLINE</strong></a></div>
+                        <div class="logo"> <a href="#"><img src="images/logo2.png" alt="PDC AIRLINE"><strong class="white">PDC AIRLINE</strong></a></div>
                      </div>
                   </div>
                </div>
@@ -74,10 +74,10 @@
                      <div class="limit-box">
                         <nav class="main-menu">
                            <ul class="menu-area-main">
-                              <li class="nav-link active" > <a href="/">Home</a> </li>
-                              <li> <a href="/#about">Sobre Nos</a> </li>
-                              <li><a href="/#travel">Viagens</a></li>
-                              <li><a href="/tarifa">Tarifas</a></li>
+                              <li class="nav-link active"><a href="#">Home</a> </li>
+                              <li> <a href="#about">Sobre Nos</a> </li>
+                              <li><a href="#travel">Viagens</a></li>
+                              <li><a href="#tarifario">Tarifas</a></li>
                               <li><a href="#contact">Fala Conosco</a></li>
                            </ul>
                         </nav>
@@ -161,27 +161,7 @@
    <script src="js/custom.js"></script>
    <!-- javascript -->
    <script src="js/owl.carousel.js"></script>
-   <script>
-      $(document).ready(function() {
-         var owl = $('.owl-carousel');
-         owl.owlCarousel({
-            margin: 10,
-            nav: true,
-            loop: true,
-            responsive: {
-               0: {
-                  items: 1
-               },
-               600: {
-                  items: 2
-               },
-               1000: {
-                  items: 3
-               }
-            }
-         })
-      })
-   </script>
+   <script src="public/js/custom.js"></script>
 
 </body>
 

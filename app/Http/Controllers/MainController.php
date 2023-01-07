@@ -21,10 +21,5 @@ class MainController extends Controller
 
     }
 
-    public function tarifa(Request $request){
-
-        return view('main.tarifa');
-        
-
-    }
+    
 }
