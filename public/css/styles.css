@@ -37,15 +37,19 @@
 }
 
 #bg-pub {
-    background-color: #0008084f;
-    margin: 20px;
-    margin-top: 50px;
-    border-radius: 15px;
+    background-color: #095474c2;
+    border-radius: 0px;
+    width: 55%;
+    
 }
 
 #bg-pub h1 {
+font-size: 20px;
 text-align: center;
-color: aliceblue;
+color: #ffffff;
+text-decoration: solid;
+font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
@@ -53,3 +57,36 @@ color: aliceblue;
     background-color: #15cfe5;
     border-color:#15cfe5;
 }
+
+.tarifasc{
+
+    margin-left: 90px;
+    margin-right: 90px;
+    position: relative;
+}
+
+
+#infob{
+    margin: 30px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    color: #323232;
+
+}
+
+
+
+@media only screen and (max-width: 500px) {
+    #bg-pub {
+
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    #bg-pub h1{
+        margin-top: -10px;
+        font-size: 13pt;
+
+    }
+  }

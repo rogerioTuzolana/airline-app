@@ -363,7 +363,6 @@ $("#btn-addPerkTariff").on('click',function() {
     }) 
 });
 
-
 $("#btn-addTariff").on('click',function() {
     $('form[name="formAddTariff"]').submit(function (event) {
         event.preventDefault();

@@ -22,7 +22,6 @@ use App\Http\Controllers\MainController;
 
 
 
-//Route::get('/home', [MainController::class, 'index'])->middleware('PreventBackHistory')->name('home');
 
 Route::middleware(['guest','PreventBackHistory'])->group(function(){
     
