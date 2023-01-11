@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'type' => "admin",
         ]);
+        
         User::create([
             'first_name' => "Edson",
             'last_name' => "Xauvunge",
@@ -35,6 +36,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'type' => "admin",
         ]);
+
         User::create([
             'first_name' => "Yuri",
             'last_name' => "Rego",

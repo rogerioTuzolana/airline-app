@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MaiinController;
+use App\Http\Controllers\MainController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +19,20 @@ use App\Http\Controllers\UserController;
 */
 
 
+
+
+
+
 Route::middleware(['guest','PreventBackHistory'])->group(function(){
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('/');
+    
+    // route of Maincontroller 
+
+    Route::get('/', [MainController::class, 'index'])->name('/');
+    Route::get('/bilhete', [MainController::class, 'Comprar_bilhete'])->name('bilhete');
+    Route::get('/tarifa', [MainController::class, 'tarifa'])->name('tarifa');
+
+
+    // and  route of Maincontroller 
 
     Route::get('/admin/entrar', [AdminController::class, 'login'])->name('admin_login');
 
@@ -41,5 +54,13 @@ Route::group(['middleware'=>['auth','PreventBackHistory']], function () {
 
 Route::group(['prefix' => 'admin','middleware'=>['auth','admin','PreventBackHistory']], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/frotas', [AdminController::class, 'fleets'])->name('fleets');
+    Route::post('/frota', [AdminController::class, 'store_fleet'])->name('fleet');
+    
+    Route::get('/tarifas', [AdminController::class, 'tariffs'])->name('tariffs');
+    Route::post('/tarifa', [AdminController::class, 'store_tariff'])->name('tariff');
+    Route::get('/regalias', [AdminController::class, 'perks'])->name('perks');
+    Route::post('/regalia', [AdminController::class, 'store_perk'])->name('perk');
+    Route::post('/regalia-tarifa', [AdminController::class, 'store_perk_tariff'])->name('perk_tariff');
 
 });
