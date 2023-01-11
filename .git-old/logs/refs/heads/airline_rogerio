@@ -1,0 +1,11 @@
+0000000000000000000000000000000000000000 f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1670670471 +0000	branch: Created from main
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 b06c430b1cb10f774d5019470707d9b2ab1b64f9 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672137130 +0000	commit: admin authentication
+b06c430b1cb10f774d5019470707d9b2ab1b64f9 665a631ff15915369654cfaa1f55f1ce745cffe5 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672137239 +0000	commit: admin authentication
+665a631ff15915369654cfaa1f55f1ce745cffe5 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243224 +0000	commit: creaction of flight components
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a 3bbab54056f884fbd65e1b4fccf4060b2ef42c5a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672402465 +0000	commit (merge): Admin perks
+3bbab54056f884fbd65e1b4fccf4060b2ef42c5a cb362e9a3889d32054069313c4bb20aba2fd62f7 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672656506 +0000	commit: Fix fleets
+cb362e9a3889d32054069313c4bb20aba2fd62f7 d5e4e6329fd89b64351c8d040b55bcac99d9e642 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672669963 +0000	commit (merge): Fix fleets
+d5e4e6329fd89b64351c8d040b55bcac99d9e642 9a89d4c70fbbdda3528d89dfa0036afdec66d2ba Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672681451 +0000	commit: Fix tariffs and perks
+9a89d4c70fbbdda3528d89dfa0036afdec66d2ba 706974057f38f4cf39fb8f574e9663eba0be9f68 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672720564 +0000	commit: Fix perks
+706974057f38f4cf39fb8f574e9663eba0be9f68 d60eca3228ca926838767d25feb86ee026021093 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672743343 +0000	commit: Fix perks
+d60eca3228ca926838767d25feb86ee026021093 0e21573877190241308c133c3742453680ad152d Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672914196 +0000	commit: Fix airline

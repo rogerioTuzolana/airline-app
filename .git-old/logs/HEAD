@@ -1,0 +1,38 @@
+0000000000000000000000000000000000000000 f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1670670299 +0000	commit (initial): Primeiro commit
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1670670397 +0000	checkout: moving from master to main
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672027983 +0000	checkout: moving from main to airline_rogerio
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 b06c430b1cb10f774d5019470707d9b2ab1b64f9 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672137130 +0000	commit: admin authentication
+b06c430b1cb10f774d5019470707d9b2ab1b64f9 665a631ff15915369654cfaa1f55f1ce745cffe5 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672137239 +0000	commit: admin authentication
+665a631ff15915369654cfaa1f55f1ce745cffe5 f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672141284 +0000	checkout: moving from airline_rogerio to airline_edson
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 665a631ff15915369654cfaa1f55f1ce745cffe5 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672141470 +0000	checkout: moving from airline_edson to airline_rogerio
+665a631ff15915369654cfaa1f55f1ce745cffe5 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243224 +0000	commit: creaction of flight components
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243365 +0000	checkout: moving from airline_rogerio to airline_rogerio
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243372 +0000	checkout: moving from airline_rogerio to airline_edson
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243572 +0000	checkout: moving from airline_edson to airline_rogerio
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243591 +0000	checkout: moving from airline_rogerio to airline_edson
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672243610 +0000	checkout: moving from airline_edson to airline_rogerio
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a f94bde5700bf2c4fad0785fad8439a88eb95a5a1 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672400591 +0000	checkout: moving from airline_rogerio to airline_edson
+f94bde5700bf2c4fad0785fad8439a88eb95a5a1 2b1f725748bf0607a14c0cc1c6350c48504ce870 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672401035 +0000	pull origin airline_edson: Fast-forward
+2b1f725748bf0607a14c0cc1c6350c48504ce870 1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672402343 +0000	checkout: moving from airline_edson to airline_rogerio
+1e5f3f4395bee301c4f37f2d1e07e4c5c7b09f4a 3bbab54056f884fbd65e1b4fccf4060b2ef42c5a Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672402465 +0000	commit (merge): Admin perks
+3bbab54056f884fbd65e1b4fccf4060b2ef42c5a cb362e9a3889d32054069313c4bb20aba2fd62f7 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672656506 +0000	commit: Fix fleets
+cb362e9a3889d32054069313c4bb20aba2fd62f7 2b1f725748bf0607a14c0cc1c6350c48504ce870 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672656558 +0000	checkout: moving from airline_rogerio to airline_edson
+2b1f725748bf0607a14c0cc1c6350c48504ce870 c3fcadee5f40e68b83e706abe6329f20975a5009 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672656591 +0000	pull origin airline_edson: Fast-forward
+c3fcadee5f40e68b83e706abe6329f20975a5009 cb362e9a3889d32054069313c4bb20aba2fd62f7 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672657444 +0000	checkout: moving from airline_edson to airline_rogerio
+cb362e9a3889d32054069313c4bb20aba2fd62f7 c3fcadee5f40e68b83e706abe6329f20975a5009 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672668538 +0000	checkout: moving from airline_rogerio to airline_edson
+c3fcadee5f40e68b83e706abe6329f20975a5009 13355249e7b2494a0fd504cc1f0324ef2346ccee Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672668560 +0000	pull origin airline_edson: Fast-forward
+13355249e7b2494a0fd504cc1f0324ef2346ccee cb362e9a3889d32054069313c4bb20aba2fd62f7 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672669449 +0000	checkout: moving from airline_edson to airline_rogerio
+cb362e9a3889d32054069313c4bb20aba2fd62f7 d5e4e6329fd89b64351c8d040b55bcac99d9e642 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672669963 +0000	commit (merge): Fix fleets
+d5e4e6329fd89b64351c8d040b55bcac99d9e642 9a89d4c70fbbdda3528d89dfa0036afdec66d2ba Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672681451 +0000	commit: Fix tariffs and perks
+9a89d4c70fbbdda3528d89dfa0036afdec66d2ba 13355249e7b2494a0fd504cc1f0324ef2346ccee Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672681482 +0000	checkout: moving from airline_rogerio to airline_edson
+13355249e7b2494a0fd504cc1f0324ef2346ccee dc02be6033d93674121a3ae581aec6c15ddd6ade Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672681589 +0000	pull origin airline_edson: Fast-forward
+dc02be6033d93674121a3ae581aec6c15ddd6ade 9a89d4c70fbbdda3528d89dfa0036afdec66d2ba Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672681674 +0000	checkout: moving from airline_edson to airline_rogerio
+9a89d4c70fbbdda3528d89dfa0036afdec66d2ba 706974057f38f4cf39fb8f574e9663eba0be9f68 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672720564 +0000	commit: Fix perks
+706974057f38f4cf39fb8f574e9663eba0be9f68 706974057f38f4cf39fb8f574e9663eba0be9f68 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672720602 +0000	checkout: moving from airline_rogerio to airline_rogerio
+706974057f38f4cf39fb8f574e9663eba0be9f68 dc02be6033d93674121a3ae581aec6c15ddd6ade Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672720646 +0000	checkout: moving from airline_rogerio to airline_edson
+dc02be6033d93674121a3ae581aec6c15ddd6ade 706974057f38f4cf39fb8f574e9663eba0be9f68 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672720693 +0000	checkout: moving from airline_edson to airline_rogerio
+706974057f38f4cf39fb8f574e9663eba0be9f68 d60eca3228ca926838767d25feb86ee026021093 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672743343 +0000	commit: Fix perks
+d60eca3228ca926838767d25feb86ee026021093 0e21573877190241308c133c3742453680ad152d Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672914196 +0000	commit: Fix airline
+0e21573877190241308c133c3742453680ad152d dc02be6033d93674121a3ae581aec6c15ddd6ade Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672915018 +0000	checkout: moving from airline_rogerio to airline_edson
+dc02be6033d93674121a3ae581aec6c15ddd6ade 6f607302ed8ec836ca3cd61b55aa2278e6215526 Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672915065 +0000	pull origin airline_edson: Fast-forward
+6f607302ed8ec836ca3cd61b55aa2278e6215526 0e21573877190241308c133c3742453680ad152d Rogério Tuzolana <tuzolanarogerio@gmail.com> 1672921488 +0000	checkout: moving from airline_edson to airline_rogerio
