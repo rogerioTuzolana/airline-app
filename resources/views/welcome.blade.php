@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="text-bg">
                     <div class="row justify-content-center">
-                       <div id="bg-pub" class="">
+                        <div id="bg-pub" class="">
                             <h1>P DC Airline o mundo Na palma de sua Mão</h1>
                         </div>
                     </div>
@@ -68,56 +68,160 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <h1>Informe os dados para fazer a compra do Bilhete</h1>
-                <form action="" id="regidter-bilhete">
-
-                    <div class="full-box">
-                        <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email" placeholder="informe seu e-mail">
-                    </div>
-                    <div class="half-box">
-                        <label for="name">Nome</label>
-                        <input type="text" name="name" id="name" placeholder="informe seu nome">
-                    </div>
-                    <div class="full-box">
-                        <label for="lastname">Sobrenome</label>
-                        <input type="text" name="lastname" id="lastname" placeholder="informe seu sobrenome">
-                    </div>
-                    <div class="full-box">
-                        <label for="origem">Aeroporto Origem</label>
-                        <input type="text" name="origem" id="origem" placeholder="informe seu aeroporto origem">
-                    </div>
-                    <div class="full-box">
-                        <label for="distino">Aeroporto Destino</label>
-                        <input type="text" name="distino" id="distino" placeholder="informe seu aeroporto distino">
-
-                    </div>
-
-                    <div class="half-box col-md-2">
-                        <label for="nbilhete">Nº Bilhete</label>
-                        <select class="form-control" id="nbilhete">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-
-                    <div class="half-box">
-                        <input type="checkbox" name="biv" id="biv">
-                        <label for="biv" id="biv-label">Bilhete de ida e volta</label>
+                <form action="" id="infob">
+                    <div class="mt-3 d-flex justify-content-center">
+                        <h1 class="text-center">Informe os dados para fazer a compra do Bilhete</h1>
                     </div>
 
 
-                    <div class="full-box">
-                        <button type="submit" class="btn btn-primary" id="cbilhete">Comprar Bilhete</button>
+
+                    <div class="form-row mt-3">
+
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="name">Nome</label>
+                            <input type="text" class="form-control rounded" name="name" id="name" placeholder="">
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="lastname">Sobrenome</label>
+                            <input type="text" class="form-control rounded" name="lastname" id="lastname" placeholder="">
+                        </div>
                     </div>
-                </form>
 
 
+                    <div class="form-row">
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Domestico</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Internacional</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control rounded" name="email" id="email" placeholder="">
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="email">Telefone</label>
+                            <input type="number" class="form-control rounded" name="email" id="email" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Domestico</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Internacional</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="origem">Aeroporto Origem</label>
+                            <select class="form-control form-control-lg">
+                                <option>selecionar</option>
+                                <option>Angola</option>
+                                <option>selecionar</option>
+                                <option>selecionar</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                            <label for="distino">Aeroporto Destino</label>
+                            <select class="form-control form-control-lg">
+                                <option>selecionar</option>
+                                <option>Angola</option>
+                                <option>selecionar</option>
+                                <option>selecionar</option>
+                            </select>
+
+
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label for="nbilhete">Nº Bilhete</label>
+                            <select class="form-control rounded" id="nbilhete">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                value="option1">
+                            <label class="form-check-label" for="inlineRadio1">Ida</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                value="option2">
+                            <label class="form-check-label" for="inlineRadio2">Ida e Volta</label>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label for="nbilhete">Data de Partida</label>
+                            <select class="form-control rounded" id="nbilhete">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+                            <label for="nbilhete">Data de Regresso</label>
+                            <select class="form-control rounded" id="nbilhete">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-12 mx-auto" style="width: 200px;">
+                            <button type="submit" class="btn btn-primary btn-lg" id="cbilhete">Comprar Bilhete</button>
+                        </div>
+                    </div>
             </div>
+
+
+            </form>
+
+
+
+
         </div>
+
+    </div>
     </div>
     <!-- about -->
 
