@@ -2,36 +2,25 @@
 @section('title', 'PDC AIRLINE')
 
 @section('content')
-<<<<<<< HEAD
     <section>
         <div class="banner-main">
             <img src="images/banner1.jpg" alt="#" />
-=======
-<section>
-   <div class="banner-main">
-      <img src="images/banner3.jpg" alt="#" />
-      <div class="container">
-         <div class="text-bg">
-            <div id="bg-pub">
-               <h1>PDC Airline<br>O Mundo Na palma de sua Mão</h1>
-            </div>
-            <div class="button_section" id="btnbilhte">
-               <a class="main_bt" data-toggle="modal" data-target=".bd-example-modal-lg" {{-- href="/bilhete"--}}>Comprar Bilhete</a>
-            </div>
->>>>>>> origin/airline_edson
             <div class="container">
                 <div class="text-bg">
-                    <div id="bg-pub">
-                        <h1>PDC Airline<br>O Mundo Na palma de sua Mão</h1>
+                    <div class="row justify-content-center">
+                       <div id="bg-pub" class="">
+                            <h1>P DC Airline o mundo Na palma de sua Mão</h1>
+                        </div>
                     </div>
                     <div class="button_section" id="btnbilhte">
-                        <a class="main_bt" data-target="bd-example-modal-lg" {{--href="/bilhete"--}}>Comprar Bilhete</a>
+                        <a class="main_bt" data-toggle="modal" data-target=".bd-example-modal-lg"
+                            {{-- href="/bilhete" --}}>Comprar Bilhete</a>
                     </div>
                     <div class="container">
                         <form class="main-form">
                             <h3>Encontre Seu VOO</h3>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                             <label>Local Origem</label>
@@ -74,13 +63,61 @@
             </div>
         </div>
     </section>
-    
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          ...
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <h1>Informe os dados para fazer a compra do Bilhete</h1>
+                <form action="" id="regidter-bilhete">
+
+                    <div class="full-box">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" placeholder="informe seu e-mail">
+                    </div>
+                    <div class="half-box">
+                        <label for="name">Nome</label>
+                        <input type="text" name="name" id="name" placeholder="informe seu nome">
+                    </div>
+                    <div class="full-box">
+                        <label for="lastname">Sobrenome</label>
+                        <input type="text" name="lastname" id="lastname" placeholder="informe seu sobrenome">
+                    </div>
+                    <div class="full-box">
+                        <label for="origem">Aeroporto Origem</label>
+                        <input type="text" name="origem" id="origem" placeholder="informe seu aeroporto origem">
+                    </div>
+                    <div class="full-box">
+                        <label for="distino">Aeroporto Destino</label>
+                        <input type="text" name="distino" id="distino" placeholder="informe seu aeroporto distino">
+
+                    </div>
+
+                    <div class="half-box col-md-2">
+                        <label for="nbilhete">Nº Bilhete</label>
+                        <select class="form-control" id="nbilhete">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+
+                    <div class="half-box">
+                        <input type="checkbox" name="biv" id="biv">
+                        <label for="biv" id="biv-label">Bilhete de ida e volta</label>
+                    </div>
+
+
+                    <div class="full-box">
+                        <button type="submit" class="btn btn-primary" id="cbilhete">Comprar Bilhete</button>
+                    </div>
+                </form>
+
+
+            </div>
         </div>
-      </div>
     </div>
     <!-- about -->
 
@@ -118,7 +155,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#">Comprar Bilhete</a>
+            <a data-toggle="modal" data-target=".bd-example-modal-lg" {{-- href="/bilhete" --}}>Comprar Bilhete</a>
         </div>
     </div>
     <!-- end about -->
@@ -230,7 +267,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
 
 
     <div id="tarifario" class="tarifasc">
@@ -580,55 +616,3 @@
     </div>
 
 @endsection
-=======
-<!--Tours -->
-<div class="Tours">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-               <h2>OS MELHORES PASSEIOS</h2>
-               <span>É um fato há muito estabelecido que um leitor se distrairá com o conteúdo legível de uma página ao olhar para seu layout. O objetivo de usar Lorem Ipsum é que ele tem uma distribuição de letras mais ou menos normal</span>
-            </div>
-         </div>
-      </div>
-      <section id="demos">
-         <div class="row">
-            <div class="col-md-12">
-               <div class="owl-carousel owl-theme">
-                  <div class="item">
-                     <img class="img-responsive" src="images/1.jpg" alt="#" />
-                     <h3>Holiday Tour</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                  </div>
-                  <div class="item">
-                     <img class="img-responsive" src="images/2.jpg" alt="#" />
-                     <h3>New York</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                  </div>
-                  <div class="item">
-                     <img class="img-responsive" src="images/3.jpg" alt="#" />
-                     <h3>London</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                  </div>
-                  <div class="item">
-                     <img class="img-responsive" src="images/2.jpg" alt="#" />
-                     <h3>Holiday Tour</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-   </div>
-</div>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
-@endsection
->>>>>>> origin/airline_edson
