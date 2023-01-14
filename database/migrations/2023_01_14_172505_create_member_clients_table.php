@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('regular_clients', function (Blueprint $table) {
+        Schema::create('member_clients', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->enum('title',['sr','sra','child']);
-            $table->date('birthDate')->nullable();
-            $table->enum('gender',['m','f'])->nullable();
+            $table->bigInteger('client_id')->unsigned();
+            $table->date('birthDate');
+            $table->enum('gender',['m','f']);
+            $table->string('address');
+            $table->string('preferred_language');
             $table->timestamps();
-            $table->foreign('user_id')
+            $table->foreign('client_id')
             ->references('id')
-            ->on('users')
+            ->on('clients')
             ->onDelete('cascade');
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regular_clients');
+        Schema::dropIfExists('member_clients');
     }
 };

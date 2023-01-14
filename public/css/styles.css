@@ -8,7 +8,7 @@
     font-size: 22px;
 }
 .menu-area nav ul li a {
-    font-size: 22px;
+    font-size: 17px;
 }
 .menu-area nav ul li a:hover {
     color: #15cfe5;
@@ -89,4 +89,20 @@ font-family: Arial, Helvetica, sans-serif;
         font-size: 13pt;
 
     }
-  }
+}
+
+
+@media (min-width: 576px) {
+    .modal-login {
+      max-width: 400px;
+    }
+    .card-pub{
+      max-width: 600px;
+    }
+    /*.modal-lg-reg {
+      max-width: 800px;
+    }*/
+    /*.modal-dialog .modal-content {
+      padding: 1rem;
+    }*/
+}

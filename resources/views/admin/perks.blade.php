@@ -14,11 +14,7 @@
         </div>
     </div>
     <div class="row mb-4 mt-4">
-<<<<<<< HEAD
         <form action="{{route('perks')}}" method="GET">
-=======
-        <form action="{{--route('planos')--}}" method="GET">
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
           <input class="form-control rounded-pill" name="search" id="search" type="text" placeholder="Procurar..">
         </form>
     </div>
@@ -36,7 +32,6 @@
           @endphp
           <div class="col-6"><a class="card-title text-center">{{$tariff->name}}</a></div>
           <div class="col-6 mb-2">
-<<<<<<< HEAD
             <div class="row">
               <div class="col-3 form-check form-switch">
                 <input class="form-check-input checkPerk" type="checkbox" id="flexSwitchCheckDefault" data-perk_tariff="{{isset($perk_tariff->id)?$perk_tariff->id:''}}" data-tariff="{{$tariff->id}}" data-perk="{{$perk->id}}" @if (isset($perk_tariff) && $perk_tariff->status)checked @endif>
@@ -79,23 +74,6 @@
                 </div>
               @endif
             </div>
-=======
-            @if (isset($perk_tariff))
-            
-            <button 
-            onclick="modalEditPerkTariff(
-              {{$perk_tariff->id}},
-              {{$perk_tariff->tariff_id}},
-              {{$perk_tariff->perk_id}},
-              '{{$perk_tariff->description}}',
-              '{{$tariff->name}}',
-              '{{$perk->name}}',
-              {{$perk_tariff->amount}})"
-              class="btn btn-primary" style="border-radius: 20px">Editar</button>
-            @else 
-            <button onclick="modalPerkTariff({{$perk->id}},{{$tariff->id}},'{{$tariff->name}}','{{$perk->name}}')" class="btn btn-primary" style="border-radius: 20px">Definir</button>
-            @endif
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
           </div>
           <hr>         
           @endforeach
@@ -103,12 +81,8 @@
         </div>
         <div class="card-footer">
           <p class="text-center">{{$perk->description}}</p>
-<<<<<<< HEAD
           
           <button class="btn text-white" style="background: #378f9b" onclick="modalEditPerk({{$perk->id}},'{{$perk->name}}','{{$perk->description}}','{{$perk->price}}')">Editar</button>
-=======
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditPerk({{$perk->id}},'{{$perk->name}}','{{$perk->description}}','{{$perk->price}}')">Editar</button>
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
           <button class="btn text-white bg-danger" onclick="modalDropPerk({{$perk->id}})">Eliminar</button>
         </div>
       </div>
@@ -125,11 +99,7 @@
 </div>
 <div class="d-flex">
     <div class="align-self-center mx-auto">
-<<<<<<< HEAD
         {{$perks->appends(['search'=>isset($search)?$search:''])->links()}}
-=======
-        {{--$perks->appends(['search'=>isset($search)?$search:''])->links()--}}
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
     </div>
 </div>
 
@@ -160,19 +130,8 @@
               </textarea>
               <div class="invalid-feedback">Descrição inválido</div>
             </div>
-<<<<<<< HEAD
             
             <input type="text" class="form-control rounded" id="perk_tariff_id" hidden>
-=======
-            {{--<div class="form-group mb-3">
-              <label for="">Descrição para classe executiva</label>
-              <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
-              </textarea>
-              <div class="invalid-feedback">Descrição inválido</div>
-            </div>--}}
-            <input type="text" class="form-control rounded" id="perk_id" hidden>
-            <input type="text" class="form-control rounded" id="tariff_id" hidden>
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
             
             <div class="row text-center">
               <button type="submit" class="btn btn-block btn-round text-white" style="background: #3bb9d8;" id="btn-addPerkTariff"></button>
@@ -189,7 +148,6 @@
   </div>
 </div>
 
-<<<<<<< HEAD
 <div class="modal fade" id="exampleModalInfoPerkTariff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-lg modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -212,8 +170,6 @@
   </div>
 </div>
 
-=======
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
 <div class="modal fade" id="exampleModalPerk" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-lg modal-dialog modal-dialog-centered">
       <div class="modal-content">

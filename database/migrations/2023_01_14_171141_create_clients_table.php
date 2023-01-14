@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('member_pdcs', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->enum('title',['sr','sra']);
-            $table->date('birthDate');
-            $table->enum('gender',['m','f']);
-            $table->string('address');
-            $table->string('preferred_language');
+            $table->enum('title',['sr','sra','child']);
             $table->timestamps();
             $table->foreign('user_id')
             ->references('id')
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('member_pdcs');
+        Schema::dropIfExists('clients');
     }
 };

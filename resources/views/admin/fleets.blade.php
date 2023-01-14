@@ -14,11 +14,7 @@
         </div>
     </div>
     <div class="row mb-4 mt-4">
-<<<<<<< HEAD
         <form action="{{route('fleets')}}" method="GET">
-=======
-        <form action="{{--route('planos')--}}" method="GET">
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
           <input class="form-control rounded-pill" name="search" id="search" type="text" placeholder="Procurar..">
         </form>
     </div>
@@ -53,11 +49,7 @@
 </div>
 <div class="d-flex">
     <div class="align-self-center mx-auto">
-<<<<<<< HEAD
         {{$fleets->appends(['search'=>isset($search)?$search:''])->links()}}
-=======
-        {{--$plans->appends(['search'=>isset($search)?$search:''])->links()--}}
->>>>>>> c882d6a9b117e2c9d620b31fa54cebc11b646691
     </div>
 </div>
 
