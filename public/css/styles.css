@@ -4,8 +4,9 @@
     width: 100px;
 }
 
+
 .logo a strong {
-    font-size: 22px;
+    font-size: 20px;
 }
 .menu-area nav ul li a {
     font-size: 17px;
@@ -56,6 +57,14 @@ font-family: Arial, Helvetica, sans-serif;
 #btnbilhte a:hover {
     background-color: #15cfe5;
     border-color:#15cfe5;
+    cursor: pointer;
+}
+#btnbilhte a{
+color: #ffffff;
+text-decoration: solid;
+text-transform:capitalize;
+
+font-weight: 15px;
 }
 
 .tarifasc{

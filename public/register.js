@@ -79,7 +79,7 @@ $("#btn-formReg").on('click',function() {
             }*/
         })
         .done(function(msg){  
-            //alert('Cadastrado')
+            alert('Cadastrado com sucesso')
             $('#resultBox').removeClass('alert-danger');
             $('#resultBox').addClass('alert-success');
             result.style.display = "block";

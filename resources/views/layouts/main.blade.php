@@ -20,17 +20,17 @@
    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/styles.css">
 
-   <!-- Responsive-->
-   <link rel="stylesheet" href="css/responsive.css">
-   <!-- fevicon -->
-   <link rel="icon" href="images/fevicon.png" type="image/gif" />
-   <!-- Scrollbar Custom CSS -->
-   <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-   <!-- Tweaks for older IEs-->
-   <!-- owl stylesheets -->
-   <link rel="stylesheet" href="css/owl.carousel.min.css">
-   <link rel="stylesheet" href="css/owl.theme.default.min.css">
-   <!--[if lt IE 9]>
+    <!-- Responsive-->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
@@ -97,66 +97,68 @@
                   
                </div>
             </div>
-         </div>
-      </div>
-      <!-- end header inner -->
-   </header>
-   <!-- end header -->
-   @yield('content')
-   <!-- footer -->
-   <footer>
-      <div id="contact" class="footer">
-         <div class="container">
-            <div class="row pdn-top-30">
-               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <ul class="location_icon">
-                     <li> <a href="#"><img src="icon/facebook.png"></a></li>
-                     <li> <a href="#"><img src="icon/Twitter.png"></a></li>
-                     <li> <a href="#"><img src="icon/linkedin.png"></a></li>
-                     <li> <a href="#"><img src="icon/instagram.png"></a></li>
-                  </ul>
-               </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="Follow">
-                     <h3>Fale Conosco</h3>
-                     <span> Rua 145 Camama 1 <br>Luanda,Belas<br>
-                        Angola<br>
-                        +244 999999999</span>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="Follow">
-                     <h3>LINKS ADICIONAIS</h3>
-                     <ul class="link">
-                        <li> <a href="#about">Sobre Nos</a></li>
-                        <li> <a href="#">Termos e Condições</a></li>
-                        <li> <a href="#"> Política de Privacidade</a></li>
-                        <li> <a href="#">Novidades</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div class="Follow">
-                     <h3> Contato</h3>
-                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                           <input class="Newsletter" placeholder="Nome" type="text">
+        </div>
+        <!-- end header inner -->
+    </header>
+    <!-- end header -->
+    @yield('content')
+    <!-- footer -->
+    <footer>
+        <div id="contact" class="footer">
+            <div class="container">
+                <div class="row pdn-top-30">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <ul class="location_icon">
+                            <li> <a href="#"><img src="icon/facebook.png"></a></li>
+                            <li> <a href="#"><img src="icon/Twitter.png"></a></li>
+                            <li> <a href="#"><img src="icon/linkedin.png"></a></li>
+                            <li> <a href="#"><img src="icon/instagram.png"></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="Follow">
+                            <h3>Fale Conosco</h3>
+                            <span> Rua 145 Camama 1 <br>Luanda,Belas<br>
+                                Angola<br>
+                                +244 999999999</span>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                           <input class="Newsletter" placeholder="Email" type="text">
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="Follow">
+                            <h3>LINKS ADICIONAIS</h3>
+                            <ul class="link">
+                                <li> <a href="#about">Sobre Nos</a></li>
+                                <li> <a href="#">Termos e Condições</a></li>
+                                <li> <a href="#"> Política de Privacidade</a></li>
+                                <li> <a href="#">Novidades</a></li>
+                            </ul>
                         </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                           <textarea class="textarea" placeholder="comment" type="text">Comentario</textarea>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="Follow">
+                            <h3> Contato</h3>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input class="Newsletter" placeholder="Nome" type="text">
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <input class="Newsletter" placeholder="Email" type="text">
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <textarea class="textarea" placeholder="comentario" type="text"></textarea>
+                                </div>
+                            </div>
+                            <div id="btnbilhte">
+                                <a class="Subscribe ">Enviar</a>
+                            </div>
                         </div>
-                     </div>
-                     <button class="Subscribe">Enviar</button>
-                  </div>
-               </div>
-            </div>
-            <div class="copyright">
-               <div class="container">
-                  <p>Copyright 2022 Todos os direitos reservados pela PDC-Airline<a href=""></a></p>
-               </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <div class="container">
+                        <p>Copyright 2022 Todos os direitos reservados pela PDC Airline</p>
+                    </div>
+                </div>
             </div>
          </div>
       </div>
