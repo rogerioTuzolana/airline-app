@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,7 +25,6 @@
   <link href="/admin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/admin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
-  <title>@yield('title')</title>
   <!-- Template Main CSS File -->
   <link href="/admin/assets/css/style.css" rel="stylesheet">
 
@@ -36,6 +34,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <title>@yield('title')</title>
 </head>
 
 <body>
@@ -44,9 +43,9 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{route('dashboard')}}" class="logo d-flex align-items-center">
         <img src="/admin/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">PDC Admin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -83,11 +82,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
+            <li>NiceAdmin
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -133,11 +128,11 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-journal-text"></i><span>Gerir</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-editors.html">
+            <a href="{{route('airlines')}}">
               <i class="bi bi-circle"></i><span>Voos</span>
             </a>
           </li>
@@ -211,7 +206,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="">Home</a></li>
           <li class="breadcrumb-item active">@yield('route')</li>
         </ol>
       </nav>
@@ -291,6 +286,60 @@
       modalBox.show();
     }
 
+    function modalAirline(parms){
+
+      var optionInter = document.getElementById('optionInter');
+      var optionLocal = document.getElementById('optionLocal');
+      let category = $("#category").val();
+      
+      if(category == "local"){   
+          optionInter.style.display = 'none';
+          optionLocal.style.display = 'flex';
+      }else{      
+          optionLocal.style.display = 'none';
+          optionInter.style.display = 'flex';
+      }
+      $("#airline_id").val("");
+      $("#date").val("");
+      $("#time").val("");
+      $("#category").val(category);
+
+      $("#btn-addAirline").html('Adicionar');
+      var modal = document.getElementById('exampleModalAirline')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+      
+    }
+
+    function modalEditAirline(id,orige,destiny,date,time,category){
+
+      var optionInter = document.getElementById('optionInter');
+      var optionLocal = document.getElementById('optionLocal');
+      //let category = $("#category").val();
+
+      if(category == "local"){   
+          optionInter.style.display = 'none';
+          optionLocal.style.display = 'flex';
+          $("#orige").val(orige);
+          $("#destiny").val(orige);
+      }else{      
+          optionLocal.style.display = 'none';
+          optionInter.style.display = 'flex';
+          $("#orige2").val(orige);
+          $("#destiny2").val(orige);
+      }
+
+      $("#airline_id").val(id);
+      $("#date").val(date);
+      $("#time").val(time);
+      $("#category").val(category);
+      $("#btn-addAirline").html('Editar');
+      var modal = document.getElementById('exampleModalAirline')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+
+    }
+
     function modalPerk(params) {
       $("#btn-addPerk").html('Adicionar');
       $("#name").val("");
@@ -312,16 +361,24 @@
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
-    function modalPerkTariff(perk_id,tariff_id,tariff,perk) {
+
+    function modalPerkTariff(perk_tariff_id,tariff,perk) {
       $("#btn-addPerkTariff").html('Adicionar');
       $("#description").val("");
-      $("#tariff_id").val(tariff_id);
-      $("#perk_id").val(perk_id);
       $("#amount").val("");
-      $("#perk_tariff_id").val("");
+      $("#perk_tariff_id").val(perk_tariff_id);
       $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
       
       var modal = document.getElementById('exampleModalPerkTariff')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function modalInfoPerkTariff(description,tariff,perk) {
+      $("#description2").html(description);
+      $("#title-tariff-perk2").html('Regalia de '+perk+' para tarifa '+tariff);
+      
+      var modal = document.getElementById('exampleModalInfoPerkTariff')
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
@@ -358,11 +415,9 @@
       modalBox.show();
     }
 
-    function modalEditPerkTariff(id,tariff_id,perk_id,description,tariff,perk,amount){
+    function modalEditPerkTariff(id,description,tariff,perk,amount){
       $("#perk_tariff_id").val(id);
       $("#btn-addPerkTariff").html('Editar');
-      $("#tariff_id").val(tariff_id);
-      $("#perk_id").val(perk_id);
       $("#amount").val(amount);
       $("#description").val(description);
       $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);

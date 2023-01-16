@@ -9,10 +9,7 @@
     font-size: 20px;
 }
 .menu-area nav ul li a {
-    font-size: 20px;
-}
-.menu-area-main li.active a {
-    color: #15cfe5;
+    font-size: 17px;
 }
 .menu-area nav ul li a:hover {
     color: #15cfe5;
@@ -88,3 +85,33 @@ font-weight: 15px;
 
 }
 
+
+
+@media only screen and (max-width: 500px) {
+    #bg-pub {
+
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    #bg-pub h1{
+        margin-top: -10px;
+        font-size: 13pt;
+
+    }
+}
+
+
+@media (min-width: 576px) {
+    .modal-login {
+      max-width: 400px;
+    }
+    .card-pub{
+      max-width: 600px;
+    }
+    /*.modal-lg-reg {
+      max-width: 800px;
+    }*/
+    /*.modal-dialog .modal-content {
+      padding: 1rem;
+    }*/
+}

@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row mb-4 mt-4">
-        <form action="{{--route('planos')--}}" method="GET">
+        <form action="{{route('perks')}}" method="GET">
           <input class="form-control rounded-pill" name="search" id="search" type="text" placeholder="Procurar..">
         </form>
     </div>
@@ -32,21 +32,48 @@
           @endphp
           <div class="col-6"><a class="card-title text-center">{{$tariff->name}}</a></div>
           <div class="col-6 mb-2">
-            @if (isset($perk_tariff))
-            
-            <button 
-            onclick="modalEditPerkTariff(
-              {{$perk_tariff->id}},
-              {{$perk_tariff->tariff_id}},
-              {{$perk_tariff->perk_id}},
-              '{{$perk_tariff->description}}',
-              '{{$tariff->name}}',
-              '{{$perk->name}}',
-              {{$perk_tariff->amount}})"
-              class="btn btn-primary" style="border-radius: 20px">Editar</button>
-            @else 
-            <button onclick="modalPerkTariff({{$perk->id}},{{$tariff->id}},'{{$tariff->name}}','{{$perk->name}}')" class="btn btn-primary" style="border-radius: 20px">Definir</button>
-            @endif
+            <div class="row">
+              <div class="col-3 form-check form-switch">
+                <input class="form-check-input checkPerk" type="checkbox" id="flexSwitchCheckDefault" data-perk_tariff="{{isset($perk_tariff->id)?$perk_tariff->id:''}}" data-tariff="{{$tariff->id}}" data-perk="{{$perk->id}}" @if (isset($perk_tariff) && $perk_tariff->status)checked @endif>
+                {{--<label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>--}}
+              </div>
+              @if (isset($perk_tariff) && $perk_tariff->status)
+                
+                <div class="col-3">
+                  @if (isset($perk_tariff->description))
+                  <a 
+                  onclick="modalEditPerkTariff(
+                    {{$perk_tariff->id}},
+                    '{{$perk_tariff->description}}',
+                    '{{$tariff->name}}',
+                    '{{$perk->name}}',
+                    {{$perk_tariff->amount}})"
+                  class="btn" style="padding: 0px"><i class="bi bi-pencil-square"></i></a>
+                  @else
+                    @if (isset($perk_tariff->id) && $perk_tariff->status == true)
+                    <a 
+                    onclick="modalPerkTariff(
+                      {{$perk_tariff->id}},
+                      '{{$tariff->name}}',
+                      '{{$perk->name}}')"
+                    class="btn" style="padding: 0px"><i class="bi bi-pencil-square"></i></a>
+                    @endif
+                  @endif
+                </div>
+                <div class="col-3">
+                  @if ($perk_tariff->description!='')
+                  <a 
+                  onclick="modalInfoPerkTariff(
+                    '{{$perk_tariff->description}}',
+                    '{{$tariff->name}}',
+                    '{{$perk->name}}')"
+                    class="btn" style="padding: 0px;border-radius: 20px"><i class="bi bi-info-circle-fill"></i></a>
+                  @else 
+                  <a style="padding: 0px;border-radius: 20px" class="btn" style="border-radius: 20px"><i class="bi bi-info-circle-fill"></i></a>
+                  @endif
+                </div>
+              @endif
+            </div>
           </div>
           <hr>         
           @endforeach
@@ -54,7 +81,8 @@
         </div>
         <div class="card-footer">
           <p class="text-center">{{$perk->description}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditPerk({{$perk->id}},'{{$perk->name}}','{{$perk->description}}','{{$perk->price}}')">Editar</button>
+          
+          <button class="btn text-white" style="background: #378f9b" onclick="modalEditPerk({{$perk->id}},'{{$perk->name}}','{{$perk->description}}','{{$perk->price}}')">Editar</button>
           <button class="btn text-white bg-danger" onclick="modalDropPerk({{$perk->id}})">Eliminar</button>
         </div>
       </div>
@@ -71,7 +99,7 @@
 </div>
 <div class="d-flex">
     <div class="align-self-center mx-auto">
-        {{--$perks->appends(['search'=>isset($search)?$search:''])->links()--}}
+        {{$perks->appends(['search'=>isset($search)?$search:''])->links()}}
     </div>
 </div>
 
@@ -102,14 +130,8 @@
               </textarea>
               <div class="invalid-feedback">Descrição inválido</div>
             </div>
-            {{--<div class="form-group mb-3">
-              <label for="">Descrição para classe executiva</label>
-              <textarea name="description" class="form-control rounded" id="description" placeholder="Descrição" cols="30" rows="3">
-              </textarea>
-              <div class="invalid-feedback">Descrição inválido</div>
-            </div>--}}
-            <input type="text" class="form-control rounded" id="perk_id" hidden>
-            <input type="text" class="form-control rounded" id="tariff_id" hidden>
+            
+            <input type="text" class="form-control rounded" id="perk_tariff_id" hidden>
             
             <div class="row text-center">
               <button type="submit" class="btn btn-block btn-round text-white" style="background: #3bb9d8;" id="btn-addPerkTariff"></button>
@@ -122,6 +144,28 @@
       <div class="modal-footer d-flex justify-content-center">
           
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalInfoPerkTariff" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-lg modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h5 id="title-tariff-perk2" style="font-weight: bold"></h5>
+        </div>
+
+        <div class="d-flex flex-column">
+          <p id="description2" class="mb-2" style="text-align: center">
+          </p>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>

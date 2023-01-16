@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('tariff_id')->unsigned();
             $table->bigInteger('perk_id')->unsigned();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->double('amount',10,2)->nullable();
             $table->timestamps();
 
