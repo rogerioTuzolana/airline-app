@@ -120,7 +120,7 @@
                                 <li> <a href="#about">Sobre Nos</a></li>
                                 <li> <a href="#">Termos e Condições</a></li>
                                 <li> <a href="#"> Política de Privacidade</a></li>
-                                <li> <a href="#">Novidades</a></li>
+                                <li> <a href="#travel">Novidades</a></li>
                             </ul>
                         </div>
                     </div>
