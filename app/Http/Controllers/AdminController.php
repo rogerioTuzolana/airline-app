@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Fleet;
 use App\Models\Perk;
 use App\Models\Tariff;
+use App\Models\Airline;
 use App\Models\PerkTariff;
+use App\Models\TariffAirline;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -205,6 +207,62 @@ class AdminController extends Controller
         ],422);
     }
 
+    public function perk_delete(Request $request){
+
+        $perk = Perk::findOrFail($request->perk_id);
+        $delete = $perk->delete();
+        if ($delete) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Regalia eliminado.',
+            ],200);        
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Regalia não eliminado.',
+            ],422);
+        }
+    }
+
+    public function change_status_perk(Request $request){
+        $status = false;
+        if ($request->perk_tariff_id!='') {
+            $perk_tariff = PerkTariff::find($request->perk_tariff_id);
+            $perk_tariff->status = $request->status;
+            $status = $perk_tariff->update();
+        }else {
+            $perk_tariff = new PerkTariff;
+            $perk_tariff->status = $request->status;
+            $perk_tariff->perk_id = $request->perk_id;
+            $perk_tariff->tariff_id = $request->tariff_id;
+            $status = $perk_tariff->save();
+        }
+
+        if ($request->perk_tariff_id!='') {
+            if ($status) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Estado da regalia alterada com sucesso.',
+                ],200);
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Estado da regalia não editada.',
+                ],422);
+            }
+        }
+        if ($status) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Estado da regalia adicionada com sucesso.',
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Estado da regalia não adicionada.',
+        ],422);
+    }
+
     public function store_perk_tariff(Request $request){
         $status = false;
         if ($request->perk_tariff_id!='') {
@@ -225,7 +283,7 @@ class AdminController extends Controller
             if ($status) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Condições da regalia adicionada com sucesso.',
+                    'message' => 'Condições da regalia editada com sucesso.',
                 ],200);
             }else {
                 return response()->json([
@@ -245,6 +303,121 @@ class AdminController extends Controller
             'message' => 'Condições da regalia não adicionada.',
         ],422);
     }
+
+    public function airlines(){
+        $airlines = '';
+        $search = request('search');
+        if ($search) {
+            $airlines = Airline::where([
+                ['name', 'like', '%'.$search.'%']
+            ])->orWhere([
+                ['description', 'like', '%'.$search.'%']
+            ])
+            ->paginate(3);
+            
+        }else{
+            $airlines = Airline::paginate(3);
+        }
+        $tariffs = Tariff::get();
+        $fleets = Fleet::get();
+        return view('admin.airlines',[
+            "airlines"=>$airlines,
+            "tariffs"=>$tariffs, 
+            "fleets"=>$fleets,
+            "search"=>$search,
+        ]);
+    }
+
+    public function store_airline(Request $request){
+        $status = false;
+        if ($request->airline_id!='') {
+            $airline = Airline::find($request->airline_id);
+            $airline->name = $request->name;
+            $airline->category = $request->category;
+            $airline->orige = $request->orige;
+            $airline->destiny = $request->destiny;
+            $airline->fleet_id = $request->fleet_id;
+            $airline->date = $request->date;
+            $airline->time = $request->time;
+            $status = $airline->update();
+        }else {
+            $airline = new Airline;
+            $airline->name = $request->name;
+            $airline->category = $request->category;
+            $airline->orige = $request->orige;
+            $airline->destiny = $request->destiny;
+            $airline->fleet_id = $request->fleet_id;
+            $airline->date = $request->date;
+            $airline->time = $request->time;
+            $status = $airline->save();
+        }
+
+        if ($request->airline_id!='') {
+            if ($status) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Voo editado com sucesso.',
+                ],200);
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Voo não editado.',
+                ],422);
+            }
+        }
+        if ($status) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Voo adicionado com sucesso.',
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Voo não adicionado.',
+        ],422);
+    }
+
+    public function change_status_tariff_airline(Request $request){
+        $status = false;
+       
+        if ($request->tariff_airline_id!='') {
+            $tariff_airline = TariffAirline::find($request->tariff_airline_id);
+            $tariff_airline->status = $request->status;
+            $status = $tariff_airline->update();
+        }else {
+            
+            $tariff_airline = new TariffAirline;
+            $tariff_airline->airline_id = $request->airline_id;
+            $tariff_airline->tariff_id = $request->tariff_id;
+            $tariff_airline->status = $request->status;
+            $status = $tariff_airline->save();
+        }
+
+        if ($request->tariff_airline_id!='') {
+            if ($status) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Tarifa do voo alterada com sucesso.',
+                ],200);
+            }else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tarifa do voo não alterada.',
+                ],422);
+            }
+        }
+        if ($status) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tarifa do voo adicionada com sucesso.',
+            ],200);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Tarifa do voo não adicionada.',
+        ],422);
+    }
+
 
     public function auth(Request $request){
         $request->validate([

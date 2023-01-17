@@ -4,11 +4,12 @@
     width: 100px;
 }
 
+
 .logo a strong {
-    font-size: 22px;
+    font-size: 20px;
 }
 .menu-area nav ul li a {
-    font-size: 22px;
+    font-size: 17px;
 }
 .menu-area nav ul li a:hover {
     color: #15cfe5;
@@ -37,19 +38,80 @@
 }
 
 #bg-pub {
-    background-color: #0008084f;
-    margin: 20px;
-    margin-top: 50px;
-    border-radius: 15px;
+    background-color: #095474c2;
+    border-radius: 0px;
+    width: 55%;
+    
 }
 
 #bg-pub h1 {
+font-size: 20px;
 text-align: center;
-color: aliceblue;
+color: #ffffff;
+text-decoration: solid;
+font-family: Arial, Helvetica, sans-serif;
+
 }
 
 
 #btnbilhte a:hover {
     background-color: #15cfe5;
     border-color:#15cfe5;
+    cursor: pointer;
+}
+#btnbilhte a{
+color: #ffffff;
+text-decoration: solid;
+text-transform:capitalize;
+
+font-weight: 15px;
+}
+
+.tarifasc{
+
+    margin-left: 90px;
+    margin-right: 90px;
+    position: relative;
+}
+
+
+#infob{
+    margin: 30px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    color: #323232;
+
+}
+
+
+
+@media only screen and (max-width: 500px) {
+    #bg-pub {
+
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    #bg-pub h1{
+        margin-top: -10px;
+        font-size: 13pt;
+
+    }
+}
+
+
+@media (min-width: 576px) {
+    .modal-login {
+      max-width: 400px;
+    }
+    .card-pub{
+      max-width: 600px;
+    }
+    /*.modal-lg-reg {
+      max-width: 800px;
+    }*/
+    /*.modal-dialog .modal-content {
+      padding: 1rem;
+    }*/
 }
