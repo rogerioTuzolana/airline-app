@@ -70,7 +70,7 @@
             <div class="modal-content">
                 <form action="" id="infob">
                     <div class="modal-header mt-3 d-flex justify-content-center text-center">
-                        <h1 class="">Informe os dados para fazer a compra do Bilhete</h1>
+                        <h1 class="">Informe os dados</h1>
                         <button type="button" class="close" data-dismiss="modal" aria-label="close"><span
                                 aria-hidden="true">
                                 &times;</span></button>

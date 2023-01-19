@@ -156,7 +156,7 @@
                 </div>
                 <div class="copyright">
                     <div class="container">
-                        <p>Copyright 2022 Todos os direitos reservados pela PDC Airline</p>
+                        <p>Copyright 2022 PDC Airline . Todos direitos reservados</p>
                     </div>
                 </div>
             </div>
