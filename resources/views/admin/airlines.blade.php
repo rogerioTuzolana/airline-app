@@ -110,24 +110,13 @@
               <div class="col-6">
                 <div class="form-group mb-3">
                   <label for="">Origem</label>
+                  @php
+                    $citys = App\Models\ApiCity::get();
+                  @endphp
                   <select name="orige" id="orige" class="form-control rounded">
-                    <option value="bengo">Bengo</option>
-                    <option value="bengue">Benguela</option>
-                    <option value="bie">Bié</option>
-                    <option value="cabinda">Cabinda</option>
-                    <option value="cuandocub">Cuando-Cubango</option>
-                    <option value="cunene">Cunene</option>
-                    <option value="huambo">Huambo</option>
-                    <option value="huila">Huíla</option>
-                    <option value="kwanzano">Kwanza Norte</option>
-                    <option value="luanda">Luanda</option>
-                    <option value="Lundano">Lunda Norte</option>
-                    <option value="Lundasu"> Lunda Sul</option>
-                    <option value="malanje">Malanje</option>
-                    <option value="moxico">Moxico</option>
-                    <option value="Namibe">Namibe</option>
-                    <option value="uige">Uíge</option>
-                    <option value="zaire">Zaire</option>
+                    @foreach ($citys as $city)
+                    <option value="{{$city->key}}">{{$city->name}}</option>
+                    @endforeach
                   </select>
                   <div class="invalid-feedback">Percurso inválido</div>
                 </div>
@@ -136,23 +125,9 @@
                 <div class="form-group mb-3">
                   <label for="">Destino</label>
                   <select name="destiny" id="destiny" class="form-control rounded" required>
-                    <option value="bengo">Bengo</option>
-                    <option value="bengue">Bengue</option>
-                    <option value="bie">Bié</option>
-                    <option value="cabinda">Cabinda</option>
-                    <option value="cuandocub">Cuando-Cubango</option>
-                    <option value="cunene">Cunene</option>
-                    <option value="huambo">Huambo</option>
-                    <option value="huila">Huíla</option>
-                    <option value="kwanzano">Kwanza Norte</option>
-                    <option value="luanda">Luanda</option>
-                    <option value="Lundano">Lunda Norte</option>
-                    <option value="Lundasu"> Lunda Sul</option>
-                    <option value="malanje">Malanje</option>
-                    <option value="moxico">Moxico</option>
-                    <option value="Namibe">Namibe</option>
-                    <option value="uige">Uíge</option>
-                    <option value="zaire">Zaire</option>
+                    @foreach ($citys as $city)
+                    <option value="{{$city->key}}">{{$city->name}}</option>
+                    @endforeach
                   </select>
                   <div class="invalid-feedback">Percurso inválido</div>
                 </div>
@@ -195,8 +170,13 @@
             </div>
 
             <div class="form-group mb-3">
-              <label for="">Data do voo</label>
+              <label for="">Data de Partida</label>
               <input type="date" class="form-control rounded" id="date" placeholder="" required>
+              <div class="invalid-feedback">Percurso inválido</div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="">Data de Regresso</label>
+              <input type="date" class="form-control rounded" id="date_return" placeholder="" required>
               <div class="invalid-feedback">Percurso inválido</div>
             </div>
             <div class="form-group mb-3">

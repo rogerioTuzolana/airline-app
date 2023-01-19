@@ -205,191 +205,46 @@
   <script src="/admin/assets/js/jquery.mask.min.js"></script>
 
   <script>
+    $( document ).ready(function() {
+      if($('#inlineRadio1').is(":checked")){
+        const option= document.getElementById('inter');
+        option.style.display = 'none';
+        const option2= document.getElementById('local');
+        option2.style.display = 'block';
+      }else{
+        const option= document.getElementById('local');
+        option.style.display = 'none';
+        const option2= document.getElementById('inter');
+        option2.style.display = 'block';
+      }
+    })
     
-    function modalDropFleet(id) {
-      $("#drop_fleet_id").val(id);
-      var modal = document.getElementById('exampleModalDropFleet')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-    function modalDropTariff(id) {
-      $("#drop_tariff_id").val(id);
-      var modal = document.getElementById('exampleModalDropTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-    function modalDropPerk(id) {
-      $("#drop_perk_id").val(id);
-      var modal = document.getElementById('exampleModalDropPerk')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-    /*function modalDropUser(id) {
-      $("#drop_user_id").val(id);
-      var modal = document.getElementById('exampleModalDropUser')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }*/
-    function modalFleet(params) {
-      $("#btn-addFleet").html('Adicionar');
-      $("#brand").val("");
-      $("#model").val("");
-      $("#capacity").val("");
-      $("#fleet_id").val("");
-      var modal = document.getElementById('exampleModalFleet')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalAirline(parms){
-
-      var optionInter = document.getElementById('optionInter');
-      var optionLocal = document.getElementById('optionLocal');
-      let category = $("#category").val();
+    function modalBuyTicket() {
       
-      if(category == "local"){   
-          optionInter.style.display = 'none';
-          optionLocal.style.display = 'flex';
-      }else{      
-          optionLocal.style.display = 'none';
-          optionInter.style.display = 'flex';
+      var modal = document.getElementById('exampleModalReg')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+
+    function typeAirline(element){
+      const val = $(element).val()
+     
+      
+      if(val=='option1'){
+        const option= document.getElementById('inter');
+        option.style.display = 'none';
+        const option2= document.getElementById('local');
+        option2.style.display = 'block';
+        
+      }else{
+        const option= document.getElementById('local');
+        option.style.display = 'none';
+        const option2= document.getElementById('inter');
+        option2.style.display = 'block';
+        
       }
-      $("#airline_id").val("");
-      $("#date").val("");
-      $("#time").val("");
-      $("#category").val(category);
-
-      $("#btn-addAirline").html('Adicionar');
-      var modal = document.getElementById('exampleModalAirline')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-      
-    }
-
-    function modalEditAirline(id,orige,destiny,date,time,category){
-
-      var optionInter = document.getElementById('optionInter');
-      var optionLocal = document.getElementById('optionLocal');
-      //let category = $("#category").val();
-
-      if(category == "local"){   
-          optionInter.style.display = 'none';
-          optionLocal.style.display = 'flex';
-          $("#orige").val(orige);
-          $("#destiny").val(orige);
-      }else{      
-          optionLocal.style.display = 'none';
-          optionInter.style.display = 'flex';
-          $("#orige2").val(orige);
-          $("#destiny2").val(orige);
-      }
-
-      $("#airline_id").val(id);
-      $("#date").val(date);
-      $("#time").val(time);
-      $("#category").val(category);
-      $("#btn-addAirline").html('Editar');
-      var modal = document.getElementById('exampleModalAirline')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-
-    }
-
-    function modalPerk(params) {
-      $("#btn-addPerk").html('Adicionar');
-      $("#name").val("");
-      $("#description").val("");
-      $("#perk_id").val("");
-      var modal = document.getElementById('exampleModalPerk')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-
-    function modalTariff(params) {
-      $("#btn-addTariff").html('Adicionar');
-      $("#name").val("");
-      $("#category").val("economic");
-      $("#amount").val("");
-      $("#tariff_id").val("");
-      var modal = document.getElementById('exampleModalTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalPerkTariff(perk_tariff_id,tariff,perk) {
-      $("#btn-addPerkTariff").html('Adicionar');
-      $("#description").val("");
-      $("#amount").val("");
-      $("#perk_tariff_id").val(perk_tariff_id);
-      $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
-      
-      var modal = document.getElementById('exampleModalPerkTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalInfoPerkTariff(description,tariff,perk) {
-      $("#description2").html(description);
-      $("#title-tariff-perk2").html('Regalia de '+perk+' para tarifa '+tariff);
-      
-      var modal = document.getElementById('exampleModalInfoPerkTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
     }
     
-    /*function modalTariff(params) {
-      $("#btn-addTariff").html('Adicionar');
-      $("#brand").val("");
-      $("#model").val("");
-      $("#capacity").val("");
-      var modal = document.getElementById('exampleModalTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }*/
-
-    function modalEditFleet(id,brand,model,capacity){
-      $("#btn-addFleet").html('Editar');
-      $("#fleet_id").val(id);
-      $("#brand").val(brand);
-      $("#model").val(model);
-      $("#capacity").val(capacity);
-      var modal = document.getElementById('exampleModalFleet')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalEditTariff(id,name,category,amount){
-      $("#btn-addTariff").html('Editar');
-      $("#tariff_id").val(id);
-      $("#name").val(name);
-      $("#category").val(category);
-      $("#amount").val(amount);
-      var modal = document.getElementById('exampleModalTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalEditPerkTariff(id,description,tariff,perk,amount){
-      $("#perk_tariff_id").val(id);
-      $("#btn-addPerkTariff").html('Editar');
-      $("#amount").val(amount);
-      $("#description").val(description);
-      $("#title-tariff-perk").html('Regalia de '+perk+' para tarifa '+tariff);
-      var modal = document.getElementById('exampleModalPerkTariff')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-
-    function modalEditPerk(id,name,description){
-      $("#btn-addPerk").html('Editar');
-      $("#perk_id").val(id);
-      $("#name").val(brand);
-      $("#description").val(description);
-      var modal = document.getElementById('exampleModalPerk')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
   </script>
 </body>
 

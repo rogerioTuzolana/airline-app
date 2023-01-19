@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ApiCity;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -32,7 +33,7 @@ class CitySeeder extends Seeder
             'key' => "cabinda",
         ]);
         ApiCity::create([
-            'name' => ">Cuando-Cubango",
+            'name' => "Cuando-Cubango",
             'key' => "cuandocub",
         ]);
         ApiCity::create([
