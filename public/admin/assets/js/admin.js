@@ -34,6 +34,7 @@ $("#btn-addAirline").on('click',function() {
             destiny = $(this).find("select#destiny").val();
         }
         let date = $(this).find("input#date").val();
+        let date_return = $(this).find("input#date_return").val();
         let time = $(this).find("input#time").val();
         let fleet_id = $(this).find("select#fleet_id").val();
 
@@ -51,6 +52,7 @@ $("#btn-addAirline").on('click',function() {
                 orige: orige,
                 destiny: destiny,
                 date: date,
+                date_return: date_return,
                 time: time,
                 fleet_id: fleet_id,
             },

@@ -338,6 +338,7 @@ class AdminController extends Controller
             $airline->destiny = $request->destiny;
             $airline->fleet_id = $request->fleet_id;
             $airline->date = $request->date;
+            $airline->date_return = $request->date_return;
             $airline->time = $request->time;
             $status = $airline->update();
         }else {
@@ -348,6 +349,7 @@ class AdminController extends Controller
             $airline->destiny = $request->destiny;
             $airline->fleet_id = $request->fleet_id;
             $airline->date = $request->date;
+            $airline->date_return = $request->date_return;
             $airline->time = $request->time;
             $status = $airline->save();
         }

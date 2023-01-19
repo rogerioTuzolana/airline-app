@@ -1088,6 +1088,9 @@ h1, h2, h3, h4, h5, h6 {
   .modal-lg-reg {
     max-width: 800px;
   }
+  .modal-ticket {
+    max-width: 850px;
+  }
   /*.modal-dialog .modal-content {
     padding: 1rem;
   }*/

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Client;
+use App\Models\ApiCity;
 use App\Models\MemberClient;
 use App\Models\Airline;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class MemberController extends Controller
     public function index()
     {
         $airlines = '';
+        $citys = ApiCity::get();
         $search = request('search');
         if ($search) {
             $airlines = Airline::where([
@@ -37,7 +39,7 @@ class MemberController extends Controller
 
         return view('member.home',[
             "airlines"=>$airlines,
-            //"tariffs"=>$tariffs, 
+            "citys"=>$citys, 
             //"fleets"=>$fleets,
             "search"=>$search,
         ]);
