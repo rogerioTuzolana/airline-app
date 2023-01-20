@@ -18,6 +18,42 @@ function changeCategory(select){
     
 }
 
+let countries;
+// Agentes que criam contas para utilizadores
+fetch("https://restcountries.com/v2/all")
+.then(function (res) {
+    return res.json()
+})
+.then(function (data) {
+    //console.log(data)
+    countryData(data)
+})
+.catch(function (err) {
+    console.log('Error: '+err)
+})
+
+function countryData(data) {
+    countries = data;
+    let options ="";
+    for (let i = 0; i < countries.length; i++) {
+        options = options+'<option value="'+countries[i].alpha2Code+'">'+countries[i].name+'</option>';   
+    }
+    document.getElementById('optionInter1').innerHTML = options;
+    document.getElementById('optionInter2').innerHTML = options;
+    //document.getElementById('optionInter').innerHTML = options;
+}
+
+/*function countryData2(data) {
+    countries = data;
+    let options ="";
+    for (let i = 0; i < countries.length; i++) {
+        options = options+'<option value="'+countries[i].alpha2Code+'">'+countries[i].name+'</option>';   
+    }
+    document.getElementById('orige2').innerHTML = options;
+    document.getElementById('destiny2').innerHTML = options;
+    //document.getElementById('optionInter').innerHTML = options;
+}*/
+
 $("#btn-addAirline").on('click',function() {
     $('form[name="formAddAirline"]').submit(function (event) {
         event.preventDefault();
@@ -26,15 +62,16 @@ $("#btn-addAirline").on('click',function() {
 
         let name = $(this).find("input#name").val();
         let category = $(this).find("select#category").val();
-        if (category =='inter') {  
-            orige = $(this).find("select#orige2").val();
-            destiny = $(this).find("select#destiny2").val();  
+        if (category =='inter') {
+            orige = $(this).find("select#optionInter1").val();
+            destiny = $(this).find("select#optionInter2").val();
         }else{
             orige = $(this).find("select#orige").val();
             destiny = $(this).find("select#destiny").val();
         }
+        
         let date = $(this).find("input#date").val();
-        let date_return = $(this).find("input#date_return").val();
+        //let date_return = $(this).find("input#date_return").val();
         let time = $(this).find("input#time").val();
         let fleet_id = $(this).find("select#fleet_id").val();
 
@@ -52,7 +89,7 @@ $("#btn-addAirline").on('click',function() {
                 orige: orige,
                 destiny: destiny,
                 date: date,
-                date_return: date_return,
+                //date_return: date_return,
                 time: time,
                 fleet_id: fleet_id,
             },

@@ -31,9 +31,9 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     Route::get('/', [MainController::class, 'index'])->name('/');
     Route::get('/bilhete', [MainController::class, 'Comprar_bilhete'])->name('bilhete');
     Route::get('/tarifa', [MainController::class, 'tarifa'])->name('tarifa');
-
-
-    // and  route of Maincontroller 
+    
+    
+    // and  route of Maincontroller
 
     Route::get('/admin/entrar', [AdminController::class, 'login'])->name('admin_login');
 
