@@ -7,9 +7,9 @@
             <img src="images/banner1.jpg" alt="#" />
             <div class="container">
                 <div class="text-bg">
-                    <div class="row justify-content-center">
+                    <div class="">
                         <div id="bg-pub" class="">
-                            <h1>P DC Airline o mundo Na palma de sua Mão</h1>
+                            <h1>PDC Airline o mundo Na palma de sua Mão</h1>
                         </div>
                     </div>
                     <div class="button_section" id="btnbilhte">
@@ -19,36 +19,36 @@
                     <div class="container">
                         <form class="main-form">
                             <h3>Encontre Seu VOO</h3>
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="col-md-9">
                                     <div class="row">
+
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                             <label>Local Origem</label>
                                             <input class="form-control" placeholder="local" type="text" name="">
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                            <label>Categoria Tarifas</label>
-                                            <select class="form-control" name="Any">
-                                                <option>Alguma</option>
-                                                <option>Tarifas Domestica</option>
-                                                <option>Europa/Africa</option>
-                                                <option>America do Norte</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                            <label>Preço Min</label>
-                                            <input class="form-control" placeholder="00.0" type="text" name="00.0">
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                             <label>Local Distino</label>
                                             <input class="form-control" placeholder="local" type="text" name="Alguma">
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <label>Categoria Tarifas</label>
+                                            <select class="form-control" name="Any">
+                                                <option @selected(true)>Seleciona</option>
+                                                <option>Tarifas Domestica</option>
+                                                <option>Europa/Africa</option>
+                                                <option>America do Norte</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6 col-12">
                                             <label>Data</label>
                                             <input class="form-control" placeholder="Alguma" type="date" name="Alguma">
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                            <label>Preço Max</label>
+                                        <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6 col-12">
+                                            <label>Preço</label>
                                             <input class="form-control" placeholder="00.0" type="text" name="00.0">
                                         </div>
                                     </div>

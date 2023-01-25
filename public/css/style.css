@@ -492,7 +492,7 @@ ul.top_icon li a {
 
 .menu-area-main li:hover a,
 .menu-area-main li:focus a {
-     color: #000;
+     color: rgb(255, 255, 255);
 }
 
 .menu-area-main li.active a {
