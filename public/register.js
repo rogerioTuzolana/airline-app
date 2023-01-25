@@ -43,7 +43,7 @@ $("#btn-formLogin").on('click',function() {
             result.style.display = "block";
             //
             let data = JSON.parse(msg.responseText);
-            $("#result").html("Email ou Senha errada");
+            $("#result").html('Email ou Senha errada!');
             
             /*setTimeout(
                 $('#login-spinner').removeClass('spinner-border'),
@@ -61,7 +61,7 @@ $("#btn-formReg").on('click',function() {
     $('form[name="formRegister"]').submit(function (event) {
         event.preventDefault();
         
-        let result = document.getElementById("resultBox");
+        let result = document.getElementById("resultBox2");
 
         let data = $("#formRegister").serialize();
         
@@ -80,13 +80,13 @@ $("#btn-formReg").on('click',function() {
         })
         .done(function(msg){  
             alert('Cadastrado com sucesso')
-            $('#resultBox').removeClass('alert-danger');
-            $('#resultBox').addClass('alert-success');
+            $('#resultBox2').removeClass('alert-danger');
+            $('#resultBox2').addClass('alert-success');
             result.style.display = "block";
             
             //
             let message = msg.message;
-            $("#result").html(message);
+            $("#result2").html(message);
             /*result.style.display = "none";
             //
             let message = msg.message;
@@ -98,12 +98,12 @@ $("#btn-formReg").on('click',function() {
             }*/
         })
         .fail(function(msg){
-            $('#resultBox').removeClass('bg-success');
-            $('#resultBox').addClass('bg-danger');
+            $('#resultBox2').removeClass('bg-success');
+            $('#resultBox2').addClass('bg-danger');
             result.style.display = "block";
             //
             let data = JSON.parse(msg.responseText);
-            $("#result").html(data.message);
+            $("#result2").html(data.message);
         });
         
     });

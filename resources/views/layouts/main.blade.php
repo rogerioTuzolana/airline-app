@@ -225,8 +225,8 @@
                <div class="mt-1 d-flex justify-content-center">
                    <h1 class="text-center">Registo de Membro PDC Airline</h1>
                </div>
-               <div class="text-center alert alert-danger" id="resultBox" style="display: none">
-                  <a id="result"></a>
+               <div class="text-center alert alert-danger" id="resultBox2" style="display: none">
+                  <a id="result2"></a>
                </div>
                <div class="form-row mt-2">
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -323,6 +323,8 @@
    <script src="js/owl.carousel.js"></script>
    <script src="public/js/custom.js"></script>
    <script src="register.js"></script>
+   <script src="/js/regular_user.js"></script>
+   <script src="/admin/assets/js/jquery.mask.min.js"></script>
    <script>
       function modalCreateMember(params) {
       //$("#btn-addTariff").html('Adicionar');

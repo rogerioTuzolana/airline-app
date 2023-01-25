@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="button_section" id="btnbilhte">
-                        <a class="main_bt" data-toggle="modal" data-target=".bd-example-modal-lg"
+                        <a class="main_bt" href="{{route('comprarbilhete')}}" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}
                             {{-- href="/bilhete" --}}>Comprar Bilhete</a>
                     </div>
                     <div class="container">

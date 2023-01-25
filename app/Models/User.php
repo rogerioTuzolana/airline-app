@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function admin(){
         //return $this->hasOne(Client::class);
     }
+
+    public function buy_tickets(){
+        return $this->hasMany(BuyTicket::class);
+    }
 }
