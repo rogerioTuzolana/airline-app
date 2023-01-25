@@ -1,12 +1,12 @@
 /** stilo personalisado **/
 
-#logo img {
-    width: 100px;
+.logo img {
+    width: 80px;
 }
 
 
 .logo a strong {
-    font-size: 20px;
+    font-size: 17px;
 }
 .menu-area nav ul li a {
     font-size: 17px;

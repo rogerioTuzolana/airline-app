@@ -9,6 +9,9 @@
    <meta name="csrf-token" content="{{ csrf_token() }}">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+     <!-- Favicons -->
+  <link href="images/voo.png" rel="icon">
+  <link href="images/voo.png" rel="apple-touch-icon">
    <!-- site metas -->
    <title>@yield('title')</title>
    <meta name="keywords" content="">
@@ -60,8 +63,8 @@
                   </div>
                   <div class="col-md-3">
                      <div class="header_information">
-                     <a href="#" class="btn btn-primary" onclick="modalLogin()" style="border:coral 1px solid;background-color:coral;border-radius: 20px">Entrar</a>
-                     <a href="#" onclick="modalCreateMember()" class="btn btn-primary" style="border-radius: 20px">Criar conta</a>
+                     <a href="#" class="btn btn-primary" onclick="modalLogin()" style="border:coral 1px solid;background-color:#ff7839;border-radius: 20px">Entrar</a>
+                     <a href="#" onclick="modalCreateMember()" class="btn btn-primary" style="border-radius: 20px;background-color:#08809B">Criar conta</a>
                      </div>
                   </div>
                </div>
@@ -69,7 +72,7 @@
          </div>
          <div class="container">
             <div class="row">
-               <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+               <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                   <div class="full">
                      <div class="center-desk">
                         <div class="logo"> <a href="#"><img src="images/logo2.png" alt="PDC AIRLINE"><strong class="white">PDC AIRLINE</strong></a></div>
@@ -293,7 +296,7 @@
                   </div>
                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                      <label for="lastname">PIN de Acesso</label>
-                     <input type="text" class="form-control rounded" name="pin_access" id="pin_access" placeholder="" required>
+                     <input type="password" class="form-control rounded" name="pin_access" id="pin_access" placeholder="" required>
                   </div>
                </div>
                <div class="d-flex mt-3">
