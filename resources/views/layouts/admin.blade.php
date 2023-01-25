@@ -82,12 +82,6 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>NiceAdmin
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
             <li>
                 <form action="/logout" method="post">
                 @csrf
@@ -299,6 +293,7 @@
           optionLocal.style.display = 'none';
           optionInter.style.display = 'flex';
       }
+
       $("#airline_id").val("");
       $("#date").val("");
       $("#time").val("");
@@ -325,8 +320,8 @@
       }else{      
           optionLocal.style.display = 'none';
           optionInter.style.display = 'flex';
-          $("#orige2").val(orige);
-          $("#destiny2").val(orige);
+          $("#optionInter1").val(orige);
+          $("#optionInter2").val(orige);
       }
 
       $("#airline_id").val(id);

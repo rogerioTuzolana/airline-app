@@ -138,10 +138,8 @@
               <div class="col-6">
                 <div class="form-group mb-3">
                   <label for="">Origem</label>
-                  <select name="orige2" id="orige2" class="form-control rounded">
-                    <option value="angolan">Angola</option>
-                    <option value="portugal">Portugal</option>
-                    <option value="brasil">Brasil</option>
+                  <select name="optionInter1" id="optionInter1" class="form-control rounded">
+
                   </select>
                   <div class="invalid-feedback">Percurso inválido</div>
                 </div>
@@ -149,10 +147,8 @@
               <div class="col-6">
                 <div class="form-group mb-3">
                   <label for="">Destino</label>
-                  <select name="destiny2" id="destiny2" class="form-control rounded" required>
-                    <option value="angolan">Angola</option>
-                    <option value="portugal">Portugal</option>
-                    <option value="brasil">Brasil</option>
+                  <select name="optionInter2" id="optionInter2" class="form-control rounded" required>
+
                   </select>
                   <div class="invalid-feedback">Percurso inválido</div>
                 </div>
@@ -174,11 +170,11 @@
               <input type="date" class="form-control rounded" id="date" placeholder="" required>
               <div class="invalid-feedback">Percurso inválido</div>
             </div>
-            <div class="form-group mb-3">
+            {{--<div class="form-group mb-3">
               <label for="">Data de Regresso</label>
               <input type="date" class="form-control rounded" id="date_return" placeholder="" required>
               <div class="invalid-feedback">Percurso inválido</div>
-            </div>
+            </div>--}}
             <div class="form-group mb-3">
               <label for="">Hora do voo</label>
               <input type="time" class="form-control rounded" id="time" placeholder="" required>
