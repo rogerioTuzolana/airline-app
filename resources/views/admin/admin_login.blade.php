@@ -9,9 +9,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+   <!-- Favicons -->
+  <link href="/images/voo.png" rel="icon">
+  <link href="/images/voo.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -43,7 +43,7 @@
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/logo.png" alt="">
+                  <img src="/images/voo.png" alt="">
                   <span class="d-none d-lg-block">PDC Airline</span>
                 </a>
               </div><!-- End Logo -->
