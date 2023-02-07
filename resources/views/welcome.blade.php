@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="button_section" id="btnbilhte">
-                        <a class="main_bt" href="{{route('comprarbilhete')}}" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}
+                        <a class="main_bt" href="#voos{{--route('comprarbilhete')--}}" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}
                             {{-- href="/bilhete" --}}>Comprar Bilhete</a>
                     </div>
                     <div class="container">
@@ -273,7 +273,7 @@
                     </div>
                 </div>
             </div>
-            <div id="btnbilhte"> <a data-toggle="modal" data-target=".bd-example-modal-lg">
+            <div id="btnbilhte"> <a href="#voos" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}>
                     Comprar Bilhete</a>
             </div>
         </div>
@@ -340,7 +340,7 @@
     <!-- end traveling -->
 
     <!--Tours -->
-    <div class="Tours">
+    <div class="Tours" id="voos">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -356,30 +356,26 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="owl-carousel owl-theme">
+                            @foreach ($airlines as $airline)
+                            @php
+                                $city = App\Models\ApiCity::where('key',$airline->destiny)->first();
+                            @endphp
                             <div class="item">
                                 <img class="img-responsive" src="images/1.jpg" alt="#" />
-                                <h3>Holiday Tour</h3>
+                                <h3>
+                                    @if ($airline->category == 'local')
+                                        {{$city->name}}
+                                    @else
+                                        Any
+                                    @endif
+                                    
+                                </h3>
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                            
+                                <a href="{{route('comprarbilhete',$airline->id)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>
                             </div>
-                            <div class="item">
-                                <img class="img-responsive" src="images/2.jpg" alt="#" />
-                                <h3>New York</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="images/3.jpg" alt="#" />
-                                <h3>London</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="images/2.jpg" alt="#" />
-                                <h3>Holiday Tour</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

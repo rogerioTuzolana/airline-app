@@ -71,7 +71,7 @@
 						@foreach ($tariff_airlines2 as $tariff_airline2)
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="return_tariff_id" value="{{$tariff_airline2->return_tariff_id}}" >
+								<input class="form-check-input" type="radio" name="return_tariff_id" value="{{$tariff_airline2->tariff_id}}" >
 									<label class="form-check-label" for="name" >{{$tariff_airline2->name}} - <h6 class="text-center text-secondary">{{$data->n_ticket_return.'X'}} {{number_format($tariff_airline2->amount,2,',','.')}}</h6></label>
 								</div>
 							</div>

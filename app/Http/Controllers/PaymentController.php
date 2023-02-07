@@ -35,12 +35,18 @@ class PaymentController extends Controller
         
         $request->session()->put('data',[
             'airline_id'=>$request->airline_id,
-            //'email'=>$request->email,
-            //'tel'=>$request->tel,
             'n_ticket'=>$request->n_ticket,
             'tariff_id'=>$request->tariff_id,
             'return_airline_id'=>$request->return_airline_id,
             'return_tariff_id'=>$request->return_tariff_id,
+            'route'=>$request->route,
+            //Para utilizador normal
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'category_age'=>$request->category_age,
+            'contact'=>$request->contact,
+            'birth_date'=>$request->birth_date,
+
         ]);
 
         $tariff = Tariff::find($request->tariff_id);
@@ -87,6 +93,58 @@ class PaymentController extends Controller
             if ($response->isSuccessful()) { 
                 $arr = $response->getData();
                 
+
+                $payment = new BuyTicket();
+                $payment->user_id = auth()->user()->id;
+                $payment->tariff_id = $data["tariff_id"];
+                $payment->airline_id = $data["airline_id"];
+                $payment->n_ticket = $data["n_ticket"];
+                $payment->type = 'go';
+
+                $payment->reference_code = $request->input('paymentId');
+                $payment->user_id = auth()->user()->id;
+                //$payment->payment_id = $arr['id'];
+                $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
+                $payment->payer_email = $arr['payer']['payer_info']['email'];
+                $payment->method = 'paypal';
+                $payment->amount = $arr['transactions'][0]['amount']['total'];
+                $payment->currency = env('PAYPAL_CURRENCY');
+                $payment->status = $arr['state'];
+                $payment->save();
+                
+                
+                $request->session()->pull('data',[]);
+                return redirect()->back()->with('success','Pagamento efectuado com sucesso');
+                
+            }else {
+                //return $response->getMessage();
+                $request->session()->pull('data',[]);
+                
+                return redirect()->back()->with('error',$response->getMessage());
+            }
+
+        }else {
+
+            $request->session()->pull('data',[]);
+            return redirect()->back()->with('error','Transação negada!');
+        }
+    }
+
+    public function client_success(Request $request){
+        $data = $request->session()->get('data');
+        //dd($data);
+        if ($request->input('paymentId') && $request->input('PayerID')) {
+            $transaction = $this->gateway->completePurchase(array(
+                'payer_id'=>$request->input('PayerID'),
+                'transactionReference'=>$request->input('paymentId'),
+            ));
+
+            $response = $transaction->send();
+            if ($response->isSuccessful()) { 
+                $arr = $response->getData();
+                
+                $user = new User;
+                $user->name = 
 
                 $payment = new BuyTicket();
                 $payment->user_id = auth()->user()->id;

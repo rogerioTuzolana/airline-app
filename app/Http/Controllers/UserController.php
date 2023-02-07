@@ -26,9 +26,40 @@ class UserController extends Controller
     }
 
   
-    public function buy_ticket()
+    public function buy_ticket($id)
     {
-        return view('buy_ticket');
+        $airline = Airline::find($id);
+
+        $date = DB::table('airlines')
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+
+            ->where('id',$airline->id)
+            //->where('orige',$request->orige)
+            //->where('destiny',$request->destiny)
+            ->get();
+
+        $date_return = DB::table('airlines')
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+            ->where('orige',$airline->destiny)
+            ->where('destiny',$airline->orige)
+            ->get();
+        //dd($date_return);
+        
+        return view('buy_ticket',['date'=>$date,'date_return'=>$date_return,'route'=>true, 'airline'=>$airline]);
     }
 
     public function pay_ticket(Request $request){
@@ -76,66 +107,68 @@ class UserController extends Controller
             ->get();
         }
         
-        return view('member.pay_ticket',[
+        return view('pay_ticket',[
             'data'=>$request,
             'tariff_airlines'=>$tariff_airlines,
             'tariff_airlines2'=>$tariff_airlines2,
             //'tariff'=>$tariff
         ]);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    
+    public function buy_cancel(Request $request){
+        $payment = BuyTicket::where('id',$request->buy_id)->where('user_id',auth()->user()->id)->first();
+
+        if (intval($request->status_validate) == 1) {
+            $payment->status_validate = false;
+            //$payment->status = 'approved';
+        }/*else {
+            $payment->status_validate = true;
+            //$payment->status = 'denied';
+        }*/
+        
+        $status = $payment->update();
+        if ($status) {
+            return redirect()->back()->with('success','Compra cancelada com sucesso');
+        }else{
+            return redirect()->back()->with('fail','A compra não foi cancelada');
+        }
+    }
+    
+    public function date_airlines(Request $request){
+        
+        $data = DB::table('airlines')
+            //->groupBy(DB::raw('YEAR(created_at)'))
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+            
+            //->join('tariffs','airlines.tariff_id','=','tariffs.id')
+            //->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+            //->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+
+            //->where('airlines.tariff_id','tarrifs.id')
+            ->where('orige',$request->orige)
+            ->where('destiny',$request->destiny)
+            //->orderBy('created_at','ASC')
+            ->get();
+        //dd($data);
+        if (isset($data)) {
+            return response()->json([
+                'success' => true,
+                'data' => $data,
+            ],200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Algo deu errado.',
+        ],422);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

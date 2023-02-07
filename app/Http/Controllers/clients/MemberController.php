@@ -128,7 +128,7 @@ class MemberController extends Controller
             ->where('airlines.id',$request->date_return)
             ->get();
         }
-        
+        //dd($tariff_airlines2);
         return view('member.pay_ticket',[
             'data'=>$request,
             'tariff_airlines'=>$tariff_airlines,

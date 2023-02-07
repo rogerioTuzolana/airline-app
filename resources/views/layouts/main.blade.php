@@ -10,29 +10,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- Favicons -->
-    <link href="images/voo.png" rel="icon">
-    <link href="images/voo.png" rel="apple-touch-icon">
+    <link href="/images/voo.png" rel="icon">
+    <link href="/images/voo.png" rel="apple-touch-icon">
     <!-- site metas -->
     <title>@yield('title')</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
     <!-- Responsive-->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <link rel="icon" href="/images/fevicon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <!-- owl stylesheets -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -42,7 +42,7 @@
 <body class="main-layout">
     <!-- loader  -->
     <div class="loader_bg">
-        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+        <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
     </div>
     <!-- end loader -->
     <!-- header -->
@@ -233,7 +233,7 @@
 
     <div class="modal fade" id="exampleModalReg" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-lg modal-dialog modal-dialog-centered" >
+        <div class="modal-lg modal-dialog modal-reg-lg modal-dialog-centered" >
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -248,8 +248,8 @@
                         <div class="mt-1 d-flex justify-content-center">
                             <h1 class="text-center">Registo de Membro PDC Airline</h1>
                         </div>
-                        <div class="text-center alert alert-danger" id="resultBox" style="display: none">
-                            <a id="result"></a>
+                        <div class="text-center alert alert-danger" id="resultBox2" style="display: none">
+                            <a id="result2"></a>
                         </div>
                         <div class="form-row mt-2">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -337,111 +337,27 @@
                 <div class="modal-footer d-flex justify-content-center">
 
                 </div>
-            </div>
-            
-            <form action="" id="formRegister" name="formRegister">
-               @csrf
-               <div class="mt-1 d-flex justify-content-center">
-                   <h1 class="text-center">Registo de Membro PDC Airline</h1>
-               </div>
-               <div class="text-center alert alert-danger" id="resultBox2" style="display: none">
-                  <a id="result2"></a>
-               </div>
-               <div class="form-row mt-2">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Nome</label>
-                     <input type="text" class="form-control rounded" name="first_name" id="first_name" placeholder="" required>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="lastname">Sobrenome</label>
-                     <input type="text" class="form-control rounded" name="last_name" id="last_name" placeholder="" required>
-                  </div>
-               </div>
-               <div class="form-row mt-1">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Título</label>
-                     <select class="form-control rounded" name="title" id="title" required>
-                        <option value="sr">Senhor</option>
-                        <option value="sra">Senhora</option>
-                     </select>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  </div>
-               </div>
-               <div class="form-row mt-1">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Género</label>
-                     <select class="form-control rounded" name="gender" id="gender" required>
-                        <option value="f">Femenino</option>
-                        <option value="m">Masculino</option>
-                     </select>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="lastname">Data Nascimento</label>
-                     <input type="date" class="form-control rounded" name="birth_date" id="birth_date" placeholder="" required>
-                  </div>
-               </div>
-               <div class="form-row mt-1">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Idioma de Preferência</label>
-                     <input type="text" class="form-control rounded" name="preferred_language" id="preferred_language" placeholder="" required>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="lastname">Preferência de Viagem</label>
-                     <select class="form-control rounded" name="preference_air" id="preference_air" required>
-                        <option value="1">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                        <option value="2">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                        <option value="3">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                     </select>
-                  </div>
-               </div>
-               <div class="form-row mt-1">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Morada</label>
-                     <input type="text" class="form-control rounded" name="address" id="address" placeholder="" required>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="lastname">Email</label>
-                     <input type="text" class="form-control rounded" name="email" id="email" placeholder="" required>
-                  </div>
-               </div>
-               <div class="form-row mt-1">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="name">Contacto Telefônico</label>
-                     <input type="text" class="form-control rounded" name="contact" id="contact" placeholder="" required>
-                  </div>
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                     <label for="lastname">PIN de Acesso</label>
-                     <input type="text" class="form-control rounded" name="pin_access" id="pin_access" placeholder="" required>
-                  </div>
-               </div>
-               <div class="d-flex mt-3">
-                  <button class="btn btn-primary" style="width: 100%" id="btn-formReg">Registar</button>
-               </div>
-            </form>
-    
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-              
-          </div>
+            </div>    
         </div>
-      </div>
-   </div>
+    </div>
     
    <!-- end footer -->
    <!-- Javascript files-->
-   <script src="js/jquery.min.js"></script>
-   <script src="js/popper.min.js"></script>
-   <script src="js/bootstrap.bundle.min.js"></script>
-   <script src="js/jquery-3.0.0.min.js"></script>
-   <script src="js/plugin.js"></script>
+   <script src="/js/jquery.min.js"></script>
+   <script src="/js/popper.min.js"></script>
+   <script src="/js/bootstrap.bundle.min.js"></script>
+   <script src="/js/jquery-3.0.0.min.js"></script>
+   @if (empty($route))
+   <script src="/js/plugin.js"></script>
+   @endif
+   
    <!-- sidebar -->
-   <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="js/custom.js"></script>
+   <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="/js/custom.js"></script>
    <!-- javascript -->
-   <script src="js/owl.carousel.js"></script>
-   <script src="public/js/custom.js"></script>
-   <script src="register.js"></script>
+   <script src="/js/owl.carousel.js"></script>
+   <script src="/public/js/custom.js"></script>
+   <script src="/register.js"></script>
    <script src="/js/regular_user.js"></script>
    <script src="/admin/assets/js/jquery.mask.min.js"></script>
    <script>

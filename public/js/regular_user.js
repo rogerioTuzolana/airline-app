@@ -32,7 +32,7 @@ $("#cat2").on('click',function(event) {
 });
 
 $(document).ready(function () {
-    $("#cat1").prop("checked", true);
+    /*$("#cat1").prop("checked", true);
     
 
     if($("#cat1").is(':checked') && $("#cat1").val()=='option1'){
@@ -63,7 +63,7 @@ $(document).ready(function () {
         $("#optionInter2").prop("required", true);
 
         $("#category").val("inter") 
-    }
+    }*/
 
     $("#route1").prop("checked", true);
     if($("#route1").is(':checked') && $("#route1").val()=='go'){
@@ -109,12 +109,25 @@ function countryData(data) {
 }
 
 function dateData(data) {
+    
     date = data;
+
+    var select = document.getElementById('date');
+    var newOption;
+    while (select.childNodes.length>=1) {
+        select.removeChild(select.firstChild);
+    }
+
     let options ="";
     for (let i = 0; i < date.length; i++) {
-        options = options+'<option value="'+date[i].id+'">'+date[i].date+' '+date[i].time+' - '+date[i].name+'</option>';   
+        newOption = document.createElement('option');
+        newOption.value = date[i].id;
+        newOption.text = date[i].date+' '+date[i].time+' - '+date[i].name;
+        select.appendChild(newOption)
+        //options = options+'<option value="'+date[i].id+'">'+date[i].date+' '+date[i].time+' - '+date[i].name+'</option>';   
     }
-    document.getElementById('date').innerHTML = options;
+    console.log(newOption);
+    //document.getElementById('date').innerHTML = options;
 }
 
 function dateData2(data) {
@@ -123,6 +136,7 @@ function dateData2(data) {
     for (let i = 0; i < date.length; i++) {
         options = options+'<option value="'+date[i].id+'">'+date[i].date+' '+date[i].time+' - '+date[i].name+'</option>';   
     }
+    
     document.getElementById('date_return').innerHTML = options;
 }
 
@@ -160,7 +174,7 @@ $(".chooseDate").on('change',function(event) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : "/membro/data-voo",
+        url : "/cliente/data-voo",
         type : 'GET',
         data : {
             
@@ -174,7 +188,9 @@ $(".chooseDate").on('change',function(event) {
 
         let data = msg.data;
         console.log(data);
-        dateData(data)
+        //if (data.length > 0) {
+            //dateData(data)
+        //}
         //$("#result").html(data);
         //setTimeout(window.location.reload(), 10000);
     })
@@ -227,7 +243,7 @@ $("#route2").on('click',function(event) {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : "/membro/data-voo",
+        url : "/cliente/data-voo",
         type : 'GET',
         data : {
             
@@ -241,7 +257,7 @@ $("#route2").on('click',function(event) {
 
         let data = msg.data;
         console.log(data);
-        dateData2(data)
+        //dateData2(data)
         
     })
     .fail(function(msg){
@@ -278,7 +294,7 @@ $("#btn-addAirline").on('click',function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "/admin/voo",
+            url : "/cliente/voo",
             type : 'POST',
             data : {
                 name: name,
@@ -352,7 +368,7 @@ function chooseDateReturn() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "/membro/data-voo",
+            url : "/cliente/data-voo",
             type : 'GET',
             data : {
                 
@@ -366,7 +382,8 @@ function chooseDateReturn() {
     
             let data = msg.data;
             console.log(data);
-            dateData(data)
+            //dateData(data)
+
             //$("#result").html(data);
             //setTimeout(window.location.reload(), 10000);
         })
@@ -406,7 +423,7 @@ $("#btn-addAirline").on('click',function() {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url : "/admin/voo",
+            url : "/cliente/voo",
             type : 'POST',
             data : {
                 name: name,

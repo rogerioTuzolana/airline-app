@@ -45,9 +45,14 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     Route::post('/registo-membro', [MemberController::class, 'regist_member'])->name('register');
     Route::post('/entrar', [MemberController::class, 'login_member'])->name('login');
 
-    Route::get('/comprar-bilhete', [UserController::class, 'buy_ticket'])->name('comprarbilhete');
+    Route::get('/comprar-bilhete/{id}', [UserController::class, 'buy_ticket'])->name('comprarbilhete');
     Route::get('/pagar-bilhete', [UserController::class, 'pay_ticket'])->name('pagarbilhete');
 
+    Route::get('/cliente/data-voo', [UserController::class, 'date_airlines'])->name('cliente-data-voo');
+    Route::get('/cliente/comprar-bilhete', [UserController::class, 'pay_ticket'])->name('cliente-comprar-bilhete');
+    Route::post('/cliente/payment', [PaymentController::class, 'pay'])->name('client_payment');
+    Route::get('/cliente/success', [PaymentController::class, 'success'])->name('client_success');
+    Route::get('/cliente/error', [PaymentController::class, 'error'])->name('client_error');
 
     /*Route::post('/esqueci-senha', [UserController::class, 'forgot_password'])->name('esqueci-senha');
     Route::get('/recuperar-senha/{token}', [UserController::class, 'recover_password'])->name('recuperar-senha');
@@ -58,6 +63,7 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
 Route::group(['middleware'=>['auth','PreventBackHistory']], function () {
     Route::post('logout', [AdminController::class, 'logout'])->name('logout');
     Route::post('logout2', [MemberController::class, 'logout'])->name('logout2');
+
 });
 
 Route::group(['prefix' => 'membro','middleware'=>['auth','member','PreventBackHistory']], function () {
