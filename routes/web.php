@@ -30,8 +30,8 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     
     // route of Maincontroller 
 
-    Route::get('/', [MainController::class, 'index'])->name('/');
-    Route::get('/bilhete', [MainController::class, 'Comprar_bilhete'])->name('bilhete');
+    Route::get('/', [MainController::class, 'index'])->name('homepage');
+    Route::get('/voos', [MainController::class, 'airlines'])->name('home_airlines');
     Route::get('/tarifa', [MainController::class, 'tarifa'])->name('tarifa');
     
     
@@ -45,7 +45,7 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     Route::post('/registo-membro', [MemberController::class, 'regist_member'])->name('register');
     Route::post('/entrar', [MemberController::class, 'login_member'])->name('login');
 
-    Route::get('/comprar-bilhete/{id}', [UserController::class, 'buy_ticket'])->name('comprarbilhete');
+    Route::get('/comprar-bilhete', [UserController::class, 'buy_ticket'])->name('comprarbilhete');
     Route::get('/pagar-bilhete', [UserController::class, 'pay_ticket'])->name('pagarbilhete');
 
     Route::get('/cliente/data-voo', [UserController::class, 'date_airlines'])->name('cliente-data-voo');

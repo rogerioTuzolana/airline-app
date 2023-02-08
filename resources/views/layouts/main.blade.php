@@ -97,11 +97,11 @@
                             <div class="limit-box d-flex justify-content-center">
                                 <nav class="main-menu">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="#">Home</a></li>
-                                        <li> <a href="#about">Sobre Nos</a> </li>
-                                        <li><a href="#travel">Viagens</a></li>
-                                        <li><a href="#tarifario">Tarifas</a></li>
-                                        <li><a href="#contact">Fale Conosco</a></li>
+                                        <li class="active"><a href="{{route('homepage')}}">Home</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#about" @else href="#about" @endif >Sobre Nos</a> </li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#travel" @else href="#travel" @endif>Viagens</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#tarifario" @else href="#tarifario" @endif>Tarifas</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#contact" @else href="#contact" @endif>Fale Conosco</a></li>
                                     </ul>
                                 </nav>
                                 {{-- <div>
@@ -230,117 +230,6 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="exampleModalReg" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-lg modal-dialog modal-reg-lg modal-dialog-centered" >
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-title text-center">
-                        <h5></h5>
-                    </div>
-
-                    <form action="" id="formRegister" name="formRegister">
-                        @csrf
-                        <div class="mt-1 d-flex justify-content-center">
-                            <h1 class="text-center">Registo de Membro PDC Airline</h1>
-                        </div>
-                        <div class="text-center alert alert-danger" id="resultBox2" style="display: none">
-                            <a id="result2"></a>
-                        </div>
-                        <div class="form-row mt-2">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Nome</label>
-                                <input type="text" class="form-control rounded" name="first_name" id="first_name"
-                                    placeholder="" required>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="lastname">Sobrenome</label>
-                                <input type="text" class="form-control rounded" name="last_name" id="last_name"
-                                    placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Título</label>
-                                <select class="form-control rounded" name="title" id="title" required>
-                                    <option value="sr">Senhor</option>
-                                    <option value="sra">Senhora</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            </div>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Género</label>
-                                <select class="form-control rounded" name="gender" id="gender" required>
-                                    <option value="f">Femenino</option>
-                                    <option value="m">Masculino</option>
-                                </select>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="lastname">Data Nascimento</label>
-                                <input type="date" class="form-control rounded" name="birth_date" id="birth_date"
-                                    placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Idioma de Preferência</label>
-                                <input type="text" class="form-control rounded" name="preferred_language"
-                                    id="preferred_language" placeholder="" required>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="lastname">Preferência de Viagem</label>
-                                <select class="form-control rounded" name="preference_air" id="preference_air"
-                                    required>
-                                    <option value="1">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                                    <option value="2">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                                    <option value="3">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Morada</label>
-                                <input type="text" class="form-control rounded" name="address" id="address"
-                                    placeholder="" required>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="lastname">Email</label>
-                                <input type="text" class="form-control rounded" name="email" id="email"
-                                    placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="name">Contacto Telefônico</label>
-                                <input type="text" class="form-control rounded" name="contact" id="contact"
-                                    placeholder="" required>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <label for="lastname">PIN de Acesso</label>
-                                <input type="password" class="form-control rounded" name="pin_access"
-                                    id="pin_access" placeholder="" required>
-                            </div>
-                        </div>
-                        <div class="d-flex mt-3">
-                            <button class="btn btn-primary" style="width: 100%" id="btn-formReg">Registar</button>
-                        </div>
-                    </form>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-
-                </div>
-            </div>    
-        </div>
-    </div>
-    
    <!-- end footer -->
    <!-- Javascript files-->
    <script src="/js/jquery.min.js"></script>

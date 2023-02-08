@@ -65,6 +65,7 @@
 					</div>
 					</fieldset>
 
+					@if ($data->route =='goBack')
 					<fieldset class="border p-2 mb-3">
 						<legend class="float-none w-auto" style="font-size: 16px">Bilhete de Volta</legend>
 					<div class="row">
@@ -78,6 +79,7 @@
 						@endforeach
 					</div>
 					</fieldset>
+					@endif
 					{{--<input type="text" name="tel" value="{{$data->tel}}" hidden>
 					<input type="text" name="email" value="{{$data->email}}" hidden>--}}
 					<input type="text" name="n_ticket" value="{{$data->n_ticket}}" hidden>

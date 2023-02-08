@@ -139,7 +139,7 @@
               <label for="date">Data de Partida</label>
               <select class="form-control rounded" id="date" name="date" required>
                 @foreach ($date as $dte)
-                    <option value="">{{$dte->date.' '.$dte->time.' - '.$dte->name}}</option>
+                    <option value="{{$dte->id}}" id="date-val{{$dte->id}}" data-date="{{$dte->date.' '.$dte->time}}">{{$dte->date.' '.$dte->time}}{{--.' - '.$dte->name--}}</option>
                 @endforeach
               </select>
 
@@ -166,7 +166,7 @@
               <label for="data_return">Data de Regresso</label>
               <select class="form-control rounded" id="date_return" name="date_return">
                 @foreach ($date_return as $date)
-                    <option value="">{{$date->date.' '.$date->time.' - '.$date->name}}</option>
+                    <option value="{{$dte->id}}" id="date_return-val{{$dte->id}}" data-date_return="{{$date->date.' '.$date->time}}">{{$date->date.' '.$date->time.' - '.$date->name}}</option>
                 @endforeach
               </select>
             </div>
@@ -206,10 +206,10 @@
                 <tbody>
                   <tr>
                     <td >
-                      <span style="font-weight: bold;font-size: 16px;color:#fff;">Angola</span>
+                      <span style="font-weight: bold;font-size: 16px;color:#fff;">{{$city->name}}</span>
                     </td>
                     <td>
-                      <span style="font-weight: bold;font-size: 16px;color:#fff;">Portugal</span>
+                      <span style="font-weight: bold;font-size: 16px;color:#fff;">{{$city2->name}}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -217,7 +217,7 @@
               
             </div>
             <div class="text-center mt-2">
-              <a class="h6 text-light">Outros Dados</a>
+              <a class="h6 text-light">Datas</a>
             </div>
             <div>
               <table style="width: 100%;margin:20px;" class="table table-hover">
@@ -230,17 +230,17 @@
                 <tbody>
                   <tr>
                     <td >
-                      <span style="font-weight: bold;font-size: 16px;color:#fff;">15-02-2023</span>
+                      <span style="font-weight: bold;font-size: 16px;color:#fff;" id="date2"></span>
                     </td>
                     <td>
-                      <span style="font-weight: bold;font-size: 16px;color:#fff;">20-02-2023</span>
+                      <span style="font-weight: bold;font-size: 16px;color:#fff;" id="date_return2">--</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
               
             </div>
-            <div>
+            {{--<div>
               <table style="width: 100%;margin:20px;" class="table table-hover">
                 <thead>
                   <tr>
@@ -256,7 +256,7 @@
                 </tbody>
               </table>
               
-            </div>
+            </div>--}}
           </div>
         </div>
       </div>
@@ -320,5 +320,6 @@ sm-12 container-search">
     </div>
 </div>
 --}}
+
 
 @endsection
