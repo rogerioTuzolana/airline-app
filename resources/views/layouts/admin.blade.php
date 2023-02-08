@@ -70,13 +70,13 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="/admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h6>
+              
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -90,8 +90,8 @@
                     this.closest('form').submit();"
                     class="nav-link collapsed"
                 >
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sair</span>
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sair</span>
                 </a>
                 </form>
               {{--<a class="dropdown-item d-flex align-items-center" href="#">
@@ -121,32 +121,25 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Gerir</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="{{route('airlines')}}">
+          <i class="bi bi-airplane-engines"></i><span>Voos</span>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="{{route('airlines')}}">
-              <i class="bi bi-circle"></i><span>Voos</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{route('fleets')}}">
-              <i class="bi bi-circle"></i><span>Frotas</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{route('tariffs')}}">
-              <i class="bi bi-circle"></i><span>Tarifas</span>
-            </a>
-          </li>
-          <li>
-            <a href="{{route('perks')}}">
-              <i class="bi bi-circle"></i><span>Regalias</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End Tables Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('fleets')}}">
+          <i class="bi bi-fan"></i><span>Frotas</span>
+        </a>
+      </li><!-- End Tables Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('tariffs')}}">
+          <i class="bi bi-brush-fill"></i><span>Tarifas</span>
+        </a>
+      </li><!-- End Tables Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('perks')}}">
+          <i class="bi bi-patch-plus"></i><span>Regalias</span>
+        </a>
+      </li><!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="tables-data.html">

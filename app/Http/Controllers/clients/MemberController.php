@@ -9,9 +9,13 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\ApiCity;
 use App\Models\MemberClient;
+use App\Models\BuyTicket;
+use App\Models\Tariff;
 use App\Models\Airline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class MemberController extends Controller
 {
@@ -22,6 +26,7 @@ class MemberController extends Controller
      */
     public function index()
     {
+       
         $airlines = '';
         $citys = ApiCity::get();
         $search = request('search');
@@ -45,6 +50,143 @@ class MemberController extends Controller
         ]);
     }
 
+    public function date_airlines(Request $request){
+        $data = DB::table('airlines')
+            //->groupBy(DB::raw('YEAR(created_at)'))
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+            
+            //->join('tariffs','airlines.tariff_id','=','tariffs.id')
+            //->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+            //->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+
+            //->where('airlines.tariff_id','tarrifs.id')
+            ->where('orige',$request->orige)
+            ->where('destiny',$request->destiny)
+            //->orderBy('created_at','ASC')
+            ->get();
+        //dd($data);
+        if (isset($data)) {
+            return response()->json([
+                'success' => true,
+                'data' => $data,
+            ],200);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Algo deu errado.',
+        ],422);
+    }
+
+    public function pay_ticket(Request $request){
+        $tariff_airlines = DB::table('airlines')
+        //->groupBy(DB::raw('YEAR(created_at)'))
+        ->select(
+            'airlines.id as airline_id',
+            'airlines.time',
+            'airlines.name',
+            'airlines.date',
+            'tariffs.name',
+            'tariffs.amount',
+            'tariffs.id as tariff_id',
+            'tariff_airlines.airline_id',
+            'tariff_airlines.tariff_id',
+            //'tariffs.category',
+        )
+        
+        ->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+        ->join('tariffs','tariffs.id','=','tariff_airlines.tariff_id')
+        ->where('airlines.id',$request->date)
+        ->get();
+
+        $tariff_airlines2 =[];
+        if(isset($request->date_return)){
+            $tariff_airlines2 = DB::table('airlines')
+            //->groupBy(DB::raw('YEAR(created_at)'))
+            ->select(
+                'airlines.id as airline_id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                'tariffs.name',
+                'tariffs.amount',
+                'tariffs.id as tariff_id',
+                'tariff_airlines.airline_id',
+                'tariff_airlines.tariff_id',
+                //'tariffs.category',
+            )
+            
+            ->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
+            ->join('tariffs','tariffs.id','=','tariff_airlines.tariff_id')
+            ->where('airlines.id',$request->date_return)
+            ->get();
+        }
+        //dd($tariff_airlines2);
+        return view('member.pay_ticket',[
+            'data'=>$request,
+            'tariff_airlines'=>$tariff_airlines,
+            'tariff_airlines2'=>$tariff_airlines2,
+            //'tariff'=>$tariff
+        ]);
+    }
+
+    public function my_shopping(Request $request){
+        $buy_tickets = [];
+        $search = request('search');
+        if ($search) {
+            $buy_tickets = BuyTicket::where([
+                ['brand', 'like', '%'.$search.'%']
+            ])->orWhere([
+                ['model', 'like', '%'.$search.'%']
+            ])
+            ->orWhere([
+                ['capacity', 'like', '%'.$search.'%']
+            ])
+            ->paginate(3);
+            
+        }else{
+            $buy_tickets = BuyTicket::paginate(3);
+        }
+        
+        
+        return view('member.my_shopping',["buy_tickets"=>$buy_tickets, "search"=>$search]);
+    }
+
+    public function buy_cancel(Request $request){
+        $payment = BuyTicket::where('id',$request->buy_id)->where('user_id',auth()->user()->id)->first();
+
+        if (intval($request->status_validate) == 1) {
+            $payment->status_validate = false;
+            //$payment->status = 'approved';
+        }/*else {
+            $payment->status_validate = true;
+            //$payment->status = 'denied';
+        }*/
+        
+        $status = $payment->update();
+        if ($status) {
+            return redirect()->back()->with('success','Compra cancelada com sucesso');
+        }else{
+            return redirect()->back()->with('fail','A compra não foi cancelada');
+        }
+    }
+
+    public function my_profile(Request $request){
+
+        return view('member.my_profile');
+    }
+
+    public function buy_ticket(Request $request){
+        return route()->back('success','Comprado com sucesso');
+    }
+    
     public function login_member(Request $request){
         $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -52,24 +194,27 @@ class MemberController extends Controller
         ],[
             'email.exists' => 'Não existe este email'
         ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user->type != 'member'){
+            return response()->json([
+                'success' => false,
+                'message' => 'Email ou Senha errada!',
+            ],422);
+        }
+
         $data = $request->only('email','password');
 
-        if(Auth::attempt($data)){
-            if(auth()->user()->type == 'member'){
-                return response()->json([
-                    'success' => true,
-                    'message' => auth()->user()->type,
-                ],200);
-            }else {
-               return response()->json([
-                'success' => false,
-                'message' => 'Email ou Senha errada.',
-            ],422);
-            }
+        if(Auth::attempt($data)){   
+            return response()->json([
+                'success' => true,
+                'message' => auth()->user()->type,
+            ],200);
         }else{
             return response()->json([
                 'success' => false,
-                'message' => 'Email ou Senha errada.',
+                'message' => 'Email ou Senha errada!',
             ],422);
         }
     }

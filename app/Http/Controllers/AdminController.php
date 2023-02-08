@@ -18,7 +18,7 @@ class AdminController extends Controller
 {
     //
     public function index(){
-        return view('admin.dashboard'/*,['clients'=>$clients*/);
+        return view("admin.dashboard"/*,['clients'=>$clients*/);
     }
 
     public function login(Request $request){
@@ -48,6 +48,7 @@ class AdminController extends Controller
     }
     
     public function store_fleet(Request $request){
+
         $status = false;
         if ($request->fleet_id!='') {
             $fleet = Fleet::find($request->fleet_id);
@@ -75,6 +76,7 @@ class AdminController extends Controller
                 ],422);
             }
         }
+
         if ($status) {
             return response()->json([
                 'success' => true,
@@ -137,16 +139,19 @@ class AdminController extends Controller
                 ],422);
             }
         }
+
         if ($status) {
             return response()->json([
                 'success' => true,
                 'message' => 'Tarifa adicionada com sucesso.',
             ],200);
         }
+
         return response()->json([
             'success' => false,
             'message' => 'Tarifa não adicionada.',
         ],422);
+
     }
 
     public function perks(){
@@ -429,9 +434,10 @@ class AdminController extends Controller
             'email.exists' => 'Não existe este email'
         ]);
         $data = $request->only('email','password');
-
+        
         if(Auth::attempt($data)){
             if(auth()->user()->type == 'admin'){
+                
                 return redirect()->route('dashboard');
             }
             return redirect()->back()->with('fail','Email ou Senha errada');

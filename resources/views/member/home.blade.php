@@ -7,7 +7,8 @@
 @section('content')
 
 <div class="row">
-  <form action="" id="infob">
+  <form method="GET" action="{{route('comprar-bilhete')}}" id="infob">
+    @csrf
     <input type="text" value="{{Auth::user()->id}}{{--Auth::user()->client->member->--}}" hidden>
     {{--<div class="form-row mt-3">
       <div class="row">
@@ -53,31 +54,31 @@
       </div>
     </div>--}}
 
-    <div class="form-row mt-2">
+    {{--<div class="form-row mt-2">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="email">E-mail</label>
             <input type="email" class="form-control rounded" name="email" id="email"
-                placeholder="">
+                placeholder="" value="{{Auth::user()->email}}" required>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="email">Telefone</label>
-            <input type="text" class="form-control rounded" name="email" id="email"
-                placeholder="">
+            <input type="text" class="form-control rounded" name="tel" id="tel"
+                placeholder="" value="{{Auth::user()->contact}}" required>
         </div>
       </div>
-    </div>
+    </div>--}}
+    <input type="text" id="category" name="category" hidden>
 
     <div class="form-row mt-2">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" onclick="typeAirline(this)" name="cattarifas" id="inlineRadio1"
-                value="option1" checked>
-              <label class="form-check-label" for="inlineRadio1" >Domestico</label>
+            <input class="form-check-input" type="radio" id="cat1" onclick="typeAirline(this)" name="cat" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1" >Doméstico</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" onclick="typeAirline(this)" type="radio" name="cattarifas" id="inlineRadio2"
+            <input class="form-check-input" id="cat2" onclick="typeAirline(this)" type="radio" name="cat" id="inlineRadio2"
                 value="option2">
             <label class="form-check-label" for="inlineRadio2">Internacional</label>
           </div>
@@ -85,27 +86,27 @@
       </div>
     </div>
 
-    <div class="form-row mt-2" id="local">
+    <div class="form-row mt-2" id="loca">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="origem">Aeroporto Origem LL</label>
+          <label for="origem">Aeroporto Origem</label>
           @php
               $citys = App\Models\ApiCity::get();
           @endphp
-          <select class="form-control ">
-            <option selected>selecionar</option>
+          <select class="form-control chooseDate" name="orige" id="orige" data-per="orig" >
+            <option>selecionar</option>
             @foreach ($citys as $city)
             <option value="{{$city->key}}">{{$city->name}}</option>
             @endforeach
           </select>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="distino">Aeroporto Destino</label>
+          <label for="destiny">Aeroporto Destino</label>
           @php
               $citys = App\Models\ApiCity::get();
           @endphp
-          <select class="form-control ">
-            <option selected>selecionar</option>
+          <select class="form-control chooseDate" name="destiny" id="destiny" data-per="des" >
+            <option >selecionar</option>
             @foreach ($citys as $city)
             <option value="{{$city->key}}">{{$city->name}}</option>
             @endforeach
@@ -114,78 +115,70 @@
       </div>
       
     </div>
-    <div class="form-row mt-2" id="inter">
+    <div class="form-row mt-2" id="intern">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
           <label for="origem">Aeroporto Origem</label>
-          <select class="form-control " id="optionInter1" name="optionInter">
+          <select class="form-control chooseDate" id="optionInter1" name="optionInter1" >
             
           </select>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
           <label for="distino">Aeroporto Destino</label>
-          <select class="form-control" id="optionInter2" name="optionInter2">
+          <select class="form-control chooseDate" id="optionInter2" name="optionInter2" >
           </select>
         </div>
-      </div>
-      
+      </div> 
     </div>
+
     <div class="form-row mt-2">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
           <label for="nbilhete">Quantidade de Bilhete</label>
-          <select class="form-control rounded" id="nbilhete">
-              <option selected>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-          </select>
+          <input type="text" id="n_ticket" class="form-control rounded ticket_quantity" name="n_ticket" required>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <label for="date">Data de Partida</label>
+          <select class="form-control rounded" id="date" name="date">
+          </select>
         </div>
       </div>
     </div>
+
     <div class="form-row mt-2">
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="catbilhete" id="inlineRadio3"
-                value="option3">
-            <label class="form-check-label" for="inlineRadio1">Ida</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="catbilhete" id="inlineRadio4"
-                value="option4">
-            <label class="form-check-label" for="inlineRadio2">Ida e Volta</label>
-        </div>
-
-    </div>
-
-    <div class="form-row">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="nbilhete">Data de Partida</label>
-          <select class="form-control rounded" id="nbilhete">
-            <option selected>selecionar</option>
-            <option>2</option>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" {{--onclick="goAndGoBack(this)"--}} name="route" id="route1" value="go" >
+              <label class="form-check-label" for="route1" >Ida</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input chooseDateReturn" {{--onclick="goAndGoBack(this)"--}} type="radio" name="route" id="route2"
+                value="goBack">
+            <label class="form-check-label" for="route2">Ida e Volta</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row" id="div-date-return">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <label for="data_return">Data de Regresso</label>
+          <select class="form-control rounded" id="date_return" name="date_return">  
           </select>
         </div>
-      
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="nbilhete">Data de Regresso</label>
-          <select class="form-control rounded" id="nbilhete">
-            <option selected>selecionar</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"> 
+          <label for="nbilhete">Quantidade de bilhete de volta</label>
+          <input type="text" id="n_ticket_return" class="form-control rounded ticket_quantity" name="n_ticket_return"> 
+          
         </div>
       </div>
     </div>
 
     <div class="form-group justify-content-center mt-3">
       <div class="col-12 mx-auto" style="width: 200px;">
-      <button type="submit" class="btn btn-primary btn-lg" id="cbilhete">Comprar Bilhete</button>
+      <button type="submit" class="btn btn-primary btn-lg" id="btnBuyTicket">Comprar Bilhete</button>
     </div>
   </div>
   </form>
@@ -247,200 +240,5 @@ sm-12 container-search">
     </div>
 </div>
 --}}
-<div class="modal fade" id="exampleModalReg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-ticket" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-header mt-3 d-flex justify-content-center text-center">
-        <h1 style="font-size: 19pt;">Informe os dados para fazer a compra do Bilhete</h1>
-      </div>
-      <div class="modal-body">
-        <form action="" id="infob">
-          <input type="text" value="{{Auth::user()->id}}{{--Auth::user()->client->member->--}}" hidden>
-          {{--<div class="form-row mt-3">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="name">Nome</label>
-                <input type="text" class="form-control rounded" name="name" id="name" value="{{Auth::user()->name}}" placeholder="">
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-11">
-                <label for="lastname">Sobrenome</label>
-                <input type="text" class="form-control rounded" name="lastname" id="lastname"
-                    placeholder="">
-              </div>
-            </div>
-          </div>--}}
-          {{--<div class="form-row mt-2">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="categoriaidade" id="inlineRadio1"
-                    value="option1">
-                <label class="form-check-label" for="inlineRadio1">Adulto</label>
-              </div>
-              <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="categoriaidade" id="inlineRadio2"
-                      value="option2">
-                  <label class="form-check-label" for="inlineRadio2">Criança</label>
-              </div>
-            </div>
-          </div>--}}
-          {{--<div class="form-row mt-2">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="genero">Genero</label>
-                <select class="form-control">
-                    <option selected>selecionar</option>
-                    <option>Masculino</option>
-                    <option>Feminino</option>
-                </select>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <label>Data Nascimento</label>
-                  <input class="form-control" placeholder="Alguma" type="date" name="Alguma">
-              </div>
-            </div>
-          </div>--}}
 
-          <div class="form-row mt-2">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <label for="email">E-mail</label>
-                  <input type="email" class="form-control rounded" name="email" id="email"
-                      placeholder="">
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                  <label for="email">Telefone</label>
-                  <input type="text" class="form-control rounded" name="email" id="email"
-                      placeholder="">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row mt-2">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" onclick="typeAirline(this)" name="cattarifas" id="inlineRadio1"
-                      value="option1" checked>
-                    <label class="form-check-label" for="inlineRadio1" >Domestico</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" onclick="typeAirline(this)" type="radio" name="cattarifas" id="inlineRadio2"
-                      value="option2">
-                  <label class="form-check-label" for="inlineRadio2">Internacional</label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row mt-2" id="local">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="origem">Aeroporto Origem LL</label>
-                @php
-                    $citys = App\Models\ApiCity::get();
-                @endphp
-                <select class="form-control ">
-                  <option selected>selecionar</option>
-                  @foreach ($citys as $city)
-                  <option value="{{$city->key}}">{{$city->name}}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="distino">Aeroporto Destino</label>
-                @php
-                    $citys = App\Models\ApiCity::get();
-                @endphp
-                <select class="form-control ">
-                  <option selected>selecionar</option>
-                  @foreach ($citys as $city)
-                  <option value="{{$city->key}}">{{$city->name}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            
-          </div>
-          <div class="form-row mt-2" id="inter">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="origem">Aeroporto Origem</label>
-                <select class="form-control " id="optionInter" name="optionInter">
-                  
-                </select>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="distino">Aeroporto Destino</label>
-                <select class="form-control" id="optionInter2" name="optionInter2">
-                </select>
-              </div>
-            </div>
-            
-          </div>
-          <div class="form-row mt-2">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="nbilhete">Quantidade de Bilhete</label>
-                <select class="form-control rounded" id="nbilhete">
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-              </div>
-            </div>
-          </div>
-          <div class="form-row mt-2">
-              <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="catbilhete" id="inlineRadio3"
-                      value="option3">
-                  <label class="form-check-label" for="inlineRadio1">Ida</label>
-              </div>
-              <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="catbilhete" id="inlineRadio4"
-                      value="option4">
-                  <label class="form-check-label" for="inlineRadio2">Ida e Volta</label>
-              </div>
-
-          </div>
-
-          <div class="form-row">
-            <div class="row">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="nbilhete">Data de Partida</label>
-                <select class="form-control rounded" id="nbilhete">
-                  <option selected>selecionar</option>
-                  <option>2</option>
-                </select>
-              </div>
-            
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                <label for="nbilhete">Data de Regresso</label>
-                <select class="form-control rounded" id="nbilhete">
-                  <option selected>selecionar</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group justify-content-center mt-3">
-            <div class="col-12 mx-auto" style="width: 200px;">
-            <button type="submit" class="btn btn-primary btn-lg" id="cbilhete">Comprar Bilhete</button>
-          </div>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection

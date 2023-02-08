@@ -54,12 +54,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="/admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h6>
               <a href=""><span>Membro <i class="bi bi-pencil-square"></i></span></a>
             </li>
             <li>
@@ -105,22 +105,23 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('perfil')}}">
+          <i class="bi bi-pencil-square"></i><span>Meu Perfil</span>
+        </a>
+      </li><!-- End Tables Nav -->
+
+      {{--<li class="nav-item">
         <a class="nav-link collapsed" href="">
           <i class="bi bi-currency-dollar"></i><span>Milhas</span>
         </a>
       </li><!-- End Tables Nav -->
-
+      --}}
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{route('minhas-compras')}}">
           <i class="bi bi-currency-dollar"></i><span>Minhas Compras</span>
         </a>
       </li><!-- End Tables Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link" href="charts-chartjs.html">
-          <i class="bi bi-bar-chart"></i><span>Estatística</span>
-        </a>
-      </li><!-- End Charts Nav -->
 
       {{--<li class="nav-heading">Pages</li>
 
@@ -189,6 +190,7 @@
 
   <!-- Vendor JS Files -->
   <script src="/admin/assets/js/jquery.min.js"></script>
+  <script src="/js/jquery.mask.js"></script>
 
   <script src="/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -235,16 +237,28 @@
         option.style.display = 'none';
         const option2= document.getElementById('local');
         option2.style.display = 'block';
-        
+        $("#category").val("local")
       }else{
         const option= document.getElementById('local');
         option.style.display = 'none';
         const option2= document.getElementById('inter');
         option2.style.display = 'block';
+        $("#category").val("inter")
         
       }
     }
-    
+    /*function goAndGoBack(element) {
+      const val = $(element).val()
+     
+      
+      if(val=='go'){
+        const option= document.getElementById('div-date-return');
+        option.style.display = 'none';
+      }else{
+        const option2= document.getElementById('div-date-return');
+        option2.style.display = 'block';
+      }
+    }*/
   </script>
 </body>
 
