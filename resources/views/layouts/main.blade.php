@@ -48,11 +48,11 @@
     <!-- header -->
     <header>
         <!-- header inner -->
-        <div class="header">
+        <div class="header ">
             <div class="header_white_section">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="header_information">
                                 <ul>
                                     <li><img src="images/1.png" alt="#" /> RUA 145.Camama 1, Luanda</li>
@@ -61,47 +61,45 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="header_information">
-                                <a href="#" class="btn btn-primary" onclick="modalLogin()"
-                                    style="border:coral 1px solid;background-color:#ff7839;border-radius: 20px">Entrar</a>
-                                <a href="#" onclick="modalCreateMember()" class="btn btn-primary"
-                                    style="border-radius: 20px;background-color:#08809B">Criar conta</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col logo_section">
                         <div class="full">
                             <div class="center-desk">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="logo d-flex align-items-center w-auto">
-                                    <a href="">
-                                         
+                                    <div class="logo d-flex align-items-center w-auto fixed z-100 w-full py-5 px-10 top-0">
+                                        <a href="">
+
                                             <img src="/images/logo2.png" alt="">
-                                            <span class=""><strong class="white">PDC Airline</strong></span>
-                                       
-                                    </a>
-                                     </div>
+                                            <span class=""><strong class="white">PDC Airlines</strong></span>
+
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-9 col-md-0 col-sm-0">
+                    <div class="col-xl-9 col-lg-0 col-md-0 col-sm-0">
                         <div class="menu-area">
                             <div class="limit-box d-flex justify-content-center">
-                                <nav class="main-menu">
+                                <nav class="main-menu fixed z-100 w-full py-5 px-10 top-0">
                                     <ul class="menu-area-main">
                                         <li class="active"><a href="#">Home</a></li>
                                         <li> <a href="#about">Sobre Nos</a> </li>
                                         <li><a href="#travel">Viagens</a></li>
                                         <li><a href="#tarifario">Tarifas</a></li>
                                         <li><a href="#contact">Fale Conosco</a></li>
+                                        <li> <a href="#" onclick="modalLogin()"
+                                                style="border:#15cfe5 1px solid; size:30px; border-radius: 7px">Entrar</a>
+                                        </li>
+                                        <li><a href="#" onclick="modalCreateMember()"
+                                                style="border:#15cfe5 1px solid; border-size:30px; border-radius: 7px">Criar
+                                                conta</a></li>
                                     </ul>
                                 </nav>
                                 {{-- <div>
