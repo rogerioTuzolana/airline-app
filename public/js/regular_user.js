@@ -71,11 +71,18 @@ $(document).ready(function () {
         div.style.display = 'none';
 
         $("#n_ticket_return").prop("required", false);
+        let date = "#date-val"+$("#date").val()
+        
+        $("#date2").html($(date).attr("data-date"))
     }else{
         const div2= document.getElementById('div-date-return');
         div2.style.display = 'block';
-        
+        $("#date_return2").html($("#date_return").html())
         $("#n_ticket_return").prop("required", true);
+
+        let date = "#date_return-val"+$("#date_return").val()
+        
+        $("#date_return2").html($(date).attr("data-date_return"))
         
     }
 
@@ -201,18 +208,38 @@ $(".chooseDate").on('change',function(event) {
     });
 });
 
+$("#date").on('change',function () {
+    let date = "#date-val"+$(this).val()
+    $("#date2").html($(date).attr("data-date"))
+    
+})
+
+$("#date_return").on('change',function () {
+    let date = "#date-val"+$(this).val()
+    $("#date_return2").html($(date).attr("data-date_return"))
+    
+})
+
 $("#route1").on('click',function(event) {
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'none';
     $("#n_ticket_return").prop("required", false);
+
+    let date = "#date-val"+$("#date").val()
+    $("#date2").html($(date).attr("data-date"))
+    $("#date_return2").html("--")
 })
 
 $("#route2").on('click',function(event) {
+    
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'block';
     $("#n_ticket_return").prop("required", true);
+
+    let date = "#date_return-val"+$("#date_return").val()
+    $("#date_return2").html($(date).attr("data-date_return"))
     //event.preventDefault();
-    let orige=''
+    /*let orige=''
     let destiny=''
     
     let category = $("#category").val()
@@ -264,7 +291,7 @@ $("#route2").on('click',function(event) {
 
         let data = JSON.parse(msg.responseText);
         console.log(data.message);
-    });
+    });*/
 });
 
 $("#btn-addAirline").on('click',function() {

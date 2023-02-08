@@ -26,9 +26,8 @@ class UserController extends Controller
     }
 
   
-    public function buy_ticket($id)
-    {
-        $airline = Airline::find($id);
+    public function buy_ticket(Request $request)
+    {   
 
         $date = DB::table('airlines')
             ->select(
@@ -40,9 +39,8 @@ class UserController extends Controller
                 //'tariffs.category',
             )
 
-            ->where('id',$airline->id)
-            //->where('orige',$request->orige)
-            //->where('destiny',$request->destiny)
+            ->where('orige',$request->orige)
+            ->where('destiny',$request->destiny)
             ->get();
 
         $date_return = DB::table('airlines')
@@ -54,12 +52,20 @@ class UserController extends Controller
                 //'tariffs.name',
                 //'tariffs.category',
             )
-            ->where('orige',$airline->destiny)
-            ->where('destiny',$airline->orige)
+            ->where('orige',$request->destiny)
+            ->where('destiny',$request->orige)
             ->get();
         //dd($date_return);
-        
-        return view('buy_ticket',['date'=>$date,'date_return'=>$date_return,'route'=>true, 'airline'=>$airline]);
+        $city = ApiCity::where('key',$request->orige)->first();
+        $city2 = ApiCity::where('key',$request->destiny)->first();
+        return view('buy_ticket',[
+            'date'=>$date,
+            'date_return'=>$date_return,
+            'route'=>true, 
+            'city'=>$city, 
+            'city2'=>$city2,
+            'status'=>true,
+        ]);
     }
 
     public function pay_ticket(Request $request){
@@ -85,7 +91,7 @@ class UserController extends Controller
         ->get();
 
         $tariff_airlines2 =[];
-        if(isset($request->date_return)){
+        if(isset($request->route) && $request->route == 'goBack'){
             $tariff_airlines2 = DB::table('airlines')
             //->groupBy(DB::raw('YEAR(created_at)'))
             ->select(
@@ -111,6 +117,7 @@ class UserController extends Controller
             'data'=>$request,
             'tariff_airlines'=>$tariff_airlines,
             'tariff_airlines2'=>$tariff_airlines2,
+            'status'=>true,
             //'tariff'=>$tariff
         ]);
     }

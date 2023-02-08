@@ -17,44 +17,36 @@
                             {{-- href="/bilhete" --}}>Comprar Bilhete</a>
                     </div>
                     <div class="container">
-                        <form class="main-form">
+                        <form class="main-form" action="{{route('home_airlines')}}">
                             <h3>Encontre Seu VOO</h3>
                             <div class="form-row">
                                 <div class="col-md-9">
                                     <div class="row">
-
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <input type="text" value="1" name="status_search" hidden>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                             <label>Local Origem</label>
-                                            <input class="form-control" placeholder="local" type="text" name="">
+                                            <input class="form-control" placeholder="local" type="text" name="orige">
                                         </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                             <label>Local Distino</label>
-                                            <input class="form-control" placeholder="local" type="text" name="Alguma">
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                            <label>Categoria Tarifas</label>
-                                            <select class="form-control" name="Any">
-                                                <option @selected(true)>Seleciona</option>
-                                                <option>Tarifas Domestica</option>
-                                                <option>Europa/Africa</option>
-                                                <option>America do Norte</option>
-                                            </select>
+                                            <input class="form-control" placeholder="local" type="text" name="destiny">
                                         </div>
                                     </div>
                                     <div class="row">
-
                                         <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6 col-12">
                                             <label>Data</label>
-                                            <input class="form-control" placeholder="Alguma" type="date" name="Alguma">
+                                            <input class="form-control" placeholder="Alguma" type="date" name="date">
                                         </div>
                                         <div class="col-xl-6 col-lg-6 col-md-4 col-sm-6 col-12">
                                             <label>Preço</label>
-                                            <input class="form-control" placeholder="00.0" type="text" name="00.0">
+                                            <input class="form-control" placeholder="00.0" type="text" name="amount">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                                    <a href="#" id="btnbilhte">Procurar</a>
+                                    <div style="margin-top: 60px">
+                                        <button class="btn p-2" id="btn-search">Procurar</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -358,13 +350,14 @@
                         <div class="owl-carousel owl-theme">
                             @foreach ($airlines as $airline)
                             @php
-                                $city = App\Models\ApiCity::where('key',$airline->destiny)->first();
+                                $city = App\Models\ApiCity::where('key',$airline->orige)->first();
+                                $city2 = App\Models\ApiCity::where('key',$airline->destiny)->first();
                             @endphp
                             <div class="item">
                                 <img class="img-responsive" src="images/1.jpg" alt="#" />
                                 <h3>
                                     @if ($airline->category == 'local')
-                                        {{$city->name}}
+                                    {{$city->name}} ---> {{$city2->name}}
                                     @else
                                         Any
                                     @endif
@@ -372,11 +365,19 @@
                                 </h3>
                                 <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                                     suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                            
-                                <a href="{{route('comprarbilhete',$airline->id)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>
+                                @if (isset($city) && isset($city2))
+                                <a href="{{URL('comprar-bilhete?orige='.$city->key.'&destiny='.$city2->key)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>     
+                                @else
+                                <a href="{{URL('comprar-bilhete{{--?orige="'.$city->name.','.$city2->name--}}')}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>  
+                                @endif
                             </div>
                             @endforeach
                         </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="mt-5 mb-3">
+                    <a href="{{route('home_airlines')}}" class="btn btn-primary text-white">Ver mais</a>
                     </div>
                 </div>
             </section>

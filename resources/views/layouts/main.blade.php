@@ -89,6 +89,7 @@
                             <div class="limit-box d-flex justify-content-center">
                                 <nav class="main-menu fixed z-100 w-full py-1 px-10 top-0">
                                     <ul class="menu-area-main">
+<<<<<<< HEAD
                                         <li class="active"><a href="#">Home</a></li>
                                         <li> <a href="#about">Sobre Nos</a> </li>
                                         <li><a href="#travel">Viagens</a></li>
@@ -100,6 +101,13 @@
                                         <li><a href="#" onclick="modalCreateMember()"
                                                 style="border:#15cfe5 1px solid; border-size:30px; border-radius: 7px">Criar
                                                 conta</a></li>
+=======
+                                        <li class="active"><a href="{{route('homepage')}}">Home</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#about" @else href="#about" @endif >Sobre Nos</a> </li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#travel" @else href="#travel" @endif>Viagens</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#tarifario" @else href="#tarifario" @endif>Tarifas</a></li>
+                                        <li><a @if (isset($status)) href="{{route('homepage')}}#contact" @else href="#contact" @endif>Fale Conosco</a></li>
+>>>>>>> 308b7b23095e9e97c8e1d4efdef30b0032530a96
                                     </ul>
                                 </nav>
                                 {{-- <div>
@@ -228,6 +236,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 
     <div class="modal fade" id="exampleModalReg" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -371,6 +380,44 @@
             modalBox.show();
         }
     </script>
+=======
+   <!-- end footer -->
+   <!-- Javascript files-->
+   <script src="/js/jquery.min.js"></script>
+   <script src="/js/popper.min.js"></script>
+   <script src="/js/bootstrap.bundle.min.js"></script>
+   <script src="/js/jquery-3.0.0.min.js"></script>
+   @if (empty($route))
+   <script src="/js/plugin.js"></script>
+   @endif
+   
+   <!-- sidebar -->
+   <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+   <script src="/js/custom.js"></script>
+   <!-- javascript -->
+   <script src="/js/owl.carousel.js"></script>
+   <script src="/public/js/custom.js"></script>
+   <script src="/register.js"></script>
+   <script src="/js/regular_user.js"></script>
+   <script src="/admin/assets/js/jquery.mask.min.js"></script>
+   <script>
+      function modalCreateMember(params) {
+      //$("#btn-addTariff").html('Adicionar');
+      //$("#name").val("");
+      //$("#category").val("economic");
+      //$("#amount").val("");
+      //$("#tariff_id").val("");
+      var modal = document.getElementById('exampleModalReg')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+    function modalLogin(){
+      var modal = document.getElementById('exampleModalLog')
+      let modalBox = new bootstrap.Modal(modal);
+      modalBox.show();
+    }
+   </script>
+>>>>>>> 308b7b23095e9e97c8e1d4efdef30b0032530a96
 
 </body>
 

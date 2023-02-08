@@ -27,11 +27,47 @@ class MainController extends Controller
         return view('welcome',["airlines"=>$airlines]);
     }
 
-    public function comprar_bilhete(Request $request){
+    public function airlines(Request $request){
+        $airlines ='';
+        $city = '';
+        $city2 = '';
+        $orige_search = request('orige');
+        $destiny_search = request('destiny');
+        $date_search = request('date');
+        $amount_search = request('amount');
+        if (isset($orige_search) && isset($destiny_search)) {
+            $city = ApiCity::where('name', $orige_search)->first();
+            $city2 = ApiCity::where('name', $destiny_search)->first();
+            //dd($city.' '.$city2);
+        }
+        //dd($request);
+        if (isset($request->status_search)) {
+            
+            $airlines = Airline::where('orige',$orige_search)
+            ->where('destiny',$destiny_search)
+            ->Where([
+                ['date', '<=', $date_search??'9999-12-12']
+            ])
+            
+            ->WhereHas('tariffs', function ($query) use ($amount_search) {
+                $query->WhereHas('tariff', function ($query2) use ($amount_search) {
+                    $query2->where([
+                        ['amount', '<=', doubleval($amount_search)]
+                    ]);
+                });
+            })
+            ->groupBy(['orige','destiny'])
+            ->paginate(2);    
+            //dd($airlines);
+        }else{
+            
+            $airlines = DB::table('airlines')
+            ->select(['id','orige','destiny','category','date','time'])
+            ->groupBy(['orige','destiny'])
+            ->paginate(2);
+        }
 
-        return view('main.bilhete');
-        
+        return view('airlines',["airlines"=>$airlines,"search"=>$request]);
     }
 
-    
 }
