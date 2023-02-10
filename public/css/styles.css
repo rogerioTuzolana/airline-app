@@ -9,12 +9,15 @@
 .logo a span {
     font-size: 15px;
 }
+
 .menu-area nav ul li a {
     font-size: 15px;
 }
+
 .menu-area nav ul li a:hover {
     color: #15cfe5;
 }
+
 .logo a strong:hover {
     color: #15cfe5;
 }
@@ -27,6 +30,7 @@
     text-align: center;
     text-decoration: underline;
 }
+
 #tipo-tarifa {
     font-size: 40px;
     font-family: Arial, Helvetica, sans-serif;
@@ -41,46 +45,47 @@
     width: 60%;
     margin-left: 20%;
     margin-left: 20%;
-    
-    
+
+
 }
 
 #bg-pub h1 {
-font-size: 20px;
-text-align: center;
-color: #ffffff;
-position: relative;
-text-decoration: solid;
-padding-bottom: 10px;
-margin-bottom: 10px;
-font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    text-decoration: solid;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 
 }
 
 
 #btnbilhte a:hover {
     background-color: #15cfe5;
-    border-color:#15cfe5;
+    border-color: #15cfe5;
     cursor: pointer;
 }
-#btnbilhte a{
-color: #ffffff;
-text-decoration: solid;
-text-transform:capitalize;
 
-font-weight: 15px;
-}
-
-#btn-search{
+#btnbilhte a {
     color: #ffffff;
     text-decoration: solid;
-    text-transform:capitalize;
+    text-transform: capitalize;
+
+    font-weight: 15px;
+}
+
+#btn-search {
+    color: #ffffff;
+    text-decoration: solid;
+    text-transform: capitalize;
     background-color: #eb8e14;
     width: 150px;
     font-weight: 15px;
 }
 
-.tarifasc{
+.tarifasc {
 
     margin-left: 90px;
     margin-right: 90px;
@@ -88,7 +93,7 @@ font-weight: 15px;
 }
 
 
-#infob{
+#infob {
     margin: 30px;
     padding: 0;
     box-sizing: border-box;
@@ -101,17 +106,65 @@ font-weight: 15px;
 .menu-area-main li.active a {
     color: #15cfe5;
 }
+
 .mean-container .mean-bar {
     background: #09547462;
 
 }
+
+.fab {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.fab button {
+    cursor: pointer;
+    width: 58px;
+    height: 58px;
+    border-radius: 30px;
+    border: none;
+    box-shadow: #4b4c4d;
+    border: #15cfe5 1px solid;
+    font-size: 26px;
+    color: white;
+    -webkit-transition: .2s ease-out;
+    -moz-transition: .2s ease-out;
+    transition: .2s ease-out;
+    background-color: #095474c2;
+}
+
+.fab button.main {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #15cfe5;
+    border: #15cfe5 1px solid;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+}
+
+.fab button.mainb:active .fab button.mainb:focus {
+    outline: none;
+    background-color: #323232;
+    box-shadow: #030303;
+}
+
+.fab button.mainb:active:before,
+.fab button.mainb:focus:before {
+    content: '+';
+}
+
 @media only screen and (max-width: 500px) {
     #bg-pub {
 
-      height: 100px;
-      margin-bottom: 20px;
+        height: 100px;
+        margin-bottom: 20px;
     }
-    #bg-pub h1{
+
+    #bg-pub h1 {
         margin-top: -10px;
         font-size: 13pt;
 
@@ -121,14 +174,17 @@ font-weight: 15px;
 
 @media (min-width: 576px) {
     .modal-login {
-      max-width: 400px;
+        max-width: 400px;
     }
-    .card-pub{
-      max-width: 600px;
+
+    .card-pub {
+        max-width: 600px;
     }
+
     .modal-reg-lg {
-      max-width: 800px;
+        max-width: 800px;
     }
+
     /*.modal-dialog .modal-content {
       padding: 1rem;
     }*/

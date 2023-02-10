@@ -71,7 +71,8 @@
                             <div class="center-desk">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="logo d-flex align-items-center w-auto fixed z-100 w-full py-1 px-10 top-0">
+                                    <div
+                                        class="logo d-flex align-items-center w-auto fixed z-100 w-full py-1 px-10 top-0">
                                         <a href="">
 
                                             <img src="/images/logo2.png" alt="">
@@ -89,17 +90,25 @@
                             <div class="limit-box d-flex justify-content-center">
                                 <nav class="main-menu fixed z-100 w-full py-1 px-10 top-0">
                                     <ul class="menu-area-main">
-                                        <li class="active"><a href="{{route('homepage')}}">Home</a></li>
-                                        <li><a @if (isset($status)) href="{{route('homepage')}}#about" @else href="#about" @endif >Sobre Nos</a> </li>
-                                        <li><a @if (isset($status)) href="{{route('homepage')}}#travel" @else href="#travel" @endif>Viagens</a></li>
-                                        <li><a @if (isset($status)) href="{{route('homepage')}}#tarifario" @else href="#tarifario" @endif>Tarifas</a></li>
-                                        <li><a @if (isset($status)) href="{{route('homepage')}}#contact" @else href="#contact" @endif>Fale Conosco</a></li>
-                                    <li> <a href="#" onclick="modalLogin()"
-                                                style="border:#15cfe5 1px solid; size:30px; border-radius: 7px">Entrar</a>
+                                        <li class="active"><a href="{{ route('homepage') }}">Home</a></li>
+                                        <li><a
+                                                @if (isset($status)) href="{{ route('homepage') }}#about" @else href="#about" @endif>Sobre
+                                                Nos</a> </li>
+                                        <li><a
+                                                @if (isset($status)) href="{{ route('homepage') }}#travel" @else href="#travel" @endif>Viagens</a>
                                         </li>
-                                    <li><a href="#" onclick="modalCreateMember()"
-                                            style="border:#15cfe5 1px solid; border-size:30px; border-radius: 7px">Criar
-                                            conta</a></li>
+                                        <li><a
+                                                @if (isset($status)) href="{{ route('homepage') }}#tarifario" @else href="#tarifario" @endif>Tarifas</a>
+                                        </li>
+                                        <li><a
+                                                @if (isset($status)) href="{{ route('homepage') }}#contact" @else href="#contact" @endif>Fale
+                                                Conosco</a></li>
+                                        <li> <a href="#" onclick="modalLogin()"
+                                                style="border:#15cfe5 1px solid; size:20px; border-radius: 7px">Entrar</a>
+                                        </li>
+                                        <li><a href="#" onclick="modalCreateMember()"
+                                                style="border:#15cfe5 1px solid; border-size:20px; border-radius: 7px">Criar
+                                                conta</a></li>
                                     </ul>
                                 </nav>
                                 {{-- <div>
@@ -116,6 +125,15 @@
         <!-- end header inner -->
     </header>
     <!-- end header -->
+    <div class="fab" ontouchstart="">
+         <a href="#">
+        <button type="button" class="btn btn-lg " aria-expanded="false" aria-haspopup="true">
+           
+                <i class="fa fa-angle-up"> </i>
+
+        </button>
+        </a>
+    </div>
     @yield('content')
     <!-- footer -->
     <footer>
@@ -164,7 +182,7 @@
                                 </div>
                             </div>
                             <div id="btnbilhte">
-                                <a class="Subscribe ">Enviar</a>
+                                <a class="Subscribe" style="background-color: #ee580f">Enviar</a>
                             </div>
                         </div>
                     </div>
@@ -337,42 +355,43 @@
             </div>
         </div>
     </div>
-   <!-- end footer -->
-   <!-- Javascript files-->
-   <script src="/js/jquery.min.js"></script>
-   <script src="/js/popper.min.js"></script>
-   <script src="/js/bootstrap.bundle.min.js"></script>
-   <script src="/js/jquery-3.0.0.min.js"></script>
-   @if (empty($route))
-   <script src="/js/plugin.js"></script>
-   @endif
-   
-   <!-- sidebar -->
-   <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
-   <script src="/js/custom.js"></script>
-   <!-- javascript -->
-   <script src="/js/owl.carousel.js"></script>
-   <script src="/public/js/custom.js"></script>
-   <script src="/register.js"></script>
-   <script src="/js/regular_user.js"></script>
-   <script src="/admin/assets/js/jquery.mask.min.js"></script>
-   <script>
-      function modalCreateMember(params) {
-      //$("#btn-addTariff").html('Adicionar');
-      //$("#name").val("");
-      //$("#category").val("economic");
-      //$("#amount").val("");
-      //$("#tariff_id").val("");
-      var modal = document.getElementById('exampleModalReg')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-    function modalLogin(){
-      var modal = document.getElementById('exampleModalLog')
-      let modalBox = new bootstrap.Modal(modal);
-      modalBox.show();
-    }
-   </script>
+    <!-- end footer -->
+    <!-- Javascript files-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery-3.0.0.min.js"></script>
+    @if (empty($route))
+        <script src="/js/plugin.js"></script>
+    @endif
+
+    <!-- sidebar -->
+    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/js/custom.js"></script>
+    <!-- javascript -->
+    <script src="/js/owl.carousel.js"></script>
+    <script src="/public/js/custom.js"></script>
+    <script src="/register.js"></script>
+    <script src="/js/regular_user.js"></script>
+    <script src="/admin/assets/js/jquery.mask.min.js"></script>
+    <script>
+        function modalCreateMember(params) {
+            //$("#btn-addTariff").html('Adicionar');
+            //$("#name").val("");
+            //$("#category").val("economic");
+            //$("#amount").val("");
+            //$("#tariff_id").val("");
+            var modal = document.getElementById('exampleModalReg')
+            let modalBox = new bootstrap.Modal(modal);
+            modalBox.show();
+        }
+
+        function modalLogin() {
+            var modal = document.getElementById('exampleModalLog')
+            let modalBox = new bootstrap.Modal(modal);
+            modalBox.show();
+        }
+    </script>
 
 </body>
 

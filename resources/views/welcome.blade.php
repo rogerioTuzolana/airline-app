@@ -3,6 +3,7 @@
 
 @section('content')
     <section>
+      
         <div class="banner-main">
             <img src="images/banner1.jpg" alt="#" />
             <div class="container">
@@ -13,11 +14,11 @@
                         </div>
                     </div>
                     <div class="button_section" id="btnbilhte">
-                        <a class="main_bt" href="#voos{{--route('comprarbilhete')--}}" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}
+                        <a class="main_bt" href="#voos{{-- route('comprarbilhete') --}}" {{-- data-toggle="modal" data-target=".bd-example-modal-lg" --}}
                             {{-- href="/bilhete" --}}>Comprar Bilhete</a>
                     </div>
                     <div class="container">
-                        <form class="main-form" action="{{route('home_airlines')}}">
+                        <form class="main-form" action="{{ route('home_airlines') }}">
                             <h3>Encontre Seu VOO</h3>
                             <div class="form-row">
                                 <div class="col-md-9">
@@ -45,7 +46,7 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
                                     <div style="margin-top: 60px">
-                                        <button class="btn p-2" id="btn-search">Procurar</button>
+                                        <button class="btn p-2" id="btn-search" style="background-color: #ee580f">Procurar</button>
                                     </div>
                                 </div>
                             </div>
@@ -265,7 +266,7 @@
                     </div>
                 </div>
             </div>
-            <div id="btnbilhte"> <a href="#voos" {{--data-toggle="modal" data-target=".bd-example-modal-lg"--}}>
+            <div id="btnbilhte"> <a href="#voos" {{-- data-toggle="modal" data-target=".bd-example-modal-lg" --}}>
                     Comprar Bilhete</a>
             </div>
         </div>
@@ -292,7 +293,7 @@
                         <h3>Países diferentes</h3>
                         <p> vai usar uma passagem de Lorem Ipsum, você precisa ser </p>
                         <div class="read-more" id="btnbilhte">
-                            <a href="#">Mais informação</a>
+                            <a href="https://www.melhoresdestinos.com.br/melhores-paises-visitar-2020.html">Mais informação</a>
                         </div>
                     </div>
                 </div>
@@ -302,7 +303,7 @@
                         <h3>Passeios montanhas</h3>
                         <p> vai usar uma passagem de Lorem Ipsum, você precisa ser</p>
                         <div class="read-more" id="btnbilhte">
-                            <a href="#">Mais informação</a>
+                            <a href="https://www.terramundi.com.br/blog/destinos-de-montanhas-em-fotos-e-dicas/">Mais informação</a>
                         </div>
                     </div>
                 </div>
@@ -312,7 +313,7 @@
                         <h3>Passeios de ônibus</h3>
                         <p> vai usar uma passagem de Lorem Ipsum, você precisa ser </p>
                         <div class="read-more" id="btnbilhte">
-                            <a href="#">Mais informação</a>
+                            <a href="https://dicasdacolombia.com.br/cartagena/passeio-de-onibus-turistico-em-cartagena/">Mais informação</a>
                         </div>
                     </div>
                 </div>
@@ -349,35 +350,39 @@
                     <div class="col-md-12">
                         <div class="owl-carousel owl-theme">
                             @foreach ($airlines as $airline)
-                            @php
-                                $city = App\Models\ApiCity::where('key',$airline->orige)->first();
-                                $city2 = App\Models\ApiCity::where('key',$airline->destiny)->first();
-                            @endphp
-                            <div class="item">
-                                <img class="img-responsive" src="images/1.jpg" alt="#" />
-                                <h3>
-                                    @if ($airline->category == 'local')
-                                    {{$city->name}} ---> {{$city2->name}}
+                                @php
+                                    $city = App\Models\ApiCity::where('key', $airline->orige)->first();
+                                    $city2 = App\Models\ApiCity::where('key', $airline->destiny)->first();
+                                @endphp
+                                <div class="item">
+                                    <img class="img-responsive" src="images/1.jpg" alt="#" />
+                                    <h3>
+                                        @if ($airline->category == 'local')
+                                            {{ $city->name }} ---> {{ $city2->name }}
+                                        @else
+                                            Any
+                                        @endif
+
+                                    </h3>
+                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                        suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                                    @if (isset($city) && isset($city2))
+                                        <a href="{{ URL('comprar-bilhete?orige=' . $city->key . '&destiny=' . $city2->key) }}"
+                                            class="btn ml-1 text-white" style="background-color: #ee580f">Comprar
+                                            bilhete</a>
                                     @else
-                                        Any
+                                        <a href="{{ URL('comprar-bilhete{{-- ?orige="'.$city->name.','.$city2->name --}}') }}"
+                                            class="btn ml-1 text-white" style="background-color: #ee580f">Comprar
+                                            bilhete</a>
                                     @endif
-                                    
-                                </h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                    suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                                @if (isset($city) && isset($city2))
-                                <a href="{{URL('comprar-bilhete?orige='.$city->key.'&destiny='.$city2->key)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>     
-                                @else
-                                <a href="{{URL('comprar-bilhete{{--?orige="'.$city->name.','.$city2->name--}}')}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>  
-                                @endif
-                            </div>
+                                </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <div class="mt-5 mb-3">
-                    <a href="{{route('home_airlines')}}" class="btn btn-primary text-white">Ver mais</a>
+                    <div class="mt-5 mb-3" >
+                        <a href="{{ route('home_airlines') }}" style="background-color: #ee580f" class="btn text-white">Ver mais</a>
                     </div>
                 </div>
             </section>
