@@ -10,29 +10,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- Favicons -->
-    <link href="/images/voo.png" rel="icon">
-    <link href="/images/voo.png" rel="apple-touch-icon">
+    <link href="images/voo.png" rel="icon">
+    <link href="images/voo.png" rel="apple-touch-icon">
     <!-- site metas -->
     <title>@yield('title')</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Responsive-->
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="/images/fevicon.png" type="image/gif" />
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
     <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <!-- owl stylesheets -->
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
@@ -42,17 +42,17 @@
 <body class="main-layout">
     <!-- loader  -->
     <div class="loader_bg">
-        <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
     </div>
     <!-- end loader -->
     <!-- header -->
     <header>
         <!-- header inner -->
-        <div class="header">
+        <div class="header ">
             <div class="header_white_section">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="header_information">
                                 <ul>
                                     <li><img src="images/1.png" alt="#" /> RUA 145.Camama 1, Luanda</li>
@@ -61,47 +61,46 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="header_information">
-                                <a href="#" class="btn btn-primary" onclick="modalLogin()"
-                                    style="border:coral 1px solid;background-color:#ff7839;border-radius: 20px">Entrar</a>
-                                <a href="#" onclick="modalCreateMember()" class="btn btn-primary"
-                                    style="border-radius: 20px;background-color:#08809B">Criar conta</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+                    <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col logo_section">
                         <div class="full">
                             <div class="center-desk">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="logo d-flex align-items-center w-auto">
-                                    <a href="">
-                                         
+                                    <div class="logo d-flex align-items-center w-auto fixed z-100 w-full py-1 px-10 top-0">
+                                        <a href="">
+
                                             <img src="/images/logo2.png" alt="">
-                                            <span class=""><strong class="white">PDC Airline</strong></span>
-                                       
-                                    </a>
-                                     </div>
+                                            <span class=""><strong class="white">PDC Airlines</strong></span>
+
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-lg-9 col-md-0 col-sm-0">
+                    <div class="col-xl-9 col-lg-0 col-md-0 col-sm-0">
                         <div class="menu-area">
                             <div class="limit-box d-flex justify-content-center">
-                                <nav class="main-menu">
+                                <nav class="main-menu fixed z-100 w-full py-1 px-10 top-0">
                                     <ul class="menu-area-main">
                                         <li class="active"><a href="{{route('homepage')}}">Home</a></li>
                                         <li><a @if (isset($status)) href="{{route('homepage')}}#about" @else href="#about" @endif >Sobre Nos</a> </li>
                                         <li><a @if (isset($status)) href="{{route('homepage')}}#travel" @else href="#travel" @endif>Viagens</a></li>
                                         <li><a @if (isset($status)) href="{{route('homepage')}}#tarifario" @else href="#tarifario" @endif>Tarifas</a></li>
                                         <li><a @if (isset($status)) href="{{route('homepage')}}#contact" @else href="#contact" @endif>Fale Conosco</a></li>
+                                        <li> <a href="#" onclick="modalLogin()"
+                                                    style="border:#15cfe5 1px solid; size:30px; border-radius: 7px">Entrar</a>
+                                        </li>
+                                        <li><a href="#" onclick="modalCreateMember()"
+                                                    style="border:#15cfe5 1px solid; border-size:30px; border-radius: 7px">Criar
+                                            conta</a>
+                                        </li>
                                     </ul>
                                 </nav>
                                 {{-- <div>
@@ -224,6 +223,116 @@
 
                     <div class="signup-section">Esqueci o PIN? <a href="#a" onclick="modalRecover()"
                             class="text-info"> Recuperar</a>.</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalReg" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-lg modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center">
+                        <h5></h5>
+                    </div>
+
+                    <form action="" id="formRegister" name="formRegister">
+                        @csrf
+                        <div class="mt-1 d-flex justify-content-center">
+                            <h1 class="text-center">Registo de Membro PDC Airline</h1>
+                        </div>
+                        <div class="text-center alert alert-danger" id="resultBox" style="display: none">
+                            <a id="result"></a>
+                        </div>
+                        <div class="form-row mt-2">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Nome</label>
+                                <input type="text" class="form-control rounded" name="first_name" id="first_name"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="lastname">Sobrenome</label>
+                                <input type="text" class="form-control rounded" name="last_name" id="last_name"
+                                    placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Título</label>
+                                <select class="form-control rounded" name="title" id="title" required>
+                                    <option value="sr">Senhor</option>
+                                    <option value="sra">Senhora</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Género</label>
+                                <select class="form-control rounded" name="gender" id="gender" required>
+                                    <option value="f">Femenino</option>
+                                    <option value="m">Masculino</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="lastname">Data Nascimento</label>
+                                <input type="date" class="form-control rounded" name="birth_date" id="birth_date"
+                                    placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Idioma de Preferência</label>
+                                <input type="text" class="form-control rounded" name="preferred_language"
+                                    id="preferred_language" placeholder="" required>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="lastname">Preferência de Viagem</label>
+                                <select class="form-control rounded" name="preference_air" id="preference_air"
+                                    required>
+                                    <option value="1">Refeição - Vegetariano e Tipo de lugar - Janela</option>
+                                    <option value="2">Refeição - Vegetariano e Tipo de lugar - Janela</option>
+                                    <option value="3">Refeição - Vegetariano e Tipo de lugar - Janela</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Morada</label>
+                                <input type="text" class="form-control rounded" name="address" id="address"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="lastname">Email</label>
+                                <input type="text" class="form-control rounded" name="email" id="email"
+                                    placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="form-row mt-1">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="name">Contacto Telefônico</label>
+                                <input type="text" class="form-control rounded" name="contact" id="contact"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                <label for="lastname">PIN de Acesso</label>
+                                <input type="password" class="form-control rounded" name="pin_access"
+                                    id="pin_access" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <button class="btn btn-primary" style="width: 100%" id="btn-formReg">Registar</button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
 
                 </div>
             </div>

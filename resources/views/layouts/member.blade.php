@@ -27,6 +27,7 @@
 
   <!-- Template Main CSS File -->
   <link href="/admin/assets/css/style.css" rel="stylesheet">
+  <link href="/member/style_member.css" rel="stylesheet">
 
   <title>@yield('title')</title>
 </head>
@@ -53,14 +54,14 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="" alt="Perfil" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h6>
-              <a href=""><span>Membro <i class="bi bi-pencil-square"></i></span></a>
+              <a href="{{route('perfil')}}"><span>Membro <i class="bi bi-pencil-square"></i></span></a>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -207,6 +208,7 @@
   <script src="/admin/assets/js/jquery.mask.min.js"></script>
 
   <script>
+    
     $( document ).ready(function() {
       if($('#inlineRadio1').is(":checked")){
         const option= document.getElementById('inter');
@@ -247,18 +249,13 @@
         
       }
     }
-    /*function goAndGoBack(element) {
-      const val = $(element).val()
-     
-      
-      if(val=='go'){
-        const option= document.getElementById('div-date-return');
-        option.style.display = 'none';
-      }else{
-        const option2= document.getElementById('div-date-return');
-        option2.style.display = 'block';
+    
+    function modalCancelBuy(id) {
+      $("#cancel_buy_id").val(id);
+        var modal = document.getElementById('exampleModalCancelBuy')
+        let modalBox = new bootstrap.Modal(modal);
+        modalBox.show();
       }
-    }*/
   </script>
 </body>
 

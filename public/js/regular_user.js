@@ -71,16 +71,19 @@ $(document).ready(function () {
         div.style.display = 'none';
 
         $("#n_ticket_return").prop("required", false);
-        let date = "#date-val"+$("#date").val()
+        $("#airline_id_return").prop("required", false);
+
+        let date = "#date-val"+$("#airline_id").val()
         
         $("#date2").html($(date).attr("data-date"))
     }else{
         const div2= document.getElementById('div-date-return');
         div2.style.display = 'block';
-        $("#date_return2").html($("#date_return").html())
+        $("#date_return2").html($("#airline_id_return").html())
         $("#n_ticket_return").prop("required", true);
+        $("#airline_id_return").prop("required", true);
 
-        let date = "#date_return-val"+$("#date_return").val()
+        let date = "#date_return-val"+$("#airline_id_return").val()
         
         $("#date_return2").html($(date).attr("data-date_return"))
         
@@ -208,13 +211,13 @@ $(".chooseDate").on('change',function(event) {
     });
 });
 
-$("#date").on('change',function () {
+$("#airline_id").on('change',function () {
     let date = "#date-val"+$(this).val()
     $("#date2").html($(date).attr("data-date"))
     
 })
 
-$("#date_return").on('change',function () {
+$("#airline_id_return").on('change',function () {
     let date = "#date-val"+$(this).val()
     $("#date_return2").html($(date).attr("data-date_return"))
     
@@ -224,6 +227,7 @@ $("#route1").on('click',function(event) {
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'none';
     $("#n_ticket_return").prop("required", false);
+    $("#airline_id_return").prop("required", false);
 
     let date = "#date-val"+$("#date").val()
     $("#date2").html($(date).attr("data-date"))
@@ -235,8 +239,9 @@ $("#route2").on('click',function(event) {
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'block';
     $("#n_ticket_return").prop("required", true);
+    $("#airline_id_return").prop("required", true);
 
-    let date = "#date_return-val"+$("#date_return").val()
+    let date = "#date_return-val"+$("#airline_id_return").val()
     $("#date_return2").html($(date).attr("data-date_return"))
     //event.preventDefault();
     /*let orige=''

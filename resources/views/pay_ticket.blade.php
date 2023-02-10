@@ -47,7 +47,7 @@
 				
 				<div class="col-xl-5 col-lg-7 col-md-8 col-sm-12 mb-1">
 					<form
-					 action="{{route('payment')}}"
+					 action="{{route('payment_regular_client')}}"
 					 method="post" >
 					@csrf
 
@@ -80,12 +80,17 @@
 					</div>
 					</fieldset>
 					@endif
-					{{--<input type="text" name="tel" value="{{$data->tel}}" hidden>
-					<input type="text" name="email" value="{{$data->email}}" hidden>--}}
+					<input type="text" name="route" value="{{$data->route}}" hidden>
+					<input type="date" name="birth_date" value="{{$data->birth_date}}" hidden>
+					<input type="text" name="contact" value="{{$data->contact}}" hidden>
+					<input type="text" name="email" value="{{$data->email}}" hidden>
+					<input type="text" name="gender" value="{{$data->gender}}" hidden>
+					<input type="text" name="last_name" value="{{$data->last_name}}" hidden>
+					<input type="text" name="first_name" value="{{$data->first_name}}" hidden>
 					<input type="text" name="n_ticket" value="{{$data->n_ticket}}" hidden>
 					<input type="text" name="n_ticket_return" value="{{$data->n_ticket_return}}" hidden>
-					<input type="text" name="airline_id" value="{{$data->date}}" hidden>
-					<input type="text" name="return_airline_id" value="{{$data->date_return}}" hidden>
+					<input type="text" name="airline_id" value="{{$data->airline_id}}" hidden>
+					<input type="text" name="return_airline_id" value="{{$data->airline_id_return}}" hidden>
 					<button type="submit" class="btn btn-plan" href="" style="padding:0;border-color:rgb(79, 133, 226);border-radius: 10px;color: #fff;width: 100%;background-color:#fff" {{--($user_plan->currency=='kz')? 'disabled':''--}} >
 						<img src="/images/paypal.png" alt="" width="60px" height="60px">
 					</button>

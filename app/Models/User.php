@@ -50,7 +50,7 @@ class User extends Authenticatable
         //return $this->hasOne(Client::class);
     }
 
-    public function buy_tickets(){
-        return $this->hasMany(BuyTicket::class);
+    public function buys(){
+        return $this->hasMany(Buy::class);
     }
 }

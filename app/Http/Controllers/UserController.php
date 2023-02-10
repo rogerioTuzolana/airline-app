@@ -12,6 +12,7 @@ use App\Models\BuyTicket;
 use App\Models\Tariff;
 use App\Models\Airline;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -25,10 +26,12 @@ class UserController extends Controller
         //
     }
 
-  
     public function buy_ticket(Request $request)
     {   
-
+        $orige = Crypt::decryptString($request->orige);
+        $destiny = Crypt::decryptString($request->destiny);
+        //dd($destiny.' '.$orige);
+        
         $date = DB::table('airlines')
             ->select(
                 'airlines.id',
@@ -39,8 +42,8 @@ class UserController extends Controller
                 //'tariffs.category',
             )
 
-            ->where('orige',$request->orige)
-            ->where('destiny',$request->destiny)
+            ->where('orige',$orige)
+            ->where('destiny',$destiny)
             ->get();
 
         $date_return = DB::table('airlines')
@@ -52,12 +55,12 @@ class UserController extends Controller
                 //'tariffs.name',
                 //'tariffs.category',
             )
-            ->where('orige',$request->destiny)
-            ->where('destiny',$request->orige)
+            ->where('orige',$destiny)
+            ->where('destiny',$orige)
             ->get();
         //dd($date_return);
-        $city = ApiCity::where('key',$request->orige)->first();
-        $city2 = ApiCity::where('key',$request->destiny)->first();
+        $city = ApiCity::where('key',$orige)->first();
+        $city2 = ApiCity::where('key',$destiny)->first();
         return view('buy_ticket',[
             'date'=>$date,
             'date_return'=>$date_return,
@@ -69,7 +72,7 @@ class UserController extends Controller
     }
 
     public function pay_ticket(Request $request){
-        //dd($request);
+        
         $tariff_airlines = DB::table('airlines')
         //->groupBy(DB::raw('YEAR(created_at)'))
         ->select(
@@ -84,10 +87,10 @@ class UserController extends Controller
             'tariff_airlines.tariff_id',
             //'tariffs.category',
         )
-        
+
         ->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
         ->join('tariffs','tariffs.id','=','tariff_airlines.tariff_id')
-        ->where('airlines.id',$request->date)
+        ->where('airlines.id',$request->airline_id)
         ->get();
 
         $tariff_airlines2 =[];
@@ -109,7 +112,7 @@ class UserController extends Controller
             
             ->join('tariff_airlines','tariff_airlines.airline_id','=','airlines.id')
             ->join('tariffs','tariffs.id','=','tariff_airlines.tariff_id')
-            ->where('airlines.id',$request->date_return)
+            ->where('airlines.id',$request->airline_id_return)
             ->get();
         }
         

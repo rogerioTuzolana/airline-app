@@ -34,7 +34,7 @@ $("#cat2").on('click',function(event) {
 });
 
 $(document).ready(function () {
-    $("#cat1").prop("checked", true);
+    /*$("#cat1").prop("checked", true);
     
 
     if($("#cat1").is(':checked') && $("#cat1").val()=='option1'){
@@ -65,7 +65,7 @@ $(document).ready(function () {
         $("#optionInter2").prop("required", true);
 
         $("#category").val("inter") 
-    }
+    }*/
 
     $("#route1").prop("checked", true);
     if($("#route1").is(':checked') && $("#route1").val()=='go'){
@@ -73,12 +73,21 @@ $(document).ready(function () {
         div.style.display = 'none';
 
         $("#n_ticket_return").prop("required", false);
+        $("#date_return").prop("required", false);
+        
+        let date = "#date-val"+$("#date").val()
+        $("#date2").html($(date).attr("data-date"))
+
     }else{
         const div2= document.getElementById('div-date-return');
         div2.style.display = 'block';
-        
+
+        $("#date_return2").html($("#date_return").html())
         $("#n_ticket_return").prop("required", true);
-        
+        $("#date_return").prop("required", true);
+
+        let date = "#date_return-val"+$("#date_return").val()
+        $("#date_return2").html($(date).attr("data-date_return"))
     }
 
     $('.ticket_quantity').mask("###", {reverse: true});
@@ -147,6 +156,7 @@ $(".chooseDate").on('change',function(event) {
         }
 
     }else{
+
         if ($(this).attr('data-per') == 'orig') {
             orige = $(this).val();
             destiny = $("#destiny").val();
@@ -154,8 +164,7 @@ $(".chooseDate").on('change',function(event) {
             orige = $("#orige").val();
             destiny = $(this).val();
         }
-        
-        
+
     }
 
     $.ajax({
@@ -176,7 +185,8 @@ $(".chooseDate").on('change',function(event) {
 
         let data = msg.data;
         console.log(data);
-        dateData(data)
+        //dateData(data)
+
         //$("#result").html(data);
         //setTimeout(window.location.reload(), 10000);
     })
@@ -187,18 +197,46 @@ $(".chooseDate").on('change',function(event) {
     });
 });
 
+$("#date").on('change',function () {
+    let date = "#date-val"+$(this).val()
+    $("#date2").html($(date).attr("data-date"))
+    
+})
+
+$("#date_return").on('change',function () {
+    let date = "#date-val"+$(this).val()
+    $("#date_return2").html($(date).attr("data-date_return"))
+    
+})
+
+
 $("#route1").on('click',function(event) {
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'none';
     $("#n_ticket_return").prop("required", false);
+    $("#date_return").prop("required", false);
+
+    let date = "#date-val"+$("#date").val()
+    $("#date2").html($(date).attr("data-date"))
+    $("#date_return2").html("--")
 })
+
+/*$("#route1").on('click',function(event) {
+    const div2= document.getElementById('div-date-return');
+    div2.style.display = 'none';
+    $("#n_ticket_return").prop("required", false);
+})*/
 
 $("#route2").on('click',function(event) {
     const div2= document.getElementById('div-date-return');
     div2.style.display = 'block';
     $("#n_ticket_return").prop("required", true);
+    $("#date_return").prop("required", true);
+
+    let date = "#date_return-val"+$("#date_return").val()
+    $("#date_return2").html($(date).attr("data-date_return"))
     //event.preventDefault();
-    let orige=''
+    /*let orige=''
     let destiny=''
     
     let category = $("#category").val()
@@ -243,14 +281,14 @@ $("#route2").on('click',function(event) {
 
         let data = msg.data;
         console.log(data);
-        dateData2(data)
+        //dateData2(data)
         
     })
     .fail(function(msg){
 
         let data = JSON.parse(msg.responseText);
         console.log(data.message);
-    });
+    });*/
 });
 
 $("#btn-addAirline").on('click',function() {
@@ -300,8 +338,7 @@ $("#btn-addAirline").on('click',function() {
             $('#resultBox').removeClass('alert-danger');
             $('#resultBox').addClass('alert-success');
             result.style.display = "block";
-            
-            //
+
             let message = msg.message;
             $("#result").html(message);
             setTimeout(window.location.reload(), 10000);
@@ -345,19 +382,16 @@ function chooseDateReturn() {
             }else{
                 orige = $("#orige").val();
                 destiny = $(this).val();
-            }
-            
-            
+            }       
         }
-    
+        
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             url : "/membro/data-voo",
             type : 'GET',
-            data : {
-                
+            data : {   
                 orige: destiny,
                 destiny: orige,
             },
@@ -365,15 +399,15 @@ function chooseDateReturn() {
             async: false,
         })
         .done(function(msg){
-    
+
             let data = msg.data;
             console.log(data);
-            dateData(data)
+            //dateData(data)
             //$("#result").html(data);
             //setTimeout(window.location.reload(), 10000);
         })
         .fail(function(msg){
-    
+
             let data = JSON.parse(msg.responseText);
             console.log(data.message);
         });
@@ -782,3 +816,45 @@ $("#btn-addTariff").on('click',function() {
 
     }) 
 });
+
+
+
+//--------------------------Membro
+
+$('#btn-cancelBuy').on('click', function () {
+    $('form[name="formCancelBuy"]').submit(function (event) {
+        event.preventDefault();
+       
+        let buy_id = $(this).find("input#cancel_buy_id").val();
+        let result = document.getElementById("resultBoxB");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : "/membro/reembolso/"+buy_id,
+            type : 'DELETE',
+            data : {
+                buy_id: buy_id, 
+            },
+            dataType: 'json',
+            async: false,
+        })
+        .done(function(msg){
+            window.location.reload();
+        })
+        .fail(function(msg){
+            //console.log("Falhou");
+            $('#resultBoxB').removeClass('alert-success');
+            $('#resultBoxB').addClass('alert-danger');
+            result.style.display = "block";
+            
+            let data = JSON.parse(msg.responseText);
+            $("#resultB").html(data.message);
+        });
+    })
+})
+
+$('#btn-cancelB').on('click', function (event) {
+    event.preventDefault();
+    $('#exampleModalCancelBuy').modal('hide')
+})

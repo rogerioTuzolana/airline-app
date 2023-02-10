@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buy_tickets', function (Blueprint $table) {
+        Schema::create('buys', function (Blueprint $table) {
             $table->id();
-
             $table->text('reference_code');
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('tariff_id')->unsigned();
-            $table->bigInteger('airline_id')->unsigned();
-            $table->integer('n_ticket')->unsigned();
+            
             $table->string('type');
             
             $table->string('payer_id')->nullable();
@@ -36,16 +33,6 @@ return new class extends Migration
             ->on('users')
             ->onDelete('cascade');
 
-            $table->foreign('tariff_id')
-            ->references('id')
-            ->on('tariffs')
-            ->onDelete('cascade');
-
-            $table->foreign('airline_id')
-            ->references('id')
-            ->on('airlines')
-            ->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -57,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buy_tickets');
+        Schema::dropIfExists('buys');
     }
 };

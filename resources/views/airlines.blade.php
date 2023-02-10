@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'PDC AIRLINE')
+@section('title', 'PDC AIRLINE - Voos')
 
 @section('content')
     <div style="margin-top: 100px">
@@ -76,7 +76,7 @@
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have
                             suffered alteration in soe suffk even slightly believable. If y be sure there</p>
                         @if (isset($city) && isset($city2))
-                        <a href="{{URL('comprar-bilhete?orige='.$city->key.'&destiny='.$city2->key)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>     
+                        <a href="{{URL('comprar-bilhete?orige='.Crypt::encryptString($city->key).'&destiny='.Crypt::encryptString($city2->key))}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>     
                         @else
                         <a href="{{URL('comprar-bilhete{{--?orige="'.$city->name.','.$city2->name--}}')}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>  
                         @endif

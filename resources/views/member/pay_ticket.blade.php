@@ -20,6 +20,7 @@
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 			@endif
+
 			@if (session('error'))
 			<div class="alert alert-danger alert-dismissible fade show text-center">
 				<span>{{session('error')}}</span>
@@ -44,7 +45,9 @@
 			--}}
 			
 			<div class="row mt-2 justify-content-center" >
-				
+				<div class="row d-flex justify-content-center mb-4">
+					<button class="btn btn-primary" style="width: 200px">Reclamar Milha</button>		
+				</div>
 				<div class="col-xl-5 col-lg-7 col-md-8 col-sm-12 mb-1">
 					<form
 					 action="{{route('payment')}}"
@@ -78,8 +81,8 @@
 						@endforeach
 					</div>
 					</fieldset>
-					{{--<input type="text" name="tel" value="{{$data->tel}}" hidden>
-					<input type="text" name="email" value="{{$data->email}}" hidden>--}}
+					{{--<input type="text" name="tel" value="{{$data->tel}}" hidden>--}}
+					<input type="text" name="route" value="{{$data->route}}" hidden>
 					<input type="text" name="n_ticket" value="{{$data->n_ticket}}" hidden>
 					<input type="text" name="n_ticket_return" value="{{$data->n_ticket_return}}" hidden>
 					<input type="text" name="airline_id" value="{{$data->date}}" hidden>

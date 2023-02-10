@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\clients;
 
+use App\Mail\MemberCode;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -9,12 +10,14 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\ApiCity;
 use App\Models\MemberClient;
-use App\Models\BuyTicket;
+use App\Models\Buy;
 use App\Models\Tariff;
+use App\Models\TariffAirlineTicket;
 use App\Models\Airline;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 
 class MemberController extends Controller
@@ -24,10 +27,10 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
        
-        $airlines = '';
+        /*$airlines = '';
         $citys = ApiCity::get();
         $search = request('search');
         if ($search) {
@@ -40,14 +43,55 @@ class MemberController extends Controller
             
         }else{
             $airlines = Airline::paginate(3);
+        }*/
+
+        $airlines ='';
+        $city = '';
+        $city2 = '';
+        $orige_search = request('orige');
+        $destiny_search = request('destiny');
+        $date_search = request('date');
+        $amount_search = request('amount');
+        if (isset($orige_search) && isset($destiny_search)) {
+            $city = ApiCity::where('name', $orige_search)->first();
+            $city2 = ApiCity::where('name', $destiny_search)->first();
+            //dd($city.' '.$city2);
+        }
+        //dd($request);
+        if (isset($request->status_search)) {
+            
+            $airlines = Airline::where('orige',$orige_search)
+            ->where('destiny',$destiny_search)
+            ->Where([
+                ['date', '<=', $date_search??'9999-12-12']
+            ])
+            
+            ->WhereHas('tariffs', function ($query) use ($amount_search) {
+                $query->WhereHas('tariff', function ($query2) use ($amount_search) {
+                    $query2->where([
+                        ['amount', '<=', doubleval($amount_search)]
+                    ]);
+                });
+            })
+            ->groupBy(['orige','destiny'])
+            ->paginate(2);    
+            //dd($airlines);
+        }else{
+            
+            $airlines = DB::table('airlines')
+            ->select(['id','orige','destiny','category','date','time'])
+            ->groupBy(['orige','destiny'])
+            ->paginate(2);
         }
 
-        return view('member.home',[
+        return view('member.home',["airlines"=>$airlines,"search"=>$request]);
+
+        /*return view('member.home',[
             "airlines"=>$airlines,
             "citys"=>$citys, 
             //"fleets"=>$fleets,
             "search"=>$search,
-        ]);
+        ]);*/
     }
 
     public function date_airlines(Request $request){
@@ -83,6 +127,47 @@ class MemberController extends Controller
             'success' => false,
             'message' => 'Algo deu errado.',
         ],422);
+    }
+
+    public function buy_ticket(Request $request)
+    {   
+        
+        $date = DB::table('airlines')
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+            ->where('orige',$request->orige)
+            ->where('destiny',$request->destiny)
+            ->get();
+
+        $date_return = DB::table('airlines')
+            ->select(
+                'airlines.id',
+                'airlines.time',
+                'airlines.name',
+                'airlines.date',
+                //'tariffs.name',
+                //'tariffs.category',
+            )
+            ->where('orige',$request->destiny)
+            ->where('destiny',$request->orige)
+            ->get();
+        //dd($date_return);
+        $city = ApiCity::where('key',$request->orige)->first();
+        $city2 = ApiCity::where('key',$request->destiny)->first();
+        return view('member.buy_ticket',[
+            'date'=>$date,
+            'date_return'=>$date_return,
+            'route'=>true,
+            'city'=>$city,
+            'city2'=>$city2,
+            'status'=>true,
+        ]);
     }
 
     public function pay_ticket(Request $request){
@@ -138,44 +223,69 @@ class MemberController extends Controller
     }
 
     public function my_shopping(Request $request){
+
         $buy_tickets = [];
         $search = request('search');
         if ($search) {
-            $buy_tickets = BuyTicket::where([
-                ['brand', 'like', '%'.$search.'%']
-            ])->orWhere([
-                ['model', 'like', '%'.$search.'%']
+            $buy_tickets = Buy::where('user_id',auth()->user()->id)
+            ->where('amount',$search)
+            ->Where([
+                ['created_at', '<=', $search]
             ])
-            ->orWhere([
-                ['capacity', 'like', '%'.$search.'%']
-            ])
+            
+            ->WhereHas('tariff_airline_tickets', function ($query) use ($search) {
+                $query->WhereHas('airline', function ($query2) use ($search) {
+                    $query2->where([
+                        ['name', '<=', $search]
+                    ])
+                    ->where([
+                        ['orige', '<=', $search]
+                    ])
+                    ->where([
+                        ['destiny', '<=', $search]
+                    ]);
+                });
+            })
+            
             ->paginate(3);
             
         }else{
-            $buy_tickets = BuyTicket::paginate(3);
+            $buy_tickets = Buy::where('user_id',auth()->user()->id)->paginate(3);
+            
+    
         }
         
         
         return view('member.my_shopping',["buy_tickets"=>$buy_tickets, "search"=>$search]);
     }
 
-    public function buy_cancel(Request $request){
-        $payment = BuyTicket::where('id',$request->buy_id)->where('user_id',auth()->user()->id)->first();
+    /*public function buy_cancelp($id){
+        //dd()
+        $crypted_id = Crypt::encryptString($id);
+        return response()->json([
+            'success' => false,
+            'message' => $crypted_id
+        ],200);
+    }*/
 
-        if (intval($request->status_validate) == 1) {
-            $payment->status_validate = false;
-            //$payment->status = 'approved';
-        }/*else {
-            $payment->status_validate = true;
-            //$payment->status = 'denied';
-        }*/
+    public function buy_cancel($id){
         
+        $decrypted_id = Crypt::decryptString($id);
+        $payment = Buy::where('id',$decrypted_id)->where('user_id',auth()->user()->id)->first();
+        $payment->status_validate = false;
         $status = $payment->update();
         if ($status) {
-            return redirect()->back()->with('success','Compra cancelada com sucesso');
-        }else{
-            return redirect()->back()->with('fail','A compra não foi cancelada');
+            return response()->json([
+                'success' => false,
+                'message' => 'Compra cancelada com sucesso.',
+            ],200);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Compra não foi cancelada.',
+            ],500);
         }
+
     }
 
     public function my_profile(Request $request){
@@ -183,7 +293,7 @@ class MemberController extends Controller
         return view('member.my_profile');
     }
 
-    public function buy_ticket(Request $request){
+    public function buy_success(Request $request){
         return route()->back('success','Comprado com sucesso');
     }
     
@@ -206,6 +316,8 @@ class MemberController extends Controller
 
         $data = $request->only('email','password');
 
+        Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
+          
         if(Auth::attempt($data)){   
             return response()->json([
                 'success' => true,
@@ -218,11 +330,7 @@ class MemberController extends Controller
             ],422);
         }
     }
-    /**
-     * Show the form for creating a new resource member pdc.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function regist_member(Request $request)
     {
         //dd($request);
@@ -279,6 +387,9 @@ class MemberController extends Controller
         $status_3 = $member_client->save();
 
         if ($status && $status_2 && $status_3) {
+
+            Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
+            
             return response()->json([
                 'success' => false,
                 'message' => 'Membro cadastrado com sucesso.',
@@ -308,6 +419,6 @@ class MemberController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect()->route('/');
+        return redirect()->route('homepage');
     }
 }

@@ -13,11 +13,11 @@
         <div class="form-row mt-3">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="name">Nome</label>
-            <input type="text" class="form-control rounded" name="name" id="name" value="" placeholder="" required>
+            <input type="text" class="form-control rounded" name="first_name" id="first_name" value="" placeholder="" required>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-11">
             <label for="lastname">Sobrenome</label>
-            <input type="text" class="form-control rounded" name="lastname" id="lastname"
+            <input type="text" class="form-control rounded" name="last_name" id="last_name"
                 placeholder="" required>
           </div> 
         </div>
@@ -38,10 +38,10 @@
         <div class="form-row mt-2">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="genero">Genero</label>
-            <select class="form-control">
+            <select class="form-control" name="gender" id="gender">
                 <option selected>selecionar</option>
-                <option>Masculino</option>
-                <option>Feminino</option>
+                <option value="m">Masculino</option>
+                <option value="f">Feminino</option>
             </select>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -137,7 +137,8 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <label for="date">Data de Partida</label>
-              <select class="form-control rounded" id="date" name="date" required>
+              <select class="form-control rounded" id="airline_id" name="airline_id" required>
+                <option value=""></option>
                 @foreach ($date as $dte)
                     <option value="{{$dte->id}}" id="date-val{{$dte->id}}" data-date="{{$dte->date.' '.$dte->time}}">{{$dte->date.' '.$dte->time}}{{--.' - '.$dte->name--}}</option>
                 @endforeach
@@ -164,7 +165,8 @@
           <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <label for="data_return">Data de Regresso</label>
-              <select class="form-control rounded" id="date_return" name="date_return">
+              <select class="form-control rounded" id="airline_id_return" name="airline_id_return" required>
+                <option value=""></option>
                 @foreach ($date_return as $date)
                     <option value="{{$dte->id}}" id="date_return-val{{$dte->id}}" data-date_return="{{$date->date.' '.$date->time}}">{{$date->date.' '.$date->time.' - '.$date->name}}</option>
                 @endforeach
@@ -172,7 +174,7 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"> 
               <label for="nbilhete">Quantidade de bilhete de volta</label>
-              <input type="text" id="n_ticket_return" class="form-control rounded ticket_quantity" name="n_ticket_return"> 
+              <input type="text" id="n_ticket_return" class="form-control rounded ticket_quantity" name="n_ticket_return" > 
               
             </div>
           </div>

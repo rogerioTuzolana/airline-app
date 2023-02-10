@@ -14,4 +14,6 @@ class Airline extends Model
         return $this->hasMany(TariffAirline::class);
     }
 
+    
+
 }

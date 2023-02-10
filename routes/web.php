@@ -50,9 +50,9 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
 
     Route::get('/cliente/data-voo', [UserController::class, 'date_airlines'])->name('cliente-data-voo');
     Route::get('/cliente/comprar-bilhete', [UserController::class, 'pay_ticket'])->name('cliente-comprar-bilhete');
-    Route::post('/cliente/payment', [PaymentController::class, 'pay'])->name('client_payment');
-    Route::get('/cliente/success', [PaymentController::class, 'success'])->name('client_success');
-    Route::get('/cliente/error', [PaymentController::class, 'error'])->name('client_error');
+    Route::post('/cliente/payment', [PaymentController::class, 'pay_regular_client'])->name('payment_regular_client');
+    Route::get('/cliente/success', [PaymentController::class, 'regular_client_success'])->name('regular_client_success');
+    Route::get('/cliente/error', [PaymentController::class, 'regular_client_error'])->name('regular_client_error');
 
     /*Route::post('/esqueci-senha', [UserController::class, 'forgot_password'])->name('esqueci-senha');
     Route::get('/recuperar-senha/{token}', [UserController::class, 'recover_password'])->name('recuperar-senha');
@@ -68,10 +68,12 @@ Route::group(['middleware'=>['auth','PreventBackHistory']], function () {
 
 Route::group(['prefix' => 'membro','middleware'=>['auth','member','PreventBackHistory']], function () {
     Route::get('/home', [MemberController::class, 'index'])->name('home');
-    Route::get('/data-voo', [MemberController::class, 'date_airlines'])->name('data-voo');
-    Route::get('/comprar-bilhete', [MemberController::class, 'pay_ticket'])->name('comprar-bilhete');
+    //Route::get('/data-voo', [MemberController::class, 'date_airlines'])->name('data-voo');
+    Route::get('/pagar-bilhete', [MemberController::class, 'pay_ticket'])->name('pagar-bilhete');
+    Route::get('/comprar-bilhete', [MemberController::class, 'buy_ticket'])->name('comprar-bilhete');
     Route::get('/minhas-compras', [MemberController::class, 'my_shopping'])->name('minhas-compras');
     Route::get('/perfil', [MemberController::class, 'my_profile'])->name('perfil');
+    Route::delete('/reembolso/{id}', [MemberController::class, 'buy_cancel'])->name('reembolso');
     Route::post('/payment', [PaymentController::class, 'pay'])->name('payment');
     Route::get('/success', [PaymentController::class, 'success'])->name('success');
     Route::get('/error', [PaymentController::class, 'error'])->name('error');

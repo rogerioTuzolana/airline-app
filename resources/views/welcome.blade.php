@@ -345,19 +345,18 @@
                 </div>
             </div>
             <section id="demos">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="owl-carousel owl-theme">
-                            @foreach ($airlines as $airline)
+                <div class="row d-flex justify-content-center">
+                    @forelse ($airlines as $airline)
+                        <div class="card vid-card mb-3 ml-3 col-xs-6 col-sm-6 col-md-4 col-lg-3">
                             @php
                                 $city = App\Models\ApiCity::where('key',$airline->orige)->first();
                                 $city2 = App\Models\ApiCity::where('key',$airline->destiny)->first();
                             @endphp
-                            <div class="item">
+                            <div class="item mb-3 mt-3">
                                 <img class="img-responsive" src="images/1.jpg" alt="#" />
                                 <h3>
                                     @if ($airline->category == 'local')
-                                    {{$city->name}} ---> {{$city2->name}}
+                                    {{$city->name}} - {{$city2->name}}
                                     @else
                                         Any
                                     @endif
@@ -371,9 +370,12 @@
                                 <a href="{{URL('comprar-bilhete{{--?orige="'.$city->name.','.$city2->name--}}')}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>  
                                 @endif
                             </div>
-                            @endforeach
                         </div>
-                    </div>
+                    @empty
+                        <div class="">
+                            <h5 class="text-secondary text-center">Conteúdos não conteúdos</h5>
+                        </div>
+                    @endforelse
                 </div>
                 <div class="row d-flex justify-content-center">
                     <div class="mt-5 mb-3">

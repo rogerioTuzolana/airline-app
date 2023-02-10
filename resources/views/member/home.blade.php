@@ -6,239 +6,106 @@
 
 @section('content')
 
-<div class="row">
-  <form method="GET" action="{{route('comprar-bilhete')}}" id="infob">
-    @csrf
-    <input type="text" value="{{Auth::user()->id}}{{--Auth::user()->client->member->--}}" hidden>
-    {{--<div class="form-row mt-3">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="name">Nome</label>
-          <input type="text" class="form-control rounded" name="name" id="name" value="{{Auth::user()->name}}" placeholder="">
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-11">
-          <label for="lastname">Sobrenome</label>
-          <input type="text" class="form-control rounded" name="lastname" id="lastname"
-              placeholder="">
-        </div>
-      </div>
-    </div>--}}
-    {{--<div class="form-row mt-2">
-      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" name="categoriaidade" id="inlineRadio1"
-              value="option1">
-          <label class="form-check-label" for="inlineRadio1">Adulto</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="categoriaidade" id="inlineRadio2"
-                value="option2">
-            <label class="form-check-label" for="inlineRadio2">Criança</label>
-        </div>
-      </div>
-    </div>--}}
-    {{--<div class="form-row mt-2">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="genero">Genero</label>
-          <select class="form-control">
-              <option selected>selecionar</option>
-              <option>Masculino</option>
-              <option>Feminino</option>
-          </select>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-            <label>Data Nascimento</label>
-            <input class="form-control" placeholder="Alguma" type="date" name="Alguma">
-        </div>
-      </div>
-    </div>--}}
-
-    {{--<div class="form-row mt-2">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-            <label for="email">E-mail</label>
-            <input type="email" class="form-control rounded" name="email" id="email"
-                placeholder="" value="{{Auth::user()->email}}" required>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-            <label for="email">Telefone</label>
-            <input type="text" class="form-control rounded" name="tel" id="tel"
-                placeholder="" value="{{Auth::user()->contact}}" required>
-        </div>
-      </div>
-    </div>--}}
-    <input type="text" id="category" name="category" hidden>
-
-    <div class="form-row mt-2">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="cat1" onclick="typeAirline(this)" name="cat" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1" >Doméstico</label>
+<div style="margin-top: 30px">
+  <div class="container">
+      <form class="main-form" >
+          <h3>Encontre Seu VOO</h3>
+          <div class="form-row">
+              <div class="col-md-12">
+                  <div class="row">
+                      <input type="text" value="1" name="status_search" hidden>
+                      <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                          <label>Local Origem</label>
+                          <input class="form-control" placeholder="local" type="text" name="orige">
+                      </div>
+                      <div class="col-xl-6 col-lg-4 col-md-6 col-sm-6 col-sm-12">
+                          <label>Local Distino</label>
+                          <input class="form-control" placeholder="local" type="text" name="destiny">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-xl-6 col-lg-4 col-md-4 col-sm-6 col-sm-12">
+                          <label>Data</label>
+                          <input class="form-control" placeholder="Alguma" type="date" name="date">
+                      </div>
+                      <div class="col-xl-6 col-lg-4 col-md-4 col-sm-6">
+                          <label>Preço</label>
+                          <input class="form-control" placeholder="00.0" type="text" name="amount">
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                  <div style="margin-top: 20px">
+                      <button class="btn p-2" id="btn-search">Procurar</button>
+                  </div>
+              </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="cat2" onclick="typeAirline(this)" type="radio" name="cat" id="inlineRadio2"
-                value="option2">
-            <label class="form-check-label" for="inlineRadio2">Internacional</label>
-          </div>
-        </div>
-      </div>
-    </div>
+      </form>
+  </div>
+</div>
 
-    <div class="form-row mt-2" id="loca">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="origem">Aeroporto Origem</label>
-          @php
-              $citys = App\Models\ApiCity::get();
-          @endphp
-          <select class="form-control chooseDate" name="orige" id="orige" data-per="orig" >
-            <option>selecionar</option>
-            @foreach ($citys as $city)
-            <option value="{{$city->key}}">{{$city->name}}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="destiny">Aeroporto Destino</label>
-          @php
-              $citys = App\Models\ApiCity::get();
-          @endphp
-          <select class="form-control chooseDate" name="destiny" id="destiny" data-per="des" >
-            <option >selecionar</option>
-            @foreach ($citys as $city)
-            <option value="{{$city->key}}">{{$city->name}}</option>
-            @endforeach
-          </select>
-        </div>
-      </div>
-      
-    </div>
-    <div class="form-row mt-2" id="intern">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="origem">Aeroporto Origem</label>
-          <select class="form-control chooseDate" id="optionInter1" name="optionInter1" >
+<div style="margin-top: 30px;">
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+        
+        @forelse ($airlines as $airline)
+        <div class="card vid-card mb-3 col-xs-6 col-sm-6 col-md-4 col-lg-3" style="margin-left: 20px">
             
-          </select>
+            @php
+                $city = App\Models\ApiCity::where('key',$airline->orige)->first();
+                $city2 = App\Models\ApiCity::where('key',$airline->destiny)->first();
+            @endphp
+            <div class="item mb-3 mt-3">
+                <img class="img-responsive" src="/images/1.jpg" alt="#" width="100%" />
+                <h5 class="mt-2">
+                    @if ($airline->category == 'local')
+                    {{$city->name}} - {{$city2->name}}
+                    @else
+                        Any
+                    @endif
+                    
+                </h5>
+                @if (isset($search->status_search) && isset($airline->tariffs))
+                    
+                <h6 class="ml-2">Preços da passagem por tarifa</h6>
+                @foreach ($airline->tariffs as $air_tariff)
+                    <div class="ml-2">
+                        <span class="h1" style="font-weight: bold;font-size:15px;">{{$air_tariff->tariff->name}} - {{number_format($air_tariff->tariff->amount,2,',','.')}}</span>
+                    </div>
+                @endforeach
+                    
+                @endif
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                    suffered alteration in soe suffk even slightly believable. If y be sure there
+                </p>
+                @if (isset($city) && isset($city2))
+                <a href="{{URL('/membro/comprar-bilhete?orige='.$city->key.'&destiny='.$city2->key)}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>     
+                @else
+                <a href="{{URL('/membro/comprar-bilhete{{--?orige="'.$city->name.','.$city2->name--}}')}}" class="btn ml-1 text-white" style="background-color: #ee580f">Comprar bilhete</a>  
+                @endif
+            </div>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="distino">Aeroporto Destino</label>
-          <select class="form-control chooseDate" id="optionInter2" name="optionInter2" >
-          </select>
-        </div>
-      </div> 
-    </div>
-
-    <div class="form-row mt-2">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="nbilhete">Quantidade de Bilhete</label>
-          <input type="text" id="n_ticket" class="form-control rounded ticket_quantity" name="n_ticket" required>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="date">Data de Partida</label>
-          <select class="form-control rounded" id="date" name="date">
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-row mt-2">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" {{--onclick="goAndGoBack(this)"--}} name="route" id="route1" value="go" >
-              <label class="form-check-label" for="route1" >Ida</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input chooseDateReturn" {{--onclick="goAndGoBack(this)"--}} type="radio" name="route" id="route2"
-                value="goBack">
-            <label class="form-check-label" for="route2">Ida e Volta</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-row" id="div-date-return">
-      <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <label for="data_return">Data de Regresso</label>
-          <select class="form-control rounded" id="date_return" name="date_return">  
-          </select>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12"> 
-          <label for="nbilhete">Quantidade de bilhete de volta</label>
-          <input type="text" id="n_ticket_return" class="form-control rounded ticket_quantity" name="n_ticket_return"> 
-          
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group justify-content-center mt-3">
-      <div class="col-12 mx-auto" style="width: 200px;">
-      <button type="submit" class="btn btn-primary btn-lg" id="btnBuyTicket">Comprar Bilhete</button>
+        @empty
+            <div class="">
+                <h5 class="text-secondary text-center">Conteúdos não conteúdos</h5>
+            </div>
+        @endforelse
+        
     </div>
   </div>
-  </form>
-</div>
-</div>
-</div>
-{{--<div class="row">
-
-    <div class="mb-4 mt-4">
-
-sm-12 container-search">
-          <div class="small fw-light"></div>
-          <form action="{{route('home')}}" method="GET">
-            @csrf
-            <div class="input-group">
-              <input class="form-control border-end-0 border rounded-pill" style="height: 40px;margin-left: 20px;" name="search" type="search" placeholder="Pesquisar" id="example-search-input">
-              <span class="input-group-append" style="margin-top:-0.5px;">
-                <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" style="margin-left: -33px;z-index: 7;padding:5px 10px 10px 10px" type="submit">
-                  <i class="bi bi-search" style=""></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </div>
-    </div>
-    <div class="card-group">
-      @foreach ($airlines as $airline)
-      @php
-          $orige = App\Models\ApiCity::where('key',$airline->orige)->first();
-          $destiny = App\Models\ApiCity::where('key',$airline->destiny)->first();
-      @endphp
-      <div class="card rounded" style="margin-left: 20px">
-        <div class="card-header card-personal text-center">{{$airline->name}}</div>
-        <div class="card-body">
-          <p class="card-title text-center">{{($airline->category=='local')?'Voo Local':'Voo Internacional'}}</p> 
-        </div>
-        <div class="card-footer">
-          <h5 class="text-center" style="color:#012970">Origem</h5>
-          <p class="text-center">{{$orige->name}}</p>
-          <h5 class="text-center" style="color:#012970">Destino</h5>
-          <p class="text-center">{{$destiny->name}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalBuyTicket()" data-airId="{{$airline->id}}" id="btn-buyTicket" >Comprar Bilhete</button>
-        </div>
-      </div>
-      @endforeach
-
-      @if (count($airlines) == 0 && $search)
-        <div class="row">
-          <div class="text-center">
-            <p style="font-size: 18px">Nenhuma frota encotrado<a href="{{route('home')}}"><b>Ver todos</b></a></p>
-          </div>
-        </div>
-      @endif
-    </div>
-</div>
-<div class="d-flex">
+  
+  <div class="d-flex mt-5">
     <div class="align-self-center mx-auto">
-        {{$airlines->appends(['search'=>isset($search)?$search:''])->links()}}
+        {{
+            $airlines->appends([
+                'orige'=>isset($serarch->orige)?$serarch->orige:'',
+                'destiny'=>isset($serarch->destiny)?$serarch->destiny:'',
+                'date'=>isset($serarch->date)?$serarch->date:'',
+                'amount'=>isset($serarch->amount)?$amount:'',
+            ])->links()
+        }}
     </div>
+  </div>
 </div>
---}}
 
 @endsection

@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\BuyTicket;
+use App\Models\User;
+use App\Models\Client;
+use App\Models\RegularClient;
+use App\Models\Buy;
+use App\Models\TariffAirlineTicket;
 use App\Models\Tariff;
 use Illuminate\Http\Request;
 use Omnipay\Common\Exception\OmnipayException;
 use Omnipay\Omnipay;
+use Illuminate\Support\Facades\DB;
 
 
 class PaymentController extends Controller
@@ -39,35 +44,23 @@ class PaymentController extends Controller
             'tariff_id'=>$request->tariff_id,
             'return_airline_id'=>$request->return_airline_id,
             'return_tariff_id'=>$request->return_tariff_id,
+            'n_ticket_return'=>$request->n_ticket_return,
             'route'=>$request->route,
-            //Para utilizador normal
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'category_age'=>$request->category_age,
-            'contact'=>$request->contact,
-            'birth_date'=>$request->birth_date,
-
         ]);
 
         $tariff = Tariff::find($request->tariff_id);
-        //dd($tariff);
-        /*$request->email
-        $request->n_ticket
-        $request->tel
-        $request->n_ticket_return
-        $request->date_return*/
+
         try {
             $response = $this->gateway->purchase(array(
                 'amount'=>($tariff->amount*$request->n_ticket),
                 'currency'=>env('PAYPAL_CURRENCY'),
                 'returnUrl'=>route('success'),
                 'cancelUrl'=>url('error'),
-                //'description'=>'Teste de pagamento',
             ))->send();
             
             if ($response->isSuccessful()) { 
                 if ($response->isRedirect()) {
-                    echo "uuu";
+                    
                     $ref = $response->getTransactionReference();
                     return $response->redirect();
                 }else{
@@ -93,29 +86,49 @@ class PaymentController extends Controller
             if ($response->isSuccessful()) { 
                 $arr = $response->getData();
                 
+                DB::beginTransaction();
+                try{
+                    $payment = new Buy();
+                    $payment->user_id = auth()->user()->id;
+                    $payment->type = $data["route"];
 
-                $payment = new BuyTicket();
-                $payment->user_id = auth()->user()->id;
-                $payment->tariff_id = $data["tariff_id"];
-                $payment->airline_id = $data["airline_id"];
-                $payment->n_ticket = $data["n_ticket"];
-                $payment->type = 'go';
+                    $payment->reference_code = $request->input('paymentId');
+                    $payment->user_id = auth()->user()->id;
+                    //$payment->payment_id = $arr['id'];
+                    $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
+                    $payment->payer_email = $arr['payer']['payer_info']['email'];
+                    $payment->method = 'paypal';
+                    $payment->amount = $arr['transactions'][0]['amount']['total'];
+                    $payment->currency = env('PAYPAL_CURRENCY');
+                    $payment->status = $arr['state'];
+                    $payment->save();
+                    
+                    $tariff_airline_ticket = new TariffAirlineTicket;
+                    $tariff_airline_ticket->tariff_id = $data["tariff_id"];
+                    $tariff_airline_ticket->airline_id = $data["airline_id"];
+                    $tariff_airline_ticket->n_ticket = $data["n_ticket"];
+                    $tariff_airline_ticket->buy_id = $payment->id;
+                    $tariff_airline_ticket->save();
 
-                $payment->reference_code = $request->input('paymentId');
-                $payment->user_id = auth()->user()->id;
-                //$payment->payment_id = $arr['id'];
-                $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
-                $payment->payer_email = $arr['payer']['payer_info']['email'];
-                $payment->method = 'paypal';
-                $payment->amount = $arr['transactions'][0]['amount']['total'];
-                $payment->currency = env('PAYPAL_CURRENCY');
-                $payment->status = $arr['state'];
-                $payment->save();
-                
-                
-                $request->session()->pull('data',[]);
-                return redirect()->back()->with('success','Pagamento efectuado com sucesso');
-                
+                    if($data["route"] =='goBack'){
+                        $tariff_airline_ticket = new TariffAirlineTicket;
+                        $tariff_airline_ticket->tariff_id = $data["return_tariff_id"];
+                        $tariff_airline_ticket->airline_id = $data["return_airline_id"];
+                        $tariff_airline_ticket->n_ticket = $data["n_ticket_return"];
+                        $tariff_airline_ticket->buy_id = $payment->id;
+                        $tariff_airline_ticket->save();
+                    }
+                    
+                    DB::commit();
+                    
+                    $request->session()->pull('data',[]);
+                    return redirect()->back()->with('success','Pagamento efectuado com sucesso');
+                } catch (\Exception $th) {
+                    //Throwable    throw $th;
+                    DB::rollBack();
+                    return redirect()->back()->with('error','Algo deu errado no processo, por favor tente novamente');
+                }
+
             }else {
                 //return $response->getMessage();
                 $request->session()->pull('data',[]);
@@ -126,11 +139,67 @@ class PaymentController extends Controller
         }else {
 
             $request->session()->pull('data',[]);
+            
             return redirect()->back()->with('error','Transação negada!');
         }
     }
 
-    public function client_success(Request $request){
+    public function error(Request $error){
+        //return "Utilizador cancelou o pagamento!";
+        $request->session()->pull('data',[]);
+        return redirect()->back()->with('error','Transação cancelada!');     
+    }
+
+    public function pay_regular_client(Request $request){
+        if (empty($request->tariff_id)) {
+            return redirect()->back()->with('error','Escolhe uma tarifa para pagar o bilhete');
+        }
+        
+        $request->session()->put('data',[
+            'airline_id'=>$request->airline_id,
+            'n_ticket'=>$request->n_ticket,
+            'tariff_id'=>$request->tariff_id,
+            'return_airline_id'=>$request->return_airline_id,
+            'return_tariff_id'=>$request->return_tariff_id,
+            'n_ticket_return'=>$request->n_ticket_return,
+            'route'=>$request->route,
+            //Para utilizador normal
+            'first_name'=> $request->first_name,
+            'last_name'=>$request->last_name,
+            'gender'=>$request->gender,
+            'email'=>$request->email,
+            'category_age'=>$request->category_age,
+            'contact'=>$request->contact,
+            'birth_date'=>$request->birth_date,
+        ]);
+
+        $tariff = Tariff::find($request->tariff_id);
+        
+        try {
+            $response = $this->gateway->purchase(array(
+                'amount'=>($tariff->amount*$request->n_ticket),
+                'currency'=>env('PAYPAL_CURRENCY'),
+                'returnUrl'=>route('regular_client_success'),
+                'cancelUrl'=>url('regular_client_error'),
+                //'description'=>'Teste de pagamento',
+            ))->send();
+            
+            if ($response->isSuccessful()) { 
+                if ($response->isRedirect()) {
+                    
+                    $ref = $response->getTransactionReference();
+                    return $response->redirect();
+                }else{
+                    $response->getMessage();
+                }
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th->getMessage();
+        }
+    }
+
+    public function regular_client_success(Request $request){
         $data = $request->session()->get('data');
         //dd($data);
         if ($request->input('paymentId') && $request->input('PayerID')) {
@@ -143,31 +212,77 @@ class PaymentController extends Controller
             if ($response->isSuccessful()) { 
                 $arr = $response->getData();
                 
-                $user = new User;
-                $user->name = 
+                DB::beginTransaction();
+                try{
+                    
+                    $user = new User;
+                    $user->first_name = $data["first_name"];
+                    $user->last_name = $data["last_name"];
+                    $user->email = $data["email"];
+                    $user->contact = $data["contact"];
+                    $user->password = '';
+                    $user->save();
 
-                $payment = new BuyTicket();
-                $payment->user_id = auth()->user()->id;
-                $payment->tariff_id = $data["tariff_id"];
-                $payment->airline_id = $data["airline_id"];
-                $payment->n_ticket = $data["n_ticket"];
-                $payment->type = 'go';
+                    $client = new Client;
+                    $client->user_id = $user->id;
+                    if ($data["category_age"] == 'old' && $data["gender"] == 'm') {
+                        $client->title = 'sr';
+                    }else if ($data["category_age"] == 'old' && $data["gender"] == 'f') {
+                        $client->title = 'sra';
+                    }else{
+                        $client->title = 'child';
+                    }
+                    $client->save();
 
-                $payment->reference_code = $request->input('paymentId');
-                $payment->user_id = auth()->user()->id;
-                //$payment->payment_id = $arr['id'];
-                $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
-                $payment->payer_email = $arr['payer']['payer_info']['email'];
-                $payment->method = 'paypal';
-                $payment->amount = $arr['transactions'][0]['amount']['total'];
-                $payment->currency = env('PAYPAL_CURRENCY');
-                $payment->status = $arr['state'];
-                $payment->save();
-                
-                
-                $request->session()->pull('data',[]);
-                return redirect()->back()->with('success','Pagamento efectuado com sucesso');
-                
+                    $regular_client = new RegularClient;
+                    $regular_client->client_id = $client->id;
+                    $regular_client->birthDate = $data["birth_date"];
+                    $regular_client->gender = $data["gender"];
+                    $regular_client->save();
+
+                    $payment = new Buy;
+                    $payment->user_id = $user->id;
+                    $payment->type = $data["route"];
+
+                    $payment->reference_code = $request->input('paymentId');
+                    //$payment->user_id = auth()->user()->id;
+                    //$payment->payment_id = $arr['id'];
+                    $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
+                    $payment->payer_email = $arr['payer']['payer_info']['email'];
+                    $payment->method = 'paypal';
+                    $payment->amount = $arr['transactions'][0]['amount']['total'];
+                    $payment->currency = env('PAYPAL_CURRENCY');
+                    $payment->status = $arr['state'];
+                    $payment->save();               
+
+                    $tariff_airline_ticket = new TariffAirlineTicket;
+                    $tariff_airline_ticket->tariff_id = $data["tariff_id"];
+                    $tariff_airline_ticket->airline_id = $data["airline_id"];
+                    $tariff_airline_ticket->n_ticket = $data["n_ticket"];
+                    $tariff_airline_ticket->buy_id = $payment->id;
+                    $tariff_airline_ticket->save();
+
+                    if($data["route"] =='goBack'){
+
+                        $tariff_airline_ticket = new TariffAirlineTicket;
+                        $tariff_airline_ticket->tariff_id = $data["return_tariff_id"];
+                        $tariff_airline_ticket->airline_id = $data["return_airline_id"];
+                        $tariff_airline_ticket->n_ticket = $data["n_ticket_return"];
+                        $tariff_airline_ticket->buy_id = $payment->id;
+                        $tariff_airline_ticket->save();
+
+                    }
+
+                    DB::commit();
+                         
+                    $request->session()->pull('data',[]);
+                    return redirect()->route('home_airlines')->with('success','Pagamento efectuado com sucesso');
+
+                } catch (\Exception $th) {
+                    //Throwable    throw $th;
+                    DB::rollBack();
+                    return redirect()->back()->with('error','Algo deu errado no processo, por favor tente novamente');
+                }  
             }else {
                 //return $response->getMessage();
                 $request->session()->pull('data',[]);
@@ -182,7 +297,7 @@ class PaymentController extends Controller
         }
     }
 
-    public function error(Request $error){
+    public function regular_client_error(Request $error){
         //return "Utilizador cancelou o pagamento!";
         $request->session()->pull('data',[]);
         return redirect()->back()->with('error','Transação cancelada!');     
