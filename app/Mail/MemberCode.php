@@ -28,17 +28,17 @@ class MemberCode extends Mailable
     }
 
 
-    public function build()
+    /*public function build()
     {
 
         return $this->view('emails.member_code',['user'=>$this->user]);
-        /*->with([
+        ->with([
             //'message'=>$this,
             'user'=>$this->user,
             //'image'=>$image
-        ])*/;
+        ]);
 
-    }
+    }*/
     /**
      * Get the message envelope.
      *
@@ -60,7 +60,10 @@ class MemberCode extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.member_code',
+            with: [
+                'user' => $this->user,         
+            ]
         );
     }
 

@@ -8,11 +8,14 @@ use App\Models\Tariff;
 use App\Models\Airline;
 use App\Models\PerkTariff;
 use App\Models\TariffAirline;
+use App\Models\Buy;
+use App\Models\TariffAirlineTicket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminController extends Controller
 {
@@ -51,7 +54,8 @@ class AdminController extends Controller
 
         $status = false;
         if ($request->fleet_id!='') {
-            $fleet = Fleet::find($request->fleet_id);
+            $fleet_id = Crypt::decryptString($request->fleet_id);
+            $fleet = Fleet::find($fleet_id);
             $fleet->brand = $request->brand;
             $fleet->model = $request->model;
             $fleet->capacity = $request->capacity;
@@ -87,6 +91,23 @@ class AdminController extends Controller
             'success' => false,
             'message' => 'Frota não adicionado.',
         ],422);
+    }
+
+    public function fleet_delete(Request $request){
+
+        $fleet = Fleet::findOrFail(Crypt::decryptString($request->fleet_id));
+        $delete = $fleet->delete();
+        if ($delete) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Frota eliminada.',
+            ],200);        
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Frota não foi eliminada.',
+            ],422);
+        }
     }
 
     public function tariffs(){
@@ -345,6 +366,7 @@ class AdminController extends Controller
             $airline->date = $request->date;
             //$airline->date_return = $request->date_return;
             $airline->time = $request->time;
+            $airline->miles = $request->miles;
             $status = $airline->update();
         }else {
             $airline = new Airline;
@@ -356,6 +378,7 @@ class AdminController extends Controller
             $airline->date = $request->date;
             //$airline->date_return = $request->date_return;
             $airline->time = $request->time;
+            $airline->miles = $request->miles;
             $status = $airline->save();
         }
 
@@ -426,6 +449,41 @@ class AdminController extends Controller
     }
 
 
+    public function buys(Request $request){
+
+        $buy_tickets = [];
+        $search = request('search');
+        if ($search) {
+            $buy_tickets = Buy::where('amount',$search)
+            ->Where([
+                ['created_at', '<=', $search]
+            ])
+            
+            ->WhereHas('tariff_airline_tickets', function ($query) use ($search) {
+                $query->WhereHas('airline', function ($query2) use ($search) {
+                    $query2->where([
+                        ['name', '<=', $search]
+                    ])
+                    ->where([
+                        ['orige', '<=', $search]
+                    ])
+                    ->where([
+                        ['destiny', '<=', $search]
+                    ]);
+                });
+            })
+            
+            ->paginate(6);
+            
+        }else{
+            $buy_tickets = Buy::paginate(6);
+            
+        }
+        
+        return view('admin.buys',["buy_tickets"=>$buy_tickets, "search"=>$search]);
+    }
+
+
     public function auth(Request $request){
         $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -433,6 +491,13 @@ class AdminController extends Controller
         ],[
             'email.exists' => 'Não existe este email'
         ]);
+
+        
+        $user = User::where('email',$request->email)->where('type','admin')->first();
+        if (!isset($user)) {
+            return redirect()->back()->with('fail','Está conta não tem permissão!');
+        }
+
         $data = $request->only('email','password');
         
         if(Auth::attempt($data)){

@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\RegularClient;
+use App\Models\MemberClient;
 use App\Models\Buy;
+use App\Models\Airline;
 use App\Models\TariffAirlineTicket;
 use App\Models\Tariff;
 use Illuminate\Http\Request;
@@ -37,6 +39,10 @@ class PaymentController extends Controller
         if (empty($request->tariff_id)) {
             return redirect()->back()->with('error','Escolhe uma tarifa para pagar o bilhete');
         }
+
+        if (isset($request->points) && doubleval($request->points) > auth()->user()->client->member->points) {
+            return redirect()->back()->with('error','O valor é superior do que o ponto acumulado');
+        }
         
         $request->session()->put('data',[
             'airline_id'=>$request->airline_id,
@@ -46,13 +52,20 @@ class PaymentController extends Controller
             'return_tariff_id'=>$request->return_tariff_id,
             'n_ticket_return'=>$request->n_ticket_return,
             'route'=>$request->route,
+            'points'=>$request->points
         ]);
 
         $tariff = Tariff::find($request->tariff_id);
+        $tariff2 = Tariff::find($request->return_tariff_id);
 
         try {
             $response = $this->gateway->purchase(array(
-                'amount'=>($tariff->amount*$request->n_ticket),
+                'amount'=>
+                    isset($request->points)?
+                    ($tariff->amount*$request->n_ticket)-doubleval($request->points)
+                    :(isset($tariff2)?
+                        ($tariff->amount*$request->n_ticket)+($tariff2->amount*$request->n_ticket_return)
+                        :($tariff->amount*$request->n_ticket)),
                 'currency'=>env('PAYPAL_CURRENCY'),
                 'returnUrl'=>route('success'),
                 'cancelUrl'=>url('error'),
@@ -118,7 +131,21 @@ class PaymentController extends Controller
                         $tariff_airline_ticket->buy_id = $payment->id;
                         $tariff_airline_ticket->save();
                     }
+
+
+                    $airline = Airline::find($data["airline_id"]);
+                     
+                    if (isset($data["points"])) {
+                        $member = MemberClient::find(auth()->user()->client->member->id);
+                        $member->points = $member->points - $data["points"];
+                        $member->update();
+                    }
+
+                    $member = MemberClient::find(auth()->user()->client->member->id);
+                    $member->points = $member->points + ($airline->miles*10)/100;
                     
+                    $member->update();
+
                     DB::commit();
                     
                     $request->session()->pull('data',[]);
@@ -174,10 +201,16 @@ class PaymentController extends Controller
         ]);
 
         $tariff = Tariff::find($request->tariff_id);
+        $tariff2 = Tariff::find($request->return_tariff_id);
         
         try {
             $response = $this->gateway->purchase(array(
-                'amount'=>($tariff->amount*$request->n_ticket),
+                'amount'=>
+                    isset($tariff2)?
+                    ($tariff->amount*$request->n_ticket)+($tariff2->amount*$request->n_ticket_return)
+                    :($tariff->amount*$request->n_ticket),
+                
+                
                 'currency'=>env('PAYPAL_CURRENCY'),
                 'returnUrl'=>route('regular_client_success'),
                 'cancelUrl'=>url('regular_client_error'),
@@ -219,6 +252,7 @@ class PaymentController extends Controller
                     $user->first_name = $data["first_name"];
                     $user->last_name = $data["last_name"];
                     $user->email = $data["email"];
+                    $user->type = "client";
                     $user->contact = $data["contact"];
                     $user->password = '';
                     $user->save();

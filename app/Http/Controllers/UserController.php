@@ -72,7 +72,33 @@ class UserController extends Controller
     }
 
     public function pay_ticket(Request $request){
+        $capacity_airline = Airline::find($request->airline_id);
+        $capacity_airline2 = Airline::find($request->airline_id_return);
+
+        $count_capacity_buys = DB::table('tariff_airline_tickets')
+        ->select(DB::raw('SUM(n_ticket) as capacity'))
+        ->where('airline_id',$request->airline_id)
+        ->get();
+
+        $count_capacity_buys2 = DB::table('tariff_airline_tickets')
+        ->select(DB::raw('SUM(n_ticket) as capacity'))
+        ->where('airline_id',$request->airline_id_return)
+        ->get();
+
+        $next_capacity = $count_capacity_buys[0]->capacity+$request->n_ticket;
+        $next_capacity2 = $count_capacity_buys2[0]->capacity+$request->n_ticket_return;
+
+        if ($next_capacity > $capacity_airline->fleet->capacity) {
+            return redirect()->back()->with('error','O Voo da data de partida está com lotação máxima.');
+        }
+
+        if (isset($capacity_airline2)) {
         
+            if ($next_capacity2 > $capacity_airline2->fleet->capacity) {
+                return redirect()->back()->with('error','Voo da data de regresso está com lotação máxima.');
+            }
+        }
+
         $tariff_airlines = DB::table('airlines')
         //->groupBy(DB::raw('YEAR(created_at)'))
         ->select(

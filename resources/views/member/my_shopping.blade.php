@@ -37,13 +37,14 @@
 									Voo
 								</label>
 							</div>
-							
-							<span class="text-secondary" style="font-weight: bold">
 								
-								@foreach ($buy_ticket->tariff_airline_tickets as $tariff_airline_ticket)
+							@foreach ($buy_ticket->tariff_airline_tickets as $tariff_airline_ticket)
+							<div class="row">
+								<span class="text-secondary" style="font-weight: bold">
 									{{$tariff_airline_ticket->airline->name}}
-								@endforeach
-							</span>
+								</span>
+							</div>
+							@endforeach
 
 						</div>
 						<div class="col-lg-3 col-md-12 col-sm-12">

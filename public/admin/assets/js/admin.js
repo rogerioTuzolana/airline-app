@@ -34,6 +34,8 @@ $("#cat2").on('click',function(event) {
 });
 
 $(document).ready(function () {
+    $('.quantity').mask("###", {reverse: true});
+    $('.money').mask("###", {reverse: true});
     /*$("#cat1").prop("checked", true);
     
 
@@ -90,8 +92,6 @@ $(document).ready(function () {
         $("#date_return2").html($(date).attr("data-date_return"))
     }
 
-    $('.ticket_quantity').mask("###", {reverse: true});
-    $('.money').mask("###", {reverse: true});
 });
 
 let countries;
@@ -294,6 +294,7 @@ $("#route2").on('click',function(event) {
 $("#btn-addAirline").on('click',function() {
     $('form[name="formAddAirline"]').submit(function (event) {
         event.preventDefault();
+        
         let orige=''
         let destiny=''
 
@@ -310,6 +311,7 @@ $("#btn-addAirline").on('click',function() {
         let date = $(this).find("input#date").val();
         //let date_return = $(this).find("input#date_return").val();
         let time = $(this).find("input#time").val();
+        let miles = $(this).find("input#miles").val();
         let fleet_id = $(this).find("select#fleet_id").val();
 
 
@@ -328,6 +330,7 @@ $("#btn-addAirline").on('click',function() {
                 date: date,
                 //date_return: date_return,
                 time: time,
+                miles: miles,
                 fleet_id: fleet_id,
             },
             dataType: 'json',
@@ -356,7 +359,7 @@ $("#btn-addAirline").on('click',function() {
     }) 
 });
 
-function chooseDateReturn() {
+/*function chooseDateReturn() {
     $(".chooseDateReturn").on('change',function(event) {
         event.preventDefault();
         const orige=''
@@ -412,10 +415,10 @@ function chooseDateReturn() {
             console.log(data.message);
         });
     });
-}
-/**/
+}*/
 
-$("#btn-addAirline").on('click',function() {
+
+/*$("#btn-addAirline").on('click',function() {
     $('form[name="formAddAirline"]').submit(function (event) {
         event.preventDefault();
         let orige=''
@@ -479,7 +482,7 @@ $("#btn-addAirline").on('click',function() {
         });
 
     }) 
-});
+});*/
 
 
 $("#btn-addFleet").on('click',function() {
@@ -535,6 +538,39 @@ $("#btn-addFleet").on('click',function() {
 
     }) 
 });
+
+$('#btn-dropFleet').on('click', function () {
+    $('form[name="formDropFleet"]').submit(function (event) {
+        event.preventDefault();
+        let fleet_id = $(this).find("input#drop_fleet_id").val();
+        let result = document.getElementById("resultBoxV");
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url : "/admin/eliminar-frota",
+            type : 'DELETE',
+            data : {
+                fleet_id: fleet_id, 
+            },
+            dataType: 'json',
+            async: false,
+        })
+        .done(function(msg){
+            window.location.reload();
+        })
+        .fail(function(msg){
+            //console.log("Falhou");
+            $('#resultBoxV').removeClass('alert-success');
+            $('#resultBoxV').addClass('alert-danger');
+            result.style.display = "block";
+            //
+            let data = JSON.parse(msg.responseText);
+            $("#resultV").html(data.message);
+        });
+    })
+})
+
 
 $("#btn-addPerk").on('click',function() {
     $('form[name="formAddPerk"]').submit(function (event) {
@@ -818,7 +854,8 @@ $("#btn-addTariff").on('click',function() {
 });
 
 
-
+//$('.quantity').mask("###", {reverse: true});
+//$('.money').mask("###", {reverse: true});
 //--------------------------Membro
 
 $('#btn-cancelBuy').on('click', function () {

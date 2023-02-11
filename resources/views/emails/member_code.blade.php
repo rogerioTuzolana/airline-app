@@ -64,7 +64,7 @@
 
               <tr>
                 <h4 class="card-title">Código do membro</h4>
-                <h6 class="card-text">{{$user->id}}</h6>
+                <h6 class="card-text">{{$user->id.''.$user->client->id.''.$user->client->member->id}}</h6>
      
               </tr>
             </table>

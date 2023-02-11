@@ -44,14 +44,14 @@
         </div>
         <div class="card-footer">
           <div class="row">
-            <h1 class="text-center" style="font-size: 25px">Percurso</h1>
+            <h1 class="text-center" style="font-size: 20px">Percurso</h1>
           </div>
           <div class="row">
-            <div class="col-6">
-              <h1 class="text-center" style="font-size: 20px">{{$airline->orige}}</h1>
+            <div class="col-12">
+              <h1 class="text-center" style="font-size: 20px">Origem: {{$airline->orige}}</h1>
             </div>
-            <div class="col-6">
-              <h1 class="text-center" style="font-size: 20px">{{$airline->destiny}}</h1>
+            <div class="col-12">
+              <h1 class="text-center" style="font-size: 20px">Destino: {{$airline->destiny}}</h1>
             </div>
           
           </div>
@@ -63,14 +63,14 @@
       @endforeach
     </div>
     @if (count($airlines) == 0 && $search)
-      <div class="row">
+      <div class="row mt-3">
         <div class="text-center">
           <p style="font-size: 18px">Nenhum voo encotrado<a href="{{route('voos')}}"><b>Ver todos</b></a></p>
         </div>
       </div>
     @endif
 </div>
-<div class="d-flex">
+<div class="d-flex mt-3">
     <div class="align-self-center mx-auto">
         {{$airlines->appends(['search'=>isset($search)?$search:''])->links()}}
     </div>
@@ -147,7 +147,7 @@
               <div class="col-6">
                 <div class="form-group mb-3">
                   <label for="">Destino</label>
-                  <select name="optionInter2" id="optionInter2" class="form-control rounded" required>
+                  <select name="optionInter2" id="optionInter2" class="form-control rounded" >
 
                   </select>
                   <div class="invalid-feedback">Percurso inválido</div>
@@ -178,9 +178,14 @@
             <div class="form-group mb-3">
               <label for="">Hora do voo</label>
               <input type="time" class="form-control rounded" id="time" placeholder="" required>
-              <div class="invalid-feedback">Percurso inválido</div>
+              <div class="invalid-feedback">Hora inválido</div>
             </div>
-        
+
+            <div class="form-group mb-3">
+              <label for="">Milha</label>
+              <input type="text" class="form-control rounded" id="miles" placeholder="" required>
+              <div class="invalid-feedback">Milha inválido</div>
+            </div>
             <input type="text" class="form-control rounded" id="airline_id" hidden>
             
             <div class="row text-center">

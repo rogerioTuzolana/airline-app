@@ -17,12 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email')/*->unique()*/;
             $table->timestamp('email_verified_at')->nullable();
-            //$table->enum('title',['sr','sra','child']);
             $table->enum('type',['member','client','admin']);
             $table->string('contact')->nullable();
-            $table->text('password');
+            $table->text('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

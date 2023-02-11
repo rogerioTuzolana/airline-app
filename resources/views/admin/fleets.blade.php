@@ -26,14 +26,11 @@
           <p class="card-title text-center">{{$fleet->model}}</p> 
         </div>
         <div class="card-footer">
-          @if ($fleet->capacity!=null)
-          <h5 class="text-center" style="color:#012970">Capacidade</h5>
-          <p class="text-center">{{$fleet->capacity}}</p>      
-          @endif
+          
           <h5 class="text-center" style="color:#012970">Capacidade</h5>
           <p class="text-center">{{$fleet->capacity}}</p>
-          <button class="btn text-white" style="background: #d8703b" onclick="modalEditFleet({{$fleet->id}},'{{$fleet->name}}','{{$fleet->description}}','{{$fleet->price}}')">Editar</button>
-          <button class="btn text-white bg-danger" onclick="modalDropFleet({{$fleet->id}})">Eliminar</button>
+          <button class="btn text-white" style="background: #d8703b" onclick="modalEditFleet('{{Crypt::encryptString($fleet->id)}}','{{$fleet->brand}}','{{$fleet->model}}','{{$fleet->capacity}}')">Editar</button>
+          <button class="btn text-white bg-danger" onclick="modalDropFleet('{{Crypt::encryptString($fleet->id)}}')">Eliminar</button>
         </div>
       </div>
       @endforeach
@@ -78,7 +75,7 @@
                 <div class="invalid-feedback">Modelo inválido</div>
               </div>
               <div class="form-group mb-3">
-                <input type="text" class="form-control rounded money" id="capacity" placeholder="Capacidade" required>
+                <input type="text" class="form-control rounded quantity" id="capacity" placeholder="Capacidade" required>
                 <div class="invalid-feedback">Capacidade inválido</div>
               </div>
               <input type="text" class="form-control rounded" id="fleet_id" hidden>
@@ -112,14 +109,15 @@
           <div class="d-flex flex-column text-center" style="margin-top: 25px">
             {{--<form id="formDropPlan" method="POST" name="formDropPlan">
               @csrf--}}
-              <input type="text" class="form-control rounded" id="drop_fleet_id" hidden>
               <div class="d-flex justify-content-center">
                   <div>
                     <form id="formDropFleet" method="POST" name="formDropFleet">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-block btn-round text-white btn-danger" id="btn-dropPlan">Eliminar</button>
+                    <input type="text" id="drop_fleet_id" hidden>
+                    <button type="submit" class="btn btn-block btn-round text-white btn-danger" id="btn-dropFleet">Eliminar</button>
                     </form>
+
                     </div>
                   <div style="margin-left: 20px">
                     <button class="btn btn-block btn-round text-white" style="background: #d8703b;" id="btn-cancelDropFleet">Cancelar</button>

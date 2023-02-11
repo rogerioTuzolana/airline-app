@@ -6,18 +6,27 @@
 @section('content')
 
   <div class="row">
+    
     <div class="col-lg-8 col-md-6">
+      @if (session('error'))
+      <div class="row">
+      <div class="alert alert-danger alert-dismissible fade show text-center">
+        <span>{{session('error')}}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+      @endif
       <form method="GET" action="{{route('pagarbilhete')}}" id="infob">
         @csrf
         <input type="text" value="" hidden>
         <div class="form-row mt-3">
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="name">Nome</label>
-            <input type="text" class="form-control rounded" name="first_name" id="first_name" value="" placeholder="" required>
+            <input type="text" class="form-control rounded" value="{{old('first_name')}}" name="first_name" id="first_name" value="" placeholder="" required>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-11">
             <label for="lastname">Sobrenome</label>
-            <input type="text" class="form-control rounded" name="last_name" id="last_name"
+            <input type="text" class="form-control rounded" value="{{old('last_name')}}" name="last_name" id="last_name"
                 placeholder="" required>
           </div> 
         </div>
@@ -46,7 +55,7 @@
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
               <label>Data Nascimento</label>
-              <input class="form-control" placeholder="birth_date" name="birth_date" type="date" name="Alguma">
+              <input class="form-control" placeholder="birth_date" name="birth_date" type="date" value="{{old('birth_date')}}">
           </div>
         </div>
 
@@ -54,12 +63,12 @@
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="email">E-mail</label>
             <input type="email" class="form-control rounded" name="email" id="email"
-                placeholder="" value="" required>
+                placeholder="" value="{{old('email')}}" required>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="email">Telefone</label>
             <input type="text" class="form-control rounded" name="contact" id="contact"
-                placeholder="" value="" required>
+                placeholder="" value="{{old('contact')}}" required>
           </div>
         </div>
         <input type="text" id="category" name="category" hidden>

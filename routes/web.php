@@ -42,6 +42,7 @@ Route::middleware(['guest','PreventBackHistory'])->group(function(){
     Route::post('/admin/login', [AdminController::class, 'auth'])->name('auth');
 
     //Route::get('/register', [UserController::class, 'register'])->name('register');
+    Route::get('/criar-conta-membro', [MemberController::class, 'create_account'])->name('create_account');
     Route::post('/registo-membro', [MemberController::class, 'regist_member'])->name('register');
     Route::post('/entrar', [MemberController::class, 'login_member'])->name('login');
 
@@ -89,9 +90,11 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','admin','PreventBackHist
     Route::get('/regalias', [AdminController::class, 'perks'])->name('perks');
     Route::post('/regalia', [AdminController::class, 'store_perk'])->name('perk');
     Route::delete('/eliminar-regalia', [AdminController::class, 'perk_delete'])->name('perk_delete');
+    Route::delete('/eliminar-frota', [AdminController::class, 'fleet_delete'])->name('fleet_delete');
     Route::post('/regalia-tarifa', [AdminController::class, 'store_perk_tariff'])->name('perk_tariff');
     Route::post('/ativar-regalia', [AdminController::class, 'change_status_perk'])->name('change_status_perk');
-    
+    Route::get('/compras-bilhete', [AdminController::class, 'buys'])->name('list_buy_tickets');
+
     Route::post('/ativar-tarifa-voo', [AdminController::class, 'change_status_tariff_airline'])->name('change_status_tariff_airline'); 
     Route::get('/voos', [AdminController::class, 'airlines'])->name('airlines');
     Route::post('/voo', [AdminController::class, 'store_airline'])->name('airline');

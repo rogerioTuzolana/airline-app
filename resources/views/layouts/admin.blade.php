@@ -69,7 +69,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/admin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="" alt="Perfil" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -142,13 +142,13 @@
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="tables-data.html">
+        <a class="nav-link collapsed" href="{{route('list_buy_tickets')}}">
           <i class="bi bi-currency-dollar"></i><span>Compras</span>
         </a>
       </li><!-- End Tables Nav -->
 
       <li class="nav-item">
-        <a class="nav-link" href="charts-chartjs.html">
+        <a class="nav-link" href="#">
           <i class="bi bi-bar-chart"></i><span>Estatística</span>
         </a>
       </li><!-- End Charts Nav -->

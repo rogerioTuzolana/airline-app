@@ -163,7 +163,7 @@
     <div class="pagetitle">
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
           <li class="breadcrumb-item active">@yield('route')</li>
         </ol>
       </nav>
@@ -255,7 +255,14 @@
         var modal = document.getElementById('exampleModalCancelBuy')
         let modalBox = new bootstrap.Modal(modal);
         modalBox.show();
-      }
+    }
+
+    function setMiles(){
+      $("#descriptionPoints").show()
+      $("#points").val("")
+      $("#points").show()
+    }
+
   </script>
 </body>
 

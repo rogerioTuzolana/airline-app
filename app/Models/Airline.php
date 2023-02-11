@@ -14,6 +14,9 @@ class Airline extends Model
         return $this->hasMany(TariffAirline::class);
     }
 
-    
+    public function fleet(){
+        return $this->belongsTo(Fleet::class);
+        //return $this->hasOne(Fleet::class);
+    }
 
 }

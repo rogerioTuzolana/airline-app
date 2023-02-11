@@ -22,7 +22,7 @@
 			@endif
 
 			@if (session('error'))
-			<div class="alert alert-danger alert-dismissible fade show text-center">
+			<div class="alert alert-warning alert-dismissible fade show text-center">
 				<span>{{session('error')}}</span>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
@@ -43,11 +43,17 @@
 				</div>
 				@endif
 			--}}
-			
+			<div class="d-flex justify-content-center">
+				@if (Auth::user()->client->member->points > 0)
+					<h6>Pontos acumulado: <span style="font-weight: bold">{{number_format(auth()->user()->client->member->points,2,',','.')}}</span> USD</h6>
+				@endif
+			</div>
 			<div class="row mt-2 justify-content-center" >
+				
 				<div class="row d-flex justify-content-center mb-4">
-					<button class="btn btn-primary" style="width: 200px">Reclamar Milha</button>		
+					<button class="btn btn-primary" style="width: 200px" onclick="setMiles()">Reclamar Milha</button>		
 				</div>
+
 				<div class="col-xl-5 col-lg-7 col-md-8 col-sm-12 mb-1">
 					<form
 					 action="{{route('payment')}}"
@@ -60,7 +66,7 @@
 					@foreach ($tariff_airlines as $tariff_airline)
 						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="tariff_id" value="{{$tariff_airline->tariff_id}}" >
+							<input class="form-check-input" type="radio" name="tariff_id" value="{{$tariff_airline->tariff_id}}" required>
 								<label class="form-check-label" for="name" >{{$tariff_airline->name}} - <h6 class="text-center text-secondary">{{$data->n_ticket.'X'}} {{number_format($tariff_airline->amount,2,',','.')}}</h6></label>
 							</div>
 						</div>
@@ -74,7 +80,7 @@
 						@foreach ($tariff_airlines2 as $tariff_airline2)
 							<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 								<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="return_tariff_id" value="{{$tariff_airline2->tariff_id}}" >
+								<input class="form-check-input" type="radio" name="return_tariff_id" value="{{$tariff_airline2->tariff_id}}" @if(isset($tariff_airline2->tariff_id)) required @endif>
 									<label class="form-check-label" for="name" >{{$tariff_airline2->name}} - <h6 class="text-center text-secondary">{{$data->n_ticket_return.'X'}} {{number_format($tariff_airline2->amount,2,',','.')}}</h6></label>
 								</div>
 							</div>
@@ -87,6 +93,11 @@
 					<input type="text" name="n_ticket_return" value="{{$data->n_ticket_return}}" hidden>
 					<input type="text" name="airline_id" value="{{$data->date}}" hidden>
 					<input type="text" name="return_airline_id" value="{{$data->date_return}}" hidden>
+					
+					<div class="form-row mt-2 mb-3">
+						<label for="nbilhete" id="descriptionPoints" style="display: none">Reduzir o preço com ponto acumulado</label>
+						<input type="text" id="points" class="form-control rounded money" name="points" placeholder="Valor" style="display: none">
+					</div>
 					<button type="submit" class="btn btn-plan" href="" style="padding:0;border-color:rgb(79, 133, 226);border-radius: 10px;color: #fff;width: 100%;background-color:#fff" {{--($user_plan->currency=='kz')? 'disabled':''--}} >
 						<img src="/images/paypal.png" alt="" width="60px" height="60px">
 					</button>

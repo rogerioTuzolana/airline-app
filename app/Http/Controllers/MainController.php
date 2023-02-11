@@ -67,7 +67,7 @@ class MainController extends Controller
             ->paginate(2);
         }
 
-        return view('airlines',["airlines"=>$airlines,"search"=>$request]);
+        return view('airlines',["airlines"=>$airlines,"search"=>$request,"status"=>true]);
     }
 
 }

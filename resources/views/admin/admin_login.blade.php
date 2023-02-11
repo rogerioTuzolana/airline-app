@@ -96,7 +96,7 @@
               </div>
 
               <div class="credits">
-                <a href="{{route('home')}}">Página inicial</a>
+                <a href="{{route('homepage')}}">Página inicial</a>
               </div>
 
             </div>

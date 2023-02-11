@@ -71,7 +71,8 @@
                             <div class="center-desk">
 
                                 <div class="d-flex justify-content-center">
-                                    <div class="logo d-flex align-items-center w-auto fixed z-100 w-full py-1 px-10 top-0">
+                                    <div
+                                        class="logo d-flex align-items-center w-auto fixed z-100 w-full py-1 px-10 top-0">
                                         <a href="">
 
                                             <img src="/images/logo2.png" alt="">
@@ -97,7 +98,7 @@
                                         <li> <a href="#" onclick="modalLogin()"
                                                     style="border:#15cfe5 1px solid; size:30px; border-radius: 7px">Entrar</a>
                                         </li>
-                                        <li><a href="#" onclick="modalCreateMember()"
+                                        <li><a href="{{route('create_account')}}" {{--onclick="modalCreateMember()"--}}
                                                     style="border:#15cfe5 1px solid; border-size:30px; border-radius: 7px">Criar
                                             conta</a>
                                         </li>
@@ -117,6 +118,15 @@
         <!-- end header inner -->
     </header>
     <!-- end header -->
+    <div class="fab" ontouchstart="">
+         <a href="#">
+        <button type="button" class="btn btn-lg " aria-expanded="false" aria-haspopup="true">
+           
+                <i class="fa fa-angle-up"> </i>
+
+        </button>
+        </a>
+    </div>
     @yield('content')
     <!-- footer -->
     <footer>
@@ -165,7 +175,7 @@
                                 </div>
                             </div>
                             <div id="btnbilhte">
-                                <a class="Subscribe ">Enviar</a>
+                                <a class="Subscribe" style="background-color: #ee580f">Enviar</a>
                             </div>
                         </div>
                     </div>
@@ -374,6 +384,30 @@
       let modalBox = new bootstrap.Modal(modal);
       modalBox.show();
     }
+
+    /*function showHidePin() {
+        var input = document.getElementById("pin_access");
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }*/
+    
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass( "fa-eye-slash" );
+                $('#show_hide_password i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-eye" );
+            }
+        });
+    });
    </script>
 
 </body>

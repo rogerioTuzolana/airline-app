@@ -7,6 +7,13 @@
 @section('content')
 
 <div class="row">
+
+  @if (session('error'))
+  <div class="alert alert-danger alert-dismissible fade show text-center">
+    <span>{{session('error')}}</span>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  @endif
   <div class="col-lg-8 col-md-6">
     <form method="GET" action="{{route('pagar-bilhete')}}" id="infob">
       @csrf

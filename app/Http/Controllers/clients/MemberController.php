@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 
 class MemberController extends Controller
@@ -29,21 +30,9 @@ class MemberController extends Controller
      */
     public function index(Request $request)
     {
+        //dd(auth()->user()->client->member->points);
        
-        /*$airlines = '';
-        $citys = ApiCity::get();
-        $search = request('search');
-        if ($search) {
-            $airlines = Airline::where([
-                ['name', 'like', '%'.$search.'%']
-            ])->orWhere([
-                ['description', 'like', '%'.$search.'%']
-            ])
-            ->paginate(3);
-            
-        }else{
-            $airlines = Airline::paginate(3);
-        }*/
+        
 
         $airlines ='';
         $city = '';
@@ -171,6 +160,33 @@ class MemberController extends Controller
     }
 
     public function pay_ticket(Request $request){
+        $capacity_airline = Airline::find($request->date);
+        $capacity_airline2 = Airline::find($request->date_return);
+
+        $count_capacity_buys = DB::table('tariff_airline_tickets')
+        ->select(DB::raw('SUM(n_ticket) as capacity'))
+        ->where('airline_id',$request->date)
+        ->get();
+
+        $count_capacity_buys2 = DB::table('tariff_airline_tickets')
+        ->select(DB::raw('SUM(n_ticket) as capacity'))
+        ->where('airline_id',$request->date_return)
+        ->get();
+
+        $next_capacity = $count_capacity_buys[0]->capacity+$request->n_ticket;
+        $next_capacity2 = $count_capacity_buys2[0]->capacity+$request->n_ticket_return;
+
+        if ($next_capacity > $capacity_airline->fleet->capacity) {
+            return redirect()->back()->with('error','O Voo da data de partida está com lotação máxima.');
+        }
+
+        if (isset($capacity_airline2)) {
+        
+            if ($next_capacity2 > $capacity_airline2->fleet->capacity) {
+                return redirect()->back()->with('error','Voo da data de regresso está com lotação máxima.');
+            }
+        }
+
         $tariff_airlines = DB::table('airlines')
         //->groupBy(DB::raw('YEAR(created_at)'))
         ->select(
@@ -247,10 +263,10 @@ class MemberController extends Controller
                 });
             })
             
-            ->paginate(3);
+            ->paginate(5);
             
         }else{
-            $buy_tickets = Buy::where('user_id',auth()->user()->id)->paginate(3);
+            $buy_tickets = Buy::where('user_id',auth()->user()->id)->paginate(5);
             
     
         }
@@ -316,8 +332,9 @@ class MemberController extends Controller
 
         $data = $request->only('email','password');
 
-        Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
-          
+       // Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
+        //dd($user->id.''.$user->client->id.''.$user->client->member->id);
+        //smtp-mail.outlook.com
         if(Auth::attempt($data)){   
             return response()->json([
                 'success' => true,
@@ -329,6 +346,11 @@ class MemberController extends Controller
                 'message' => 'Email ou Senha errada!',
             ],422);
         }
+    }
+
+    public function create_account()
+    {
+        return view('create_account');
     }
 
     public function regist_member(Request $request)
@@ -343,9 +365,10 @@ class MemberController extends Controller
             //'accepterms' => 'required',
             //'bi' => 'required|unique:national_users,bi',
         ],
+
         );
 
-        $email_exists = User::where('email',$request->email)->first();
+        $email_exists = User::where('email',$request->email)->where('type','member')->first();
         if ($email_exists != NULL) {
             return response()->json([
                 'success' => false,
@@ -360,40 +383,51 @@ class MemberController extends Controller
                 'message' => "Aceite os termos.",
             ],422);
         }*/
-        
-        $user = new User();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->contact = $request->contact;
-        $user->type = 'member';
-        $user->password = Hash::make($request->pin_access);
-        $status = $user->save();
-        $status_2 = false;
+        DB::beginTransaction();
+        try{
+            $user = new User();
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->contact = $request->contact;
+            $user->type = 'member';
+            $user->password = Hash::make($request->pin_access);
+            $status = $user->save();
+            $status_2 = false;
 
-        $client = new Client();
-        $client->user_id = $user->id;
-        $client->title = $request->title;
-        $status_2 = $client->save();
-        $status_3 = false;
+            $client = new Client();
+            $client->user_id = $user->id;
+            $client->title = $request->title;
+            $status_2 = $client->save();
+            $status_3 = false;
 
-        $member_client = new MemberClient();
-        $member_client->client_id = $client->id;
-        $member_client->gender = $request->gender;
-        $member_client->birthDate = str_replace("/","-",$request->birth_date);
-        $member_client->preferred_language = $request->preferred_language;
-        $member_client->preference_air = $request->preference_air;
-        $member_client->address = $request->address;
-        $status_3 = $member_client->save();
+            $member_client = new MemberClient();
+            $member_client->client_id = $client->id;
+            $member_client->gender = $request->gender;
+            $member_client->birthDate = str_replace("/","-",$request->birth_date);
+            $member_client->preferred_language = $request->preferred_language;
+            //$member_client->preference_air = $request->preference_air;
+            $member_client->address = $request->address;
+            $status_3 = $member_client->save();
 
-        if ($status && $status_2 && $status_3) {
-
-            Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
+            DB::commit();
             
-            return response()->json([
+        } catch (\Exception $th) {
+            //Throwable    throw $th;
+            DB::rollBack();
+            return redirect()->back()->with('error','Algo deu errado no processo, por favor tente novamente');
+        }
+
+        //Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));
+        return redirect()->back()->with('success','Membro cadastrado com sucesso! Foi enviado por email o seu código de membro.');
+            
+
+        //if ($status && $status_2 && $status_3) {
+
+            /*return response()->json([
                 'success' => false,
-                'message' => 'Membro cadastrado com sucesso.',
-            ],200);
+                'message' => 'Membro cadastrado com sucesso! Foi enviado por email o seu código de membro.',
+            ],200);*/
             /*$data = $request->only('email','password');
             if(Auth::attempt($data)){
                 if(auth()->user()->type == 'user' || auth()->user()->type == 'agents'){
@@ -408,13 +442,13 @@ class MemberController extends Controller
                 ],200);
                 }
             }*/
-        }else {
-            //return redirect()->back()->with('fail','Algo deu errado, dados não Cadastrado');
+        /*}else {
+            return redirect()->back()->with('error','Algo deu errado, dados não Cadastrado');
             return response()->json([
                 'success' => false,
                 'message' => 'Algo deu errado, dados não Cadastrado.',
             ],500);
-        }
+        }*/
     }
 
     public function logout(){
