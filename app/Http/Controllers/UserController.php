@@ -72,6 +72,15 @@ class UserController extends Controller
     }
 
     public function pay_ticket(Request $request){
+        $date = explode("-",$request->birth_date);
+        if (date('m')<= $date[1] && date('Y')<= $date[0] ) {
+            //dd('Data de nascimento inválida!');
+            return redirect()
+            ->back()
+            ->with('error','Data de nascimento inválida!')
+            ->withInput();
+        }
+        
         $capacity_airline = Airline::find($request->airline_id);
         $capacity_airline2 = Airline::find($request->airline_id_return);
 

@@ -67,8 +67,8 @@
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
             <label for="email">Telefone</label>
-            <input type="text" class="form-control rounded" name="contact" id="contact"
-                placeholder="" value="{{old('contact')}}" required>
+            <input type="text" class="form-control number_mask rounded" name="contact" id="contact"
+                placeholder="" value="{{old('contact')}}" maxlength="9" minlength="9" required>
           </div>
         </div>
         <input type="text" id="category" name="category" hidden>
