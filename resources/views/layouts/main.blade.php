@@ -359,6 +359,10 @@
    <script src="/js/plugin.js"></script>
    @endif
    
+   <script src="/admin/assets/js/jquery.mask.min.js"></script>
+   <script>
+    $('.number_mask').mask("###", {reverse: true});
+   </script>
    <!-- sidebar -->
    <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
    <script src="/js/custom.js"></script>
@@ -367,7 +371,6 @@
    <script src="/public/js/custom.js"></script>
    <script src="/register.js"></script>
    <script src="/js/regular_user.js"></script>
-   <script src="/admin/assets/js/jquery.mask.min.js"></script>
    <script>
       function modalCreateMember(params) {
       //$("#btn-addTariff").html('Adicionar');

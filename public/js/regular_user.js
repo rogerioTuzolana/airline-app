@@ -91,6 +91,7 @@ $(document).ready(function () {
 
     $('.ticket_quantity').mask("###", {reverse: true});
     $('.money').mask("###", {reverse: true});
+    
 });
 
 let countries;

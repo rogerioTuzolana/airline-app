@@ -361,22 +361,54 @@ class MemberController extends Controller
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|'/*unique:users,email'*/,
             'pin_access' => 'required|min:8|max:255|',
-            //'cpassword' => 'required|min:8|same:password',
+            'contact' => 'required|min:9|max:9',
+            'gender' => 'required',
             //'accepterms' => 'required',
             //'bi' => 'required|unique:national_users,bi',
-        ],
+        ],[
+            'first_name.required' => 'Campo do nome é obrigatório',
+            'last_name.required' => 'Campo do sobre nome é obrigatório',
+            'email.required' => 'Campo do email é obrigatório',
+            'email.max' => 'Tamanho do email muito grande',
+            'first_name.max' => 'Tamanho do nome muito grande',
+            'last_name.max' => 'Tamanho do sobrenome muito grande',
+            'contact.required' => 'Campo do contacto é obrigatório',
+            'contact.max' => 'Tamanho máximo do contacto é 9 dígitos',
+            'contact.min' => 'Tamanho mínimo do contacto é 9 dígitos',
+            'gender.required' => 'Campo do género é obrigatório',
+            //'accepterms.required' => 'Aceita os termos',
+            'pin_access.required' => 'Campo do PIN está vazio',
+            'pin_access.min' => 'O PIN deve ter no mínimo 8 caractéres',
+        ]
 
         );
 
         $email_exists = User::where('email',$request->email)->where('type','member')->first();
         if ($email_exists != NULL) {
-            return response()->json([
-                'success' => false,
-                'message' => "Já existe conta com este email.",
-            ],422);
+
+            return redirect()->back()->with('error','Já existe conta com este email.');
+
         }
+
+        $date = explode("-",$request->birth_date);
+        if (date('m')<= $date[1] && date('Y')<= $date[0] ) {
+            //dd('Data de nascimento inválida!');
+            return redirect()
+            ->back()
+            ->with('error','Data de nascimento inválida!')
+            ->withInput();
+        }
+
+        if ($request->title == 'sra' && $request->gender != "f" || $request->title == 'sr' && $request->gender != "m") {
+            //dd('Data de nascimento inválida!');
+            return redirect()
+            ->back()
+            ->with('error','O título e o género não têm nenhuma relação, verifique os campos.')
+            ->withInput();
+        }
+        //dd(date('Y'));
         
-        
+        //dd($date[0]);
         /*if ($request->accepterms != 'on') {
             return response()->json([
                 'success' => false,
@@ -415,7 +447,9 @@ class MemberController extends Controller
         } catch (\Exception $th) {
             //Throwable    throw $th;
             DB::rollBack();
-            return redirect()->back()->with('error','Algo deu errado no processo, por favor tente novamente');
+            return redirect()->
+            back()->with('error','Algo deu errado no processo, por favor tente novamente')
+            ->withInput();;
         }
 
         //Mail::to(/*$request->email*/'tuzolanarogerio@gmail.com')->send(new MemberCode($user));

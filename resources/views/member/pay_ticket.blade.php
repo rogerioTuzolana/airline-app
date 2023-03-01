@@ -49,11 +49,11 @@
 				@endif
 			</div>
 			<div class="row mt-2 justify-content-center" >
-				
+				@if (Auth::user()->client->member->points > 0)
 				<div class="row d-flex justify-content-center mb-4">
 					<button class="btn btn-primary" style="width: 200px" onclick="setMiles()">Reclamar Milha</button>		
 				</div>
-
+				@endif
 				<div class="col-xl-5 col-lg-7 col-md-8 col-sm-12 mb-1">
 					<form
 					 action="{{route('payment')}}"

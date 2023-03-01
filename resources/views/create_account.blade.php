@@ -4,6 +4,15 @@
 @section('content')
  
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show">
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        
         @if (session('success'))
 			<div class="alert alert-success alert-dismissible fade show text-center mt-3">
 				<span>{{session('success')}}</span>
@@ -41,7 +50,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="name">Título</label>
-                            <select class="form-control rounded" name="title" id="title" required>
+                            <select class="form-control rounded" name="title" id="title"  required>
                                 <option value="">Seleccionar</option>
                                 <option value="sr">Senhor</option>
                                 <option value="sra">Senhora</option>
@@ -90,12 +99,12 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <label for="name">Morada</label>
-                            <input type="text" class="form-control rounded" name="address" id="address"
+                            <input type="text" class="form-control rounded" value="{{old('address')}}" name="address" id="address"
                                 placeholder="" required>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="name">Contacto Telefônico</label>
-                            <input type="text" class="form-control rounded" name="contact" id="contact"
+                            <input type="text" class="form-control number_mask rounded" value="{{old('contact')}}" maxlength="9" minlength="9" name="contact" id="contact"
                                 placeholder="" required>
                         </div>
                     </div>
@@ -104,7 +113,7 @@
                     <div class="row">    
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <label for="lastname">Email</label>
-                            <input type="text" class="form-control rounded" name="email" id="email"
+                            <input type="email" class="form-control rounded" name="email" id="email" value="{{old('email')}}"
                                 placeholder="" required>
                         </div>
                     

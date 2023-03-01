@@ -62,14 +62,7 @@
 				<label for="name">Idioma de Preferência</label>
 				<input type="text" class="form-control rounded" name="preferred_language" id="preferred_language" value="{{Auth::user()->client->member->preferred_language}}" placeholder="" required>
 			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-				<label for="lastname">Preferência de Viagem</label>
-				<select class="form-control rounded" name="preference_air" id="preference_air" required>
-					<option value="1">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-					<option value="2">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-					<option value="3">Refeição - Vegetariano e Tipo de lugar - Janela</option>
-				</select>
-			</div>
+			
 		</div>
 	</div>
 	<div class="form-row mt-1">

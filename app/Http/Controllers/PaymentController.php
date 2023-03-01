@@ -149,7 +149,7 @@ class PaymentController extends Controller
                     DB::commit();
                     
                     $request->session()->pull('data',[]);
-                    return redirect()->back()->with('success','Pagamento efectuado com sucesso');
+                    return redirect()->back()->with('success','Pagamento efectuado com sucesso, verifique as informações da compra no seu email.');
                 } catch (\Exception $th) {
                     //Throwable    throw $th;
                     DB::rollBack();
@@ -310,7 +310,7 @@ class PaymentController extends Controller
                     DB::commit();
                          
                     $request->session()->pull('data',[]);
-                    return redirect()->route('home_airlines')->with('success','Pagamento efectuado com sucesso');
+                    return redirect()->route('home_airlines')->with('success','Pagamento efectuado com sucesso, verifique as informações da compra no seu email.');
 
                 } catch (\Exception $th) {
                     //Throwable    throw $th;
