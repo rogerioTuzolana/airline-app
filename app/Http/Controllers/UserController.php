@@ -80,7 +80,22 @@ class UserController extends Controller
             ->with('error','Data de nascimento inválida!')
             ->withInput();
         }
-        
+        if ((intval(date('Y'))- intval($date[0])) < 18 && $request->category_age == "old") {
+            //dd('Data de nascimento inválida!');
+            return redirect()
+            ->back()
+            ->with('error','A tua idade não é considerada adulto(a)')
+            ->withInput();
+        }
+
+        if ((intval(date('Y'))- intval($date[0])) >= 18 && $request->category_age == "child") {
+            //dd('Data de nascimento inválida!');
+            return redirect()
+            ->back()
+            ->with('error','A tua idade não é considerada criança')
+            ->withInput();
+        }
+
         $capacity_airline = Airline::find($request->airline_id);
         $capacity_airline2 = Airline::find($request->airline_id_return);
 
